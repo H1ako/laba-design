@@ -31,13 +31,13 @@ global $SITE_URL, $session;
       <?php include_once('components/history-banner.php'); ?>
       <a href="/catalog" class="section__action-btn">перейти в каталог</a>
     </section>
-    <section class="main-content__section section_news">
-      <h2 class="section__title">Last News</h2>
-      <?php include_once('components/news.php'); ?>
-    </section>
     <section class="main-content__section section_reviews">
       <h2 class="section__title">Reviews</h2>
       <?php include_once('components/reviews-marquee.php'); ?>
+    </section>
+    <section class="main-content__section section_news">
+      <h2 class="section__title">Last News</h2>
+      <?php include_once('components/news.php'); ?>
       <a href="/news" class="section__action-btn">смотреть все новости</a>
     </section>
   </main>

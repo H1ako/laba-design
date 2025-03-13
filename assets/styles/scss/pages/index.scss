@@ -26,11 +26,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    align-items: center;
 
     .section__title {
       @include oliverFont;
 
-      font-size: var(--font-size-0);
+      font-size: var(--font-size-extra-big);
+      text-transform: uppercase;
+      color: var(--color-secondary)
+      letter-spacing: 5px;
     }
 
     .section__action-btn {
@@ -42,14 +46,22 @@ body {
       border: 2px solid var(--color-secondary);
       border-radius: var(--border-radius-main);
       padding: 0.5em 8em;
-      
+      text-align: center;
+      width: 40em;
       max-width: 100%;
+      margin-top: 2em;
     }
 
-    &.section_news {}
+    &.section__history-banner {
+      border-top: 2px solid var(--color-text-semivisible);
+    }
 
-    &.section_reviews {}
+    &.section_reviews {
+      margin-top: 5em;
+    }
 
-    &.section__history-banner {}
+    &.section_news {
+      margin-top: 5em;
+    }
   }
 }

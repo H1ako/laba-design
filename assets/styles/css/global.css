@@ -467,6 +467,7 @@ b {
   --color-instagram: #C13584;
   --color-telegram: #27a7e7;
   --color-whatsapp: #28d146;
+  --font-size-extra-big: clamp(8rem, 16vw, 12rem);
   --font-size-0: clamp(5rem, 8vw, 6rem);
   --font-size-1: clamp(3.5rem, 6vw, 4.2rem);
   --font-size-2: clamp(2.4rem, 3vw, 2.8rem);
