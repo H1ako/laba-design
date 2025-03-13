@@ -1,0 +1,118 @@
+//------COMPONENTS------
+@import "./rubics-cube";
+@import "./like-counter";
+@import "./socials";
+
+.main-footer {
+    width: 100%;
+    position: relative;
+    margin-top: 10em;
+
+    &__container {
+        width: var(--width-main-content);
+        margin-inline: auto;
+
+        .container__content {
+            background: var(--color-bg-element);
+            border-radius: 1.5rem;
+            padding: 3em 5em;
+            display: flex;
+            justify-content: space-between;
+            gap: 2em;
+
+            .content__col {
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+
+                &.col_socials {
+                }
+
+                &.col_nav {
+
+                }
+
+                &.col_info {
+
+                }
+
+                &.col_rubics {
+
+                }
+
+            }
+
+            .content__title {
+                @include displayFont;
+
+                font-size: var(--font-size-4);
+                margin-bottom: 2.4rem;
+                // font-weight: bold;
+            }
+
+            .content__message {
+                max-width: 40rem;
+                color: var(--color-text-darker);
+                line-height: 1.5;
+            }
+
+            .content__socials {}
+
+            .content__phones {
+                .phones__tip {
+                    @include displayFont;
+
+                    color: var(--color-text-darker);
+                    font-size: var(--font-size-4);
+                }
+
+                .phones__list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: .35em;
+                    margin-top: .5em;
+
+                    .list__item {
+                        .item__link {
+                            color: var(--color-text);
+                            font-size: var(--font-size-4);
+
+                        }
+                    }
+                }
+            }
+
+            .content__nav {
+                .nav__list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1em;
+
+                    .list__el {
+                        .el__link {
+                            font-size: var(--font-size-5);
+                            color: var(--color-text-darker);
+                        }
+                    }
+                }
+            }
+
+            .content__like-counter {}
+            .content__rubics-cube .rubics-cube {
+                --scale-factor: .5;
+            }
+        }
+
+        .container__rights {
+            @include displayFont;
+
+            margin-inline: auto;
+            margin-block: 2em;
+            color: var(--color-text-semivisible);
+            font-size: var(--font-size-5);
+            text-align: center;
+            white-space: nowrap;
+            letter-spacing: 1.25px;
+        }
+    }
+}

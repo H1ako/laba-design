@@ -1,0 +1,16 @@
+{
+    "name": "nikar/bd_20_laba",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "C:/php_projects/bd_20_laba/"
+        }
+    },
+    "authors": [
+        {
+            "name": "h1ako",
+            "email": "nikita-sobolev-wd@yandex.ru"
+        }
+    ],
+    "require": {}
+}

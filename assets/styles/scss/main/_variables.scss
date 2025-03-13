@@ -1,0 +1,47 @@
+:root {
+  // ----COLORS----
+  --color-main: #4A42B8;
+  --color-secondary: #25216E;
+  --color-accent: #2A249E;
+  // text colors
+  --color-text: #E9E8F3;
+  --color-text-darker: color-mix(in srgb, var(--color-text) 50%, transparent);
+  --color-text-semivisible: color-mix(in srgb, var(--color-text) 40%, transparent);
+  // background colors
+  --color-bg: #010104;
+  --color-bg-element: color-mix(in srgb, var(--color-text) 10%, transparent);
+  --color-bg-modal: color-mix(in srgb, var(--color-bg) 75%, transparent);
+  --color-bg-modal-back: color-mix(in srgb, var(--color-bg) 60%, transparent);
+
+  --color-delete: tomato;
+  --color-success: #0B6E4F;
+  // social colors
+  --color-facebook: #0165e1;
+  --color-instagram: #C13584;
+  --color-telegram: #27a7e7;
+  --color-whatsapp: #28d146;
+  // ----FONT SIZES---- 1rem = 10px
+  --font-size-0: clamp(5rem, 8vw, 6rem);
+  --font-size-1: clamp(3.5rem, 6vw, 4.2rem);
+  --font-size-2: clamp(2.4rem, 3vw, 2.8rem);
+  --font-size-3: clamp(2rem, 2.1vw, 2.4rem);
+  --font-size-4: clamp(1.6rem, 1.75vw, 2rem);
+  --font-size-5: clamp(1.2rem, 1.4vw, 1.4rem);
+  --font-size-6: clamp(1rem, 1vw, 1.2rem);
+
+  // ----BORDER RADIUSES----
+  // --border-radius-main: 1rem;
+  // --border-radius-big: 1.5rem;
+  // --border-radius-small: 0.5rem;
+
+  // ----TRANSITIONS----
+  --transition-main: 150ms;
+  --transition-slow: 300ms;
+  --transition-superslow: 600ms;
+  
+  --animation-delay: 2s;
+  // ----BORDERS----
+
+  // ----SIZES----
+  --width-main-content: min(1360px, 100%);
+}

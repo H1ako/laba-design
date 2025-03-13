@@ -1,0 +1,66 @@
+@mixin cleanLink {
+  text-decoration: none;
+  transition: var(--transition-main);
+  cursor: pointer;
+  outline: transparent;
+
+  svg {
+    width: 1em;
+  }
+}
+
+@mixin cleanInput {
+  outline: transparent;
+  border: none;
+  transition: var(--transition-main);
+}
+
+@mixin cleanButton {
+  outline: transparent;
+  border: none;
+  transition: var(--transition-main);
+  cursor: pointer;
+  user-select: none;
+
+  svg {
+    width: 1em;
+  }
+
+  &:active {
+    scale: 0.9;
+  }
+}
+
+@mixin image {
+  object-fit: cover;
+  object-position: center;
+  color: var(--color-text);
+  display: grid;
+  place-content: center;
+  transition: var(--transition-main);
+}
+
+@mixin wrapWords() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+@mixin displayFont() {
+  font-family: "YandexSansDisplay", sans-serif;
+}
+
+@mixin textFont() {
+  font-family: "YandexSansText", sans-serif;
+}
+
+@mixin blurBg {
+  backdrop-filter: blur(15px);
+}
+
+@mixin mainShadow {
+  box-shadow: 0px 0.6em 1.2em rgba(74, 66, 184, 0.25),
+    0px 0px 0.1em rgba(74, 66, 184, 0.25);
+}

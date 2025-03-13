@@ -1,0 +1,27 @@
+.main-header {
+  width: 100%;
+  margin-block: 3em;
+
+  .main-header__container {
+    position: relative;
+    width: var(--width-main-content);
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+
+    .container__search {
+      position: relative;
+
+      .search__logout {
+        position: absolute;
+        left: calc(100% + 2em);
+        top: 50%;
+        translate: 0 -50%;
+        flex-shrink: 0;
+        background: none;
+        color: var(--color-text-semivisible);
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+@import "./mixins";
+
+*,
+*::after,
+*::before {
+  @include textFont;
+  
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  min-height: 100vh;
+  font-size: var(--font-size-5);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+a {
+  @include cleanLink;
+}
+
+button {
+  @include cleanButton;
+}
+
+input {
+  @include cleanInput;
+}
+
+h1, h2, h3, h4, h5, ul, p {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-1);
+}
+
+h2 {
+  font-size: var(--font-size-2);
+}
+
+h3 {
+  font-size: var(--font-size-3);
+}
+
+h4 {
+  font-size: var(--font-size-4);
+}
+
+h5 {
+  font-size: var(--font-size-5);
+}
+
+ul {
+  list-style: none;
+}
+
+p {
+  font-size: var(--font-size-5);
+}
+
+b {
+  color: var(--color-main);
+  font-weight: 700;
+}

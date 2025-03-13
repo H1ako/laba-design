@@ -1,0 +1,226 @@
+body {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden !important;
+}
+
+nav {
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  box-shadow: 0px 0.6em 1.2em rgba(74, 66, 184, 0.25), 0px 0px 0.1em rgba(74, 66, 184, 0.25);
+  position: relative;
+  width: 30rem;
+  flex-shrink: 0;
+  height: 100vh;
+  background: var(--color-bg-element);
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+  z-index: 999;
+}
+nav h1 {
+  font-family: "YandexSansDisplay", sans-serif;
+  font-size: var(--font-size-2);
+  text-align: center;
+}
+nav ul {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+nav ul li:has(a) {
+  margin-top: auto;
+}
+nav ul li a {
+  color: var(--color-main) !important;
+}
+nav ul li label,
+nav ul li a {
+  display: flex;
+  background: none;
+  color: var(--color-text-semivisible);
+  cursor: pointer;
+  font-size: var(--font-size-3);
+  width: 100%;
+  text-align: left;
+  padding: 1em 0.5em;
+  border-radius: 0.5em;
+}
+nav ul li label input,
+nav ul li a input {
+  display: none;
+}
+nav ul li label:hover, nav ul li label:focus-within,
+nav ul li a:hover,
+nav ul li a:focus-within {
+  background: var(--color-bg-element);
+}
+nav ul li label:has(input:checked),
+nav ul li a:has(input:checked) {
+  font-family: "YandexSansDisplay", sans-serif;
+  color: var(--color-text);
+  font-weight: 700;
+  pointer-events: none;
+}
+
+main {
+  position: relative;
+  flex-grow: 1;
+  height: 100vh;
+  padding: 4em;
+  overflow-y: scroll;
+}
+main section {
+  display: none;
+  flex-direction: column;
+  gap: 4em;
+}
+main section > form {
+  box-shadow: 0px 0.6em 1.2em rgba(74, 66, 184, 0.25), 0px 0px 0.1em rgba(74, 66, 184, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background: var(--color-bg-element);
+  padding: 1.5em;
+  border-radius: 0.5em;
+}
+main section > form h2 {
+  margin-bottom: 1em;
+}
+main section > form input {
+  padding: 1em 2em;
+  font-size: var(--font-size-5);
+  border-radius: 0.5em;
+  background: var(--color-bg-element);
+  color: var(--color-text);
+}
+main section > form button {
+  background: var(--color-main);
+  padding: 1em 2em;
+  border-radius: 0.5em;
+  color: var(--color-text);
+  margin-top: 2em;
+}
+main section > form select {
+  padding: 1em 2em;
+  font-size: var(--font-size-5);
+  border-radius: 0.5em;
+  background: var(--color-bg-element);
+  color: var(--color-text);
+  outline: transparent;
+  border: none;
+}
+main section > form select option {
+  color: var(--color-bg);
+}
+main section > form label {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+main section > form label img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  color: var(--color-text);
+  display: grid;
+  place-content: center;
+  transition: var(--transition-main);
+  width: 100%;
+  height: 15em;
+  border-radius: 0.25em;
+}
+main section > form label input {
+  text-align: center;
+}
+main section .list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+}
+main section .list li {
+  box-shadow: 0px 0.6em 1.2em rgba(74, 66, 184, 0.25), 0px 0px 0.1em rgba(74, 66, 184, 0.25);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  background: var(--color-bg-element);
+  padding: 1.5em;
+  border-radius: 0.5em;
+}
+main section .list li form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+main section .list li form input {
+  padding: 0.5em 1em;
+  font-size: var(--font-size-5);
+  border-radius: 0.5em;
+  background: var(--color-bg-element);
+  color: var(--color-text);
+}
+main section .list li form h3 {
+  text-align: center;
+}
+main section .list li form select {
+  padding: 0.5em 1em;
+  font-size: var(--font-size-5);
+  border-radius: 0.5em;
+  background: var(--color-bg-element);
+  color: var(--color-text);
+  outline: transparent;
+  border: none;
+}
+main section .list li form select option {
+  color: var(--color-bg);
+}
+main section .list li form label {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  position: relative;
+  width: 100%;
+}
+main section .list li form label:has(img) {
+  padding-top: 15em;
+}
+main section .list li form label img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  color: var(--color-text);
+  display: grid;
+  place-content: center;
+  transition: var(--transition-main);
+  width: 100%;
+  height: 15em;
+  border-radius: 0.25em;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+main section .list li form label input {
+  text-align: center;
+}
+main section .list li button {
+  background: var(--color-main);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  color: var(--color-text);
+}
+main section .list li button[delete-action] {
+  background: var(--color-delete);
+  color: var(--color-bg);
+}
+
+:has([data-tab=users] input:checked) main .users,
+:has([data-tab=services] input:checked) main .services,
+:has([data-tab=orders] input:checked) main .orders {
+  display: flex;
+}

@@ -1,0 +1,40 @@
+@import "./normalize";
+@import "./fonts";
+@import "./defaults";
+@import "./variables";
+@import "./mixins";
+// ------COMPONENTS------
+@import "../components/footer";
+@import "../components/loading-screen";
+
+@keyframes errorAnimation {
+  0% {
+    transform: translate(30px);
+  }
+  20% {
+    transform: translate(-30px);
+  }
+  40% {
+    transform: translate(15px);
+  }
+  60% {
+    transform: translate(-15px);
+  }
+  80% {
+    transform: translate(8px);
+  }
+  100% {
+    transform: translate(0px);
+  }
+}
+
+@keyframes appear-hor {
+  0% {
+    transform: translateX(-60%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+}

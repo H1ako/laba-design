@@ -1,0 +1,58 @@
+.socials {
+  &__list {
+    display: flex;
+    gap: 0.65em;
+
+    .list__el {
+      .el__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition-duration: var(--transition-slow);
+        background: var(--color-bg-element);
+        font-size: var(--font-size-4);
+        padding: .5em;
+        border-radius: 1rem;
+
+        &:hover {
+          transition-duration: 0.3s;
+          background: #000;
+
+          &.link_telegram {
+            background: var(--color-telegram);
+          }
+
+          &.link_whatsapp {
+            background: var(--color-whatsapp);
+          }
+
+          &.link_instagram {
+            background: var(--color-instagram);
+          }
+
+
+          svg {
+            animation: slide-in-top var(--transition-slow) both;
+          }
+        }
+
+        svg {
+          fill: var(--color-text);
+        }
+      }
+    }
+  }
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(calc(100% - 4px));
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

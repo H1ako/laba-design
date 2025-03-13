@@ -1,0 +1,39 @@
+.search {
+  .search__wrapper {
+    position: relative;
+    font-size: var(--font-size-4);
+    z-index: 1;
+
+    .wrapper__icon {
+      position: absolute;
+      top: 50%;
+      left: 2em;
+      translate: -50% -45%;
+      font-size: var(--font-size-3);
+      z-index: 2;
+
+      svg {
+        fill: var(--color-main);
+        width: 1em;
+      }
+    }
+
+    .wrapper__input {
+      @include blurBg;
+    //   @include mainShadow;
+      @include displayFont;
+
+      width: 80rem;
+      padding: 1em 2em;
+      background: var(--color-bg-element);
+      border-radius: 99px;
+      color: var(--color-text);
+      padding-left: 4em;
+
+      &::placeholder {
+        color: var(--color-text);
+        font-weight: 900;
+      }
+    }
+  }
+}
