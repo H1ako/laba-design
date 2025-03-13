@@ -6,6 +6,12 @@ class Router
 {
   protected static $endpoint = '';
 
+  public static function getRoute($path) {
+    global $SITE_URL;
+
+    return $SITE_URL . $path;
+  }
+
   public static function set_route_prefix($route)
   {
     static::$endpoint = rtrim($route, '/');

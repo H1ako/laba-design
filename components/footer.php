@@ -13,11 +13,6 @@
                                 +7 (912) 123-45-67
                             </a>
                         </li>
-                        <li class="list__item">
-                            <a href="tel:+79129876543" class="item__link">
-                                +7 (912) 987-65-43
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -52,7 +47,7 @@
                 </p>
             </div>
         </div>
-        <p class="container__rights">Bce права защищены © 2024</p>
+        <p class="container__rights">Bce права защищены © 2025</p>
     </div>
 </footer>
 <?php include_once('components/loading-screen.php'); ?>

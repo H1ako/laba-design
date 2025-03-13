@@ -8,13 +8,13 @@
         <nav class="top-section__nav">
             <ul class="nav__list">
                 <li class="list__item">
-                    <a href="/" class="item__link">Home</a>
+                    <a href="<?= Router::getRoute('/') ?>" class="item__link">Home</a>
                 </li>
                 <li class="list__item">
-                    <a href="/catalog" class="item__link">Catalog</a>
+                    <a href="<?= Router::getRoute('/catalog') ?>" class="item__link">Catalog</a>
                 </li>
                 <li class="list__item">
-                    <a href="/news" class="item__link">News</a>
+                    <a href="<?= Router::getRoute('/news') ?>" class="item__link">News</a>
                 </li>
             </ul>
         </nav>

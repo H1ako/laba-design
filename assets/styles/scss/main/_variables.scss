@@ -10,7 +10,7 @@
   --color-text-semivisible: color-mix(in srgb, var(--color-text) 10%, transparent);
   // background colors
   --color-bg: #F7F8F8;
-  --color-bg-element: color-mix(in srgb, var(--color-text) 10%, transparent);
+  --color-bg-element: color-mix(in srgb, var(--color-text) 5%, transparent);
   --color-bg-modal: color-mix(in srgb, var(--color-bg) 75%, transparent);
   --color-bg-modal-back: color-mix(in srgb, var(--color-bg) 60%, transparent);
 

@@ -1,26 +1,89 @@
+//------COMPONENTS------
+@import "../components/basket-link";
+
 .main-header {
+  position: relative;
+  background-color: var(--color-bg);
   width: 100%;
-  margin-block: 3em;
+  height: 18rem;
+  z-index: 1;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-text-semivisible);
+  display: flex;
+  align-items: center;
 
-  .main-header__container {
-    position: relative;
-    width: var(--width-main-content);
-    margin-inline: auto;
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    & > * {
+      user-select: none;
+      pointer-events: none;
+      width: 40vw;
+      min-width: 600px;
+    }
+
+    .bg-part-1 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      translate: -25% -25%;
+    }
+
+    .bg-part-2 {
+      position: absolute;
+      left: 40%;
+      bottom: 0;
+      translate: -50% 60%;
+    }
+
+    .bg-part-3 {
+      position: absolute;
+      right: 0;
+      top: 15%;
+      translate: 50% -25%;
+    }
+  }
+
+  &__top-section {
+    padding: 3em;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4em;
 
-    .container__search {
-      position: relative;
+    .top-section__nav {
+      .nav__list {
+        display: flex;
+        align-items: center;
+        gap: 2em;
 
-      .search__logout {
-        position: absolute;
-        left: calc(100% + 2em);
-        top: 50%;
-        translate: 0 -50%;
-        flex-shrink: 0;
-        background: none;
-        color: var(--color-text-semivisible);
-        text-decoration: underline;
+        .list__item {
+          .item__link {
+            @include oliverFont;
+
+            font-size: var(--font-size-1);
+            color: var(--color-text);
+          }
+        }
+      }
+    }
+  }
+
+  &__main-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+    .main-section__logo {
+      .logo {
+        width: 1em;
+        font-size: 22rem;
+        translate: 10%;
       }
     }
   }

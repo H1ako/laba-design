@@ -10,6 +10,10 @@
     overflow: hidden;
     border-bottom: 1px solid var(--color-text-semivisible);
 
+    @media screen and (width < 748px) {
+        height: 90svh;
+    }
+
     &__bg{
         position: absolute;
         inset: 0;
@@ -21,13 +25,21 @@
             pointer-events: none;
             width: 40vw;
             min-width: 600px;
+
+            @media screen and (width < 748px) {
+                min-width: 550px;
+            }
         }
 
         .bg-part-1 {
             position: absolute;
-            left: 0;
-            top: 0;
+            left: 0%;
+            top: 0%;
             translate: -25% -25%;
+
+            @media screen and (width < 748px) {
+                translate: -43% -4%;
+            }
         }
 
         .bg-part-2 {
@@ -35,6 +47,12 @@
             left: 40%;
             bottom: 0;
             translate: -50% 60%;
+            
+            @media screen and (width < 748px) {
+                translate: 40% 60%;
+                right: 0%;
+                left: auto;
+            }
         }
 
         .bg-part-3 {
@@ -42,6 +60,11 @@
             right: 0;
             top: 15%;
             translate: 50% -25%;
+
+            @media screen and (width < 748px) {
+                top: 0;
+                translate: 70% -45%;
+            }
         }
     }
 
@@ -52,6 +75,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 4em;
+
+        @media screen and (width < 748px) {
+            padding: 1.5em;
+        }
     
         .top-section__nav {
 
@@ -67,6 +94,10 @@
 
                         font-size: var(--font-size-1);
                         color: var(--color-text);
+
+                        @media screen and (width < 748px) {
+                            font-size: var(--font-size-2);
+                        }
                     }
                 }
             }
@@ -86,12 +117,23 @@
         left: 50%;
         translate: -50% -50%;
 
+        @media screen and (width < 748px) {
+            top: auto;
+            bottom: 10%;
+            left: 5%;
+            translate: 0;
+        }
+
         .main-section__logo {
 
             .logo {
                 width: 1em;
                 font-size: 70rem;
                 translate: 10%;
+
+                @media screen and (width < 748px) {
+                    font-size: clamp(25rem, 50vw, 40rem);
+                }
             }
         }
     }

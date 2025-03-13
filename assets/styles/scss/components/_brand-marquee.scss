@@ -1,0 +1,33 @@
+.brand-marquee {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow-x: hidden;
+
+    &__container {
+        .container__list {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-left: 2rem;
+            transition: var(--transition-main);
+
+            .list__el {
+                @include oliverFont;
+
+                padding: 1.25em 1em;
+                flex-shrink: 0;
+                font-size: var(--font-size-2);
+                opacity: .2;
+
+                .logo {
+                    font-size: var(--font-size-2);
+                    width: 2em;
+                }
+            }
+        }
+    }
+}

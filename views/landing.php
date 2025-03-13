@@ -13,7 +13,7 @@ global $SITE_URL, $session;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php include_once('components/base-head.php'); ?>
   <title>Главная</title>
-  <link rel="stylesheet" href="<?= $SITE_URL ?>/assets/styles/css/index.css">
+  <link rel="stylesheet" href="<?= $SITE_URL ?>/assets/styles/css/landing.css">
 
   <script>
     const SITE_URL = '<?= $SITE_URL ?>';
@@ -29,7 +29,10 @@ global $SITE_URL, $session;
   <?php include_once('components/brand-marquee.php'); ?>
   <main class="main-content">
     <section class="main-content__section section__history-banner">
-      <?php include_once('components/history-banner.php'); ?>
+      <?php include_once('components/history-banner.php'); ?>      
+    </section>
+    <section class="main-content__section section_catalog">
+      <?php include_once('components/catalog.php'); ?>
       <a href="<?= Router::getRoute('/catalog') ?>" class="section__action-btn">перейти в каталог</a>
     </section>
     <section class="main-content__section section_reviews">

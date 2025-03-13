@@ -31,6 +31,27 @@
   }
 }
 
+@mixin button($border-radius: var(--border-radius-small)) {
+  position: relative;
+  border-radius: $border-radius;
+  z-index: 1;
+
+  &:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: var(--transition-main);
+    background: inherit;
+    border-radius: $border-radius;
+    z-index: -1;
+  }
+
+  &:hover:before,
+  &:focus-within:focus-visible:before {
+    filter: brightness(0.8);
+  }
+}
+
 @mixin image {
   object-fit: cover;
   object-position: center;

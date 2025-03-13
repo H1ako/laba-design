@@ -1,24 +1,27 @@
 //------COMPONENTS------
-@import "./rubics-cube";
-@import "./like-counter";
 @import "./socials";
 
 .main-footer {
     width: 100%;
     position: relative;
-    margin-top: 10em;
 
     &__container {
         width: var(--width-main-content);
         margin-inline: auto;
+        border-top: 2px solid var(--color-text-semivisible);
 
         .container__content {
-            background: var(--color-bg-element);
+            background: var(--color-bg);
             border-radius: 1.5rem;
             padding: 3em 5em;
             display: flex;
             justify-content: space-between;
             gap: 2em;
+
+            @media screen and (width < 748px) {
+                flex-direction: column;
+                padding: 3em 2.5em;
+            }
 
             .content__col {
                 display: flex;
@@ -26,10 +29,17 @@
                 gap: 1em;
 
                 &.col_socials {
+
+                    @media screen and (width > 390px) and (width < 748px) {
+                        flex-direction: row;
+                        gap: 2em;
+                    }
                 }
 
                 &.col_nav {
-
+                    @media screen and (width < 748px) {
+                        margin-top: 2em;
+                    }
                 }
 
                 &.col_info {
@@ -43,10 +53,12 @@
             }
 
             .content__title {
-                @include yandexDisplayFont;
+                @include oliverFont;
 
-                font-size: var(--font-size-4);
-                margin-bottom: 2.4rem;
+                font-size: var(--font-size-1);
+                color: var(--color-main);
+                margin-bottom: 1.4rem;
+                text-transform: uppercase;
                 // font-weight: bold;
             }
 
@@ -76,7 +88,7 @@
                         .item__link {
                             color: var(--color-text);
                             font-size: var(--font-size-4);
-
+                            opacity: 0.7;
                         }
                     }
                 }
@@ -96,11 +108,6 @@
                     }
                 }
             }
-
-            .content__like-counter {}
-            .content__rubics-cube .rubics-cube {
-                --scale-factor: .5;
-            }
         }
 
         .container__rights {
@@ -108,11 +115,12 @@
 
             margin-inline: auto;
             margin-block: 2em;
-            color: var(--color-text-semivisible);
+            color: var(--color-text);
             font-size: var(--font-size-5);
             text-align: center;
             white-space: nowrap;
             letter-spacing: 1.25px;
+            opacity: 0.5;
         }
     }
 }

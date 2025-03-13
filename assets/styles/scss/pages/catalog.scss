@@ -1,11 +1,9 @@
 @import "../main/mixins";
 //------COMPONENTS------
+@import "../components/catalog";
 @import "../components/banner";
-@import "../components/hero-header";
+@import "../components/header";
 @import "../components/brand-marquee";
-@import "../components/history-banner";
-@import "../components/news";
-@import "../components/reviews-marquee";
 
 body {
   display: flex;
@@ -35,11 +33,6 @@ body {
       text-transform: uppercase;
       color: var(--color-secondary);
       letter-spacing: 5px;
-      text-align: center;
-
-      @media screen and (width < 748px) {
-        font-size: var(--font-size-0);
-      }
     }
 
     .section__action-btn {
@@ -50,31 +43,15 @@ body {
       color: var(--color-text);
       background: var(--color-accent-transparent);
       border: 2px solid var(--color-secondary);
-      padding: 0.5em 1em;
+      padding: 0.5em 8em;
       text-align: center;
       width: 40em;
       max-width: 100%;
       margin-top: 2em;
-
-      @media screen and (width < 748px) {
-        width: calc(100% - 2em);
-      }
     }
 
-    &.section__history-banner {
-      border-top: 2px solid var(--color-text-semivisible);
-    }
-
-    &.section_reviews {
-      margin-top: 5em;
-    }
-
-    &.section_news {
-      margin-top: 5em;
+    &.section_catalog {
+      margin-top: 2em;
     }
   }
-}
-
-.main-footer {
-  margin-top: 10em;
 }

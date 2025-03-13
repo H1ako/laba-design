@@ -7,6 +7,10 @@
     padding: 0.75em;
     border-radius: 1.15em;
     color: var(--color-text);
+
+    @media screen and (width < 420px) {
+      display: none;
+    }
   }
 
   &__icon {
@@ -21,6 +25,10 @@
     align-items: center;
     justify-content: center;
     translate: -0.3em;
+
+    @media screen and (width < 420px) {
+      translate: 0;
+    }
 
     &::before {
       content: "";
