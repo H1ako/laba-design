@@ -3,7 +3,7 @@
 *,
 *::after,
 *::before {
-  @include textFont;
+  @include yandexTextFont;
   
   box-sizing: border-box;
 }

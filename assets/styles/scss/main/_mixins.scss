@@ -48,12 +48,16 @@
   hyphens: auto;
 }
 
-@mixin displayFont() {
+@mixin yandexDisplayFont() {
   font-family: "YandexSansDisplay", sans-serif;
 }
 
-@mixin textFont() {
+@mixin yandexTextFont() {
   font-family: "YandexSansText", sans-serif;
+}
+
+@mixin oliverFont() {
+  font-family: "OliverOblique", sans-serif;
 }
 
 @mixin blurBg {

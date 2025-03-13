@@ -9,7 +9,8 @@ function disableLoadingScreen() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(disableLoadingScreen, 2000);
+//   setTimeout(disableLoadingScreen, 2000);
+  disableLoadingScreen()
 });
 
 window.addEventListener('beforeunload', (event) => {

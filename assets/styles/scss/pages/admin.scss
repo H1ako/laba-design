@@ -24,7 +24,7 @@ nav {
   z-index: 999;
 
   h1 {
-    @include displayFont;
+    @include yandexDisplayFont;
 
     font-size: var(--font-size-2);
     text-align: center;
@@ -67,7 +67,7 @@ nav {
         }
 
         &:has(input:checked) {
-          @include displayFont;
+          @include yandexDisplayFont;
 
           color: var(--color-text);
           font-weight: 700;

@@ -43,7 +43,7 @@
             }
 
             .content__title {
-                @include displayFont;
+                @include yandexDisplayFont;
 
                 font-size: var(--font-size-4);
                 margin-bottom: 2.4rem;
@@ -60,7 +60,7 @@
 
             .content__phones {
                 .phones__tip {
-                    @include displayFont;
+                    @include yandexDisplayFont;
 
                     color: var(--color-text-darker);
                     font-size: var(--font-size-4);
@@ -104,7 +104,7 @@
         }
 
         .container__rights {
-            @include displayFont;
+            @include yandexDisplayFont;
 
             margin-inline: auto;
             margin-block: 2em;

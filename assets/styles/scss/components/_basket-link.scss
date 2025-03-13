@@ -1,0 +1,43 @@
+.basket-link {
+  font-size: var(--font-size-4);
+  display: flex;
+
+  &__title {
+    background: var(--color-bg);
+    padding: 0.75em;
+    border-radius: 1.15em;
+    color: var(--color-text);
+  }
+
+  &__icon {
+    position: relative;
+    background: var(--color-bg);
+    padding: 0.75em;
+    border-radius: 999px;
+    color: var(--color-text);
+    aspect-ratio: 1;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    translate: -0.3em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      left: 15%;
+      top: 15%;
+      border-radius: 999px;
+      background: var(--color-text);
+      z-index: -1;
+    }
+
+    svg {
+      width: 1em;
+      color: var(--color-bg);
+      stroke-width: 2px;
+    }
+  }
+}

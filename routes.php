@@ -11,19 +11,13 @@ global $SITE_URL;
 
 $session = Session::get();
 
+Router::get('/', 'views/index.php');
+Router::get('/catalog', 'views/catalog.php');
+Router::get('/landing', 'views/landing.php');
 
-if ($session->is_authed) {
-  Router::get('/', 'views/index.php');
-  Router::get('/login', function () {
-    Router::redirect_to('/');
-  });
-} else {
-  Router::get('/login', 'views/login.php');
-  Router::redirect_to('/login');
-};
 
-if ($session->user->is_admin) {
-  Router::get('/admin', 'views/admin.php');
-}
+// if ($session->user->is_admin) {
+//   Router::get('/admin', 'views/admin.php');
+// }
 
 Router::not_found();

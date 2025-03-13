@@ -4,8 +4,31 @@
 @import "./variables";
 @import "./mixins";
 // ------COMPONENTS------
+@import "../components/logo";
 @import "../components/footer";
 @import "../components/loading-screen";
+
+.appear-animation {
+  --animation-step: 1;
+
+  transform: translateX(0);
+  opacity: 0;
+  animation: appear-animation 400ms ease-in-out forwards
+    calc(var(--animation-step) * 0.2s + var(--animation-delay));
+}
+
+:has(.highlight-animation) .appear-animation {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+.highlight-animation {
+  background: transparent;
+  transition: var(--transition-slow) linear;
+  animation: highlight-animation 1500ms linear forwards
+    calc(var(--animation-delay) + 500ms) !important;
+}
 
 @keyframes errorAnimation {
   0% {
@@ -36,5 +59,53 @@
   100% {
     transform: translateX(-50%);
     opacity: 1;
+  }
+}
+
+@keyframes rotation_481 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  0% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes collapse_animation {
+  0% {
+    transform: rotate(360deg) scale(0.8);
+  }
+
+  50% {
+    transform: rotate(0) scale(1.2);
+  }
+}
+
+@keyframes appear-animation {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes highlight-animation {
+  0% {
+    background: var(--color-text);
+  }
+  50% {
+    background: transparent;
+  }
+
+  75% {
+    background: var(--color-text);
+  }
+
+  100% {
+    background: transparent;
   }
 }

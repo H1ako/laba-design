@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="content__col col_nav">
-                <p class="content__title">Пользователю</p>
+                <p class="content__title">For Users</p>
                 <nav class="content__nav" aria-label="Навигация пользователя">
                     <ul class="nav__list">
                         <li class="list__el">
@@ -44,20 +44,12 @@
                 </nav>
             </div>
             <div class="content__col col_info">
-                <p class="content__title">Информация</p>
+                <p class="content__title">About Us</p>
                 <p class="content__message">
                     Время приёма заказов: круглосуточно 7 дней в неделю.<br>
                     Время обработки заказов, прием звонков: пн-пт.<br>
                     c 9-00 до 21-00 (по Московскому времени).
                 </p>
-            </div>
-            <div class="content__col col_rubics">
-                <div class="content__like-counter">
-                    <?php include('components/like-counter.php'); ?>
-                </div>
-                <div class="content__rubics-cube">
-                    <?php include('components/rubics-cube.php'); ?>
-                </div>
             </div>
         </div>
         <p class="container__rights">Bce права защищены © 2024</p>

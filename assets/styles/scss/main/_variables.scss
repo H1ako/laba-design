@@ -1,14 +1,15 @@
 :root {
   // ----COLORS----
-  --color-main: #4A42B8;
-  --color-secondary: #25216E;
-  --color-accent: #2A249E;
+  --color-main: #739186;
+  --color-secondary: #B5B8C4;
+  --color-accent: #9190A5;
+  --color-accent-transparent: color-mix(in srgb, var(--color-accent) 25%, transparent);
   // text colors
-  --color-text: #E9E8F3;
+  --color-text: #060707;
   --color-text-darker: color-mix(in srgb, var(--color-text) 50%, transparent);
-  --color-text-semivisible: color-mix(in srgb, var(--color-text) 40%, transparent);
+  --color-text-semivisible: color-mix(in srgb, var(--color-text) 10%, transparent);
   // background colors
-  --color-bg: #010104;
+  --color-bg: #F7F8F8;
   --color-bg-element: color-mix(in srgb, var(--color-text) 10%, transparent);
   --color-bg-modal: color-mix(in srgb, var(--color-bg) 75%, transparent);
   --color-bg-modal-back: color-mix(in srgb, var(--color-bg) 60%, transparent);
@@ -30,9 +31,9 @@
   --font-size-6: clamp(1rem, 1vw, 1.2rem);
 
   // ----BORDER RADIUSES----
-  // --border-radius-main: 1rem;
-  // --border-radius-big: 1.5rem;
-  // --border-radius-small: 0.5rem;
+  --border-radius-main: .2em;
+  --border-radius-big: .5em;
+  --border-radius-small: 0.1rem;
 
   // ----TRANSITIONS----
   --transition-main: 150ms;

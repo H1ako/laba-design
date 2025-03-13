@@ -310,37 +310,49 @@ template {
 
 @font-face {
   font-family: "YandexSansDisplay";
-  src: url("/bd_20_laba/assets/fonts/YandexSansDisplay-Bold.woff2") format("woff2");
+  src: url("/laba_dis/assets/fonts/yandexsansdisplay-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YandexSansDisplay";
+  src: url("/laba_dis/assets/fonts/YandexSansDisplay-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "YandexSansDisplay";
-  src: url("/bd_20_laba/assets/fonts/YandexSansDisplay-Regular.woff2") format("woff2");
+  src: url("/laba_dis/assets/fonts/YandexSansDisplay-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "YandexSansText";
-  src: url("/bd_20_laba/assets/fonts/YandexSansText-Regular.woff2") format("woff2");
+  src: url("/laba_dis/assets/fonts/YandexSansText-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "YandexSansText";
-  src: url("/bd_20_laba/assets/fonts/YandexSansText-Medium.woff2") format("woff2");
+  src: url("/laba_dis/assets/fonts/YandexSansText-Medium.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "YandexSansText";
-  src: url("/bd_20_laba/assets/fonts/YandexSansText-Bold.woff2") format("woff2");
+  src: url("/laba_dis/assets/fonts/YandexSansText-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OliverOblique";
+  src: url("/laba_dis/assets/fonts/OliveraObl_Demo.woff2") format("woff2");
   font-display: swap;
 }
 *,
@@ -438,13 +450,14 @@ b {
 }
 
 :root {
-  --color-main: #4A42B8;
-  --color-secondary: #25216E;
-  --color-accent: #2A249E;
-  --color-text: #E9E8F3;
+  --color-main: #739186;
+  --color-secondary: #B5B8C4;
+  --color-accent: #9190A5;
+  --color-accent-transparent: color-mix(in srgb, var(--color-accent) 25%, transparent);
+  --color-text: #060707;
   --color-text-darker: color-mix(in srgb, var(--color-text) 50%, transparent);
-  --color-text-semivisible: color-mix(in srgb, var(--color-text) 40%, transparent);
-  --color-bg: #010104;
+  --color-text-semivisible: color-mix(in srgb, var(--color-text) 10%, transparent);
+  --color-bg: #F7F8F8;
   --color-bg-element: color-mix(in srgb, var(--color-text) 10%, transparent);
   --color-bg-modal: color-mix(in srgb, var(--color-bg) 75%, transparent);
   --color-bg-modal-back: color-mix(in srgb, var(--color-bg) 60%, transparent);
@@ -461,6 +474,9 @@ b {
   --font-size-4: clamp(1.6rem, 1.75vw, 2rem);
   --font-size-5: clamp(1.2rem, 1.4vw, 1.4rem);
   --font-size-6: clamp(1rem, 1vw, 1.2rem);
+  --border-radius-main: .2em;
+  --border-radius-big: .5em;
+  --border-radius-small: 0.1rem;
   --transition-main: 150ms;
   --transition-slow: 300ms;
   --transition-superslow: 600ms;
@@ -837,6 +853,25 @@ b {
     z-index: 1;
   }
 }
+.appear-animation {
+  --animation-step: 1;
+  transform: translateX(0);
+  opacity: 0;
+  animation: appear-animation 400ms ease-in-out forwards calc(var(--animation-step) * 0.2s + var(--animation-delay));
+}
+
+:has(.highlight-animation) .appear-animation {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+.highlight-animation {
+  background: transparent;
+  transition: var(--transition-slow) linear;
+  animation: highlight-animation 1500ms linear forwards calc(var(--animation-delay) + 500ms) !important;
+}
+
 @keyframes errorAnimation {
   0% {
     transform: translate(30px);
@@ -865,5 +900,45 @@ b {
   100% {
     transform: translateX(-50%);
     opacity: 1;
+  }
+}
+@keyframes rotation_481 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  0% {
+    transform: rotateZ(360deg);
+  }
+}
+@keyframes collapse_animation {
+  0% {
+    transform: rotate(360deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(0) scale(1.2);
+  }
+}
+@keyframes appear-animation {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@keyframes highlight-animation {
+  0% {
+    background: var(--color-text);
+  }
+  50% {
+    background: transparent;
+  }
+  75% {
+    background: var(--color-text);
+  }
+  100% {
+    background: transparent;
   }
 }

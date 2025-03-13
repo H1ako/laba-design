@@ -1,0 +1,27 @@
+.history-banner {
+    position: relative;
+    width: 100%;
+    background: var(--color-main);
+    padding: 4em;
+    z-index: 1;
+
+    &__bg {
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+
+        .bg-part-3 {}
+
+        .bg__man {
+
+        }
+    }
+
+    &__text {
+        font-size: var(--font-size-4);
+        font-weight: 300;
+        max-width: 50em;
+        line-height: 1.55;
+        letter-spacing: 1.35px;
+    }
+}
