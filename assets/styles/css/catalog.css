@@ -155,7 +155,7 @@
      -moz-user-select: none;
           user-select: none;
   pointer-events: none;
-  transition: var(--transition-slow);
+  transition: var(--transition-superslow);
   justify-content: center;
   gap: 1.5em;
   opacity: 0;
