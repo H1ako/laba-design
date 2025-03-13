@@ -140,7 +140,21 @@
     display: none;
   }
 }
+.banner .banner__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.banner .banner__bg .bg-part-2 {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  translate: -50% 0%;
+  animation: rotate-animation 20s linear infinite;
+}
 .banner__content {
+  -webkit-backdrop-filter: blur(25px);
+          backdrop-filter: blur(25px);
   overflow: hidden;
   flex-grow: 1;
   height: 100%;
@@ -176,6 +190,7 @@
   flex-shrink: 0;
   -o-object-position: center 20%;
      object-position: center 20%;
+  animation: scale-animation 5s infinite alternate;
 }
 @media screen and (width < 760px) {
   .banner__content .content__scene .scene__image {
@@ -188,6 +203,9 @@
   right: 0%;
   translate: 0 -50%;
   white-space: nowrap;
+}
+.banner__content .content__scene .scene__phone:hover, .banner__content .content__scene .scene__phone:focus {
+  transform: scale(1.05);
 }
 @media screen and (width < 760px) {
   .banner__content .content__scene .scene__phone {
@@ -221,6 +239,9 @@
 .banner__content .content__scene .scene__button:hover:before, .banner__content .content__scene .scene__button:focus-within:focus-visible:before {
   filter: brightness(0.8);
 }
+.banner__content .content__scene .scene__button:hover, .banner__content .content__scene .scene__button:focus {
+  transform: scale(1.05);
+}
 @media screen and (width < 760px) {
   .banner__content .content__scene .scene__button {
     padding: 0.75em 3em;
@@ -238,6 +259,22 @@
   background: var(--color-main);
 }
 
+@keyframes scale-animation {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+@keyframes rotate-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .basket-link {
   font-size: var(--font-size-4);
   display: flex;

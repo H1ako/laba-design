@@ -25,8 +25,24 @@
       }
     }
   }
+  
+  .banner__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    .bg-part-2 {
+        position: absolute;
+        left: 50%;
+        top: 0%;
+        translate: -50% 0%;
+
+        animation: rotate-animation 20s linear infinite;
+    }
+  }
 
   &__content {
+    backdrop-filter: blur(25px);
     overflow: hidden;
     flex-grow: 1;
     height: 100%;
@@ -53,6 +69,7 @@
         height: 3.5em;
         flex-shrink: 0;
         object-position: center 20%;
+        animation: scale-animation 5s infinite alternate;
 
         @media screen and (width < 760px) {
           display: none;
@@ -65,6 +82,11 @@
         right: 0%;
         translate: 0 -50%;
         white-space: nowrap;
+
+        &:hover,
+        &:focus {
+            transform: scale(1.05);
+        }
 
         @media screen and (width < 760px) {
           position: relative;
@@ -84,6 +106,11 @@
         padding: 0.25em 3em;
         text-align: center;
         border-radius: var(--border-radius-main);
+
+        &:hover,
+        &:focus {
+            transform: scale(1.05);
+        }
 
         @media screen and (width < 760px) {
           padding: 0.75em 3em;
@@ -112,4 +139,22 @@
   &[data-scene="2"] {
     background: var(--color-main);
   }
+}
+
+@keyframes scale-animation {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
