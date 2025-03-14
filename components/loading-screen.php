@@ -19,5 +19,4 @@
             </filter>
         </defs>
     </svg>
-
 </div>
