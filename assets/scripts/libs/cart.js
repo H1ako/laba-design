@@ -1,5 +1,5 @@
 // var cartItem = {
-//     id: 0,
+//     product_id: 0,
 //     quantity: 0,
 // }
 
@@ -10,12 +10,12 @@ async function init() {
 
 async function initCart() {
     var cart = await getCart();
-    if (!cart || cart.length === 0) {
+    if (!cart || cart.items?.length === 0) {
         console.error('Cart is empty or not initialized');
         return;
     }
 
-
+    await updateCartUI(cart);
 }
 
 async function getCart() {
@@ -27,12 +27,14 @@ async function getCart() {
             'Content-Type': 'application/json',
             'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         },
-        body: JSON.stringify(cartData),
+        body: JSON.stringify({
+            cart: cartData
+        }),
     });
     if (response.ok) {
         const data = await response.json();
-        if (data.success) {
-            return data;
+        if (data.status == 'success') {
+            return data.cart;
         }
 
         console.error('Error fetching cart:', data.message);
@@ -47,6 +49,13 @@ async function getCartData() {
     var cartData = localStorage.getItem('cartData');
     cart = cartData ? JSON.parse(cartData) : [];
     return cart;
+}
+
+async function updateCartUI(cart) {
+    const items = cart.items;
+    const total_price = cart.total_price;
+    const total_items = cart.total_items;
+    const total_discount_sum = cart.total_discount_sum;
 }
 
 
