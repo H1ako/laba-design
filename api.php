@@ -21,6 +21,8 @@ Router::set_route_prefix('api');
 
 Router::post('/cart', [UserController::class, 'get_cart']);
 
+Router::post('/cart/purchase', [UserController::class, 'purchase_cart']);
+
 // Router::post('/auth/signin', [UserController::class, 'sign_in']);
 // Router::post('/auth/signup', [UserController::class, 'sign_up']);
 // Router::get('/auth/logout', [UserController::class, 'logout']);
