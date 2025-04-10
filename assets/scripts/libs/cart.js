@@ -4,8 +4,43 @@
 // }
 
 async function init() {
+    initItemsInCart()
     initCart()
-    cart = await getCart();
+}
+
+async function initItemsInCart() {
+    const cartData = await getCartData();
+    if (!cartData || cartData.length === 0) {
+        console.error('Cart is empty or not initialized');
+        return;
+    }
+
+    cartData.forEach(cartItem => {
+        const productId = cartItem.product_id;
+        const quantity = cartItem.quantity;
+
+        const product_item = document.querySelector(`[data-catalog-product-id="${productId}"]`);
+        if (!product_item) {
+            console.error(`Product item with ID ${productId} not found`);
+            return;
+        }
+
+        const quantityElement = product_item.querySelector('[product-quantity]');
+        if (!quantityElement) {
+            console.error(`Quantity element not found for product ID ${productId}`);
+            return;
+        }
+
+        product_item.classList.add('in-cart');
+        product_item.setAttribute('in-cart', true);
+        quantityElement.value = quantity;
+    })
+}
+
+async function getCartData() {
+    var cartData = localStorage.getItem('cartData');
+    cart = cartData ? JSON.parse(cartData) : [];
+    return cart;
 }
 
 async function initCart() {
@@ -43,12 +78,6 @@ async function getCart() {
         console.error('Error fetching cart:', response.statusText);
         return null;
     }
-}
-
-async function getCartData() {
-    var cartData = localStorage.getItem('cartData');
-    cart = cartData ? JSON.parse(cartData) : [];
-    return cart;
 }
 
 async function updateCartUI(cart) {
