@@ -481,9 +481,6 @@ function createCartItemElement(item) {
     cartItem.querySelector(".original__value").textContent = formatPrice(
       product.base_price
     );
-    cartItem.querySelector(
-      ".discount__badge"
-    ).textContent = `-${product.discount}%`;
   } else {
     originalPriceContainer.style.display = "none";
   }
