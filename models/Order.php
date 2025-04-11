@@ -63,12 +63,22 @@ class Order extends BaseModel
         return $itemsCost - $this->discount_value;
     }
 
+    public function get_total_price_formatted_attribute()
+    {
+        return static::format_price($this->total_price);
+    }
+
     public function get_total_discount_sum_attribute()
     {
         $itemsDiscount = array_reduce($this->items, function ($carry, $item) {
             return $carry + $item->discount_sum * $item->quantity;
         }, 0);
         return $itemsDiscount + $this->discount_value;
+    }
+
+    public function get_total_discount_sum_formatted_attribute()
+    {
+        return static::format_price($this->total_discount_sum);
     }
 
     public function get_total_discount_attribute()
@@ -81,11 +91,6 @@ class Order extends BaseModel
         return array_reduce($this->items, function ($carry, $item) {
             return $carry + $item->quantity;
         }, 0);
-    }
-
-    public function get_total_price_formatted_attribute()
-    {
-        return static::format_price($this->total_price);
     }
 
     protected function set_status($status)
