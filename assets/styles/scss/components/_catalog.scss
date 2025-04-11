@@ -148,15 +148,21 @@
                 display: none;
               }
             }
+
+            @media screen and (width < 768px) {
+              aspect-ratio: 1;
+              height: 4em;
+              font-size: var(--font-size-5);
+            }
           }
 
           .change-quantity__input {
             @include yandexDisplayFont;
 
-            font-size: var(--font-size-5);
+            font-size: var(--font-size-4);
             color: var(--color-text);
             background: var(--color-text-light);
-            padding: 0.75em 1em;
+            padding: 0.25em 1em;
             text-align: center;
             width: 100%;
             flex: 1;
