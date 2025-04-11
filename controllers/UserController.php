@@ -53,6 +53,24 @@ class UserController extends Controller
         ]);
     }
 
+    public static function purchase_cart() {
+        $data = static::get_post_data(['cart' => 'cart', 'customer' => 'customer']);
+        $customer = $data['customer'] ?? null;
+
+        $is_validated = static::validate_data($customer, [
+            'fullname' => 'required|string|min:8|max:60',
+            'email' => 'required|string|email',
+            'phone' => 'required|string|phone_number',
+            'address' => 'string|min:8|max:160',
+        ]);
+        if (!$is_validated) {
+            return static::response_error(400, 'Invalid data');
+        }
+
+        
+        
+    }
+
     // public static function sign_in()
     // {
     //     $session = Session::get();
