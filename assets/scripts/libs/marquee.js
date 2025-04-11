@@ -1,4 +1,4 @@
-import marquee from "https://cdn.jsdelivr.net/npm/vanilla-marquee/dist/vanilla-marquee.min.js";
+import marquee from "/assets/scripts/libs/vanilla-marquee.min.js";
 
 const marqueeEl = document.querySelector(".marquee");
 

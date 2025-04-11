@@ -404,7 +404,7 @@ function formatPrice(price) {
 }
 
 async function updateCartUI(cartInfo) {
-    console.log(cartInfo)
+  console.log(cartInfo);
   if (!cartInfo || !cartInfo.items || cartInfo.items.length === 0) {
     updateEmptyCartState(true);
     return;
@@ -550,6 +550,63 @@ async function changeCartItemQuantity(productId, delta) {
   updateCartItemQuantity(productId, newQuantity);
 }
 
+function extractPriceFromElement(element) {
+  if (!element || !element.textContent) return 0;
+  return Number(element.textContent.replace(/[^\d]/g, ""));
+}
+
+// Calculate and update cart totals without server request
+function updateCartTotalsLocally() {
+  const cartItems = cartItemsContainer.querySelectorAll(".cart-item");
+
+  // Calculate totals
+  let totalItems = 0;
+  let totalPrice = 0;
+  let totalOriginalPrice = 0;
+
+  cartItems.forEach((item) => {
+    const quantity = parseInt(item.querySelector("[cart-item-quantity]").value);
+    const itemCurrentPrice = extractPriceFromElement(
+      item.querySelector(".values__current")
+    );
+    const itemOriginalPriceElement = item.querySelector(".values__original");
+
+    totalItems += quantity;
+    totalPrice += itemCurrentPrice;
+
+    if (
+      itemOriginalPriceElement &&
+      itemOriginalPriceElement.style.display !== "none"
+    ) {
+      totalOriginalPrice += extractPriceFromElement(itemOriginalPriceElement);
+    } else {
+      totalOriginalPrice += itemCurrentPrice;
+    }
+  });
+
+  const totalDiscountSum = Math.max(0, totalOriginalPrice - totalPrice);
+
+  // Update cart UI
+  if (cartItems.length === 0) {
+    updateEmptyCartState(true);
+    return;
+  }
+
+  updateEmptyCartState(false);
+
+  // Update totals in UI
+  if (cartItemsCount) cartItemsCount.textContent = totalItems;
+  if (cartSubtotal) cartSubtotal.textContent = formatPrice(totalOriginalPrice);
+  if (cartDiscount) {
+    cartDiscount.textContent = `-${formatPrice(totalDiscountSum)}`;
+    cartDiscount.parentElement.style.display =
+      totalDiscountSum > 0 ? "flex" : "none";
+  }
+  if (cartTotal) cartTotal.textContent = formatPrice(totalPrice);
+  if (cartCheckoutTotal)
+    cartCheckoutTotal.textContent = formatPrice(totalPrice);
+}
+
 async function updateCartItemQuantity(productId, newQuantity) {
   // Update in localStorage
   await updateCartProduct(productId, newQuantity);
@@ -559,7 +616,43 @@ async function updateCartItemQuantity(productId, newQuantity) {
     `.cart-item[data-cart-product-id="${productId}"]`
   );
   if (cartItem) {
-    cartItem.querySelector("[cart-item-quantity]").value = newQuantity;
+    // Update quantity input
+    const quantityInput = cartItem.querySelector("[cart-item-quantity]");
+    quantityInput.value = newQuantity;
+
+    // Get product info from the existing cart item
+    const product = {
+      price: extractPriceFromElement(cartItem.querySelector(".price__value")),
+      base_price:
+        extractPriceFromElement(cartItem.querySelector(".original__value")) ||
+        extractPriceFromElement(cartItem.querySelector(".price__value")),
+      discount:
+        cartItem
+          .querySelector(".image__discount-badge")
+          ?.textContent?.replace(/[^0-9]/g, "") || 0,
+    };
+
+    // Calculate new totals for this item
+    const hasDiscount = product.discount > 0;
+    const totalPrice = product.price * newQuantity;
+    const totalOriginalPrice = hasDiscount
+      ? product.base_price * newQuantity
+      : 0;
+
+    // Update total price for this item
+    cartItem.querySelector(".values__current").textContent =
+      formatPrice(totalPrice);
+
+    const originalTotalElement = cartItem.querySelector(".values__original");
+    if (hasDiscount) {
+      originalTotalElement.textContent = formatPrice(totalOriginalPrice);
+      originalTotalElement.style.display = "";
+    } else {
+      originalTotalElement.style.display = "none";
+    }
+
+    // Update overall cart totals by calculation
+    updateCartTotalsLocally();
   }
 
   // Update catalog item if present
@@ -572,9 +665,6 @@ async function updateCartItemQuantity(productId, newQuantity) {
       changeQuantity(newQuantity, quantityElement);
     }
   }
-
-  // Refresh cart data
-  initCart();
 }
 
 async function removeFromCart(productId) {
@@ -590,10 +680,8 @@ async function removeFromCart(productId) {
     setTimeout(() => {
       cartItem.remove();
 
-      // Check if cart is empty
-      if (cartItemsContainer.children.length === 0) {
-        updateEmptyCartState(true);
-      }
+      // Update cart totals based on remaining items
+      updateCartTotalsLocally();
     }, 300);
   }
 
@@ -610,9 +698,6 @@ async function removeFromCart(productId) {
       quantityElement.value = 1;
     }
   }
-
-  // Refresh cart data
-  initCart();
 }
 
 function addProductToCartUI(productId, quantity) {
@@ -621,13 +706,61 @@ function addProductToCartUI(productId, quantity) {
 }
 
 function removeProductFromCartUI(productId) {
-  // This will be handled by updateCartUI
-  initCart();
+  const cartItem = document.querySelector(
+    `.cart-item[data-cart-product-id="${productId}"]`
+  );
+  if (cartItem) {
+    cartItem.remove();
+    updateCartTotalsLocally();
+  }
 }
 
 function updateCartProductQuantityUI(productId, quantity) {
-  // This will be handled by updateCartUI
-  initCart();
+  const cartItem = document.querySelector(
+    `.cart-item[data-cart-product-id="${productId}"]`
+  );
+  if (cartItem) {
+    const quantityInput = cartItem.querySelector("[cart-item-quantity]");
+    if (quantityInput) {
+      // Just update the value without triggering the change event
+      quantityInput.value = quantity;
+
+      // Manually update the cart item pricing
+      const product = {
+        price: extractPriceFromElement(cartItem.querySelector(".price__value")),
+        base_price:
+          extractPriceFromElement(cartItem.querySelector(".original__value")) ||
+          extractPriceFromElement(cartItem.querySelector(".price__value")),
+        discount:
+          cartItem
+            .querySelector(".image__discount-badge")
+            ?.textContent?.replace(/[^0-9]/g, "") || 0,
+      };
+
+      // Calculate and update totals directly
+      const hasDiscount = product.discount > 0;
+      const totalPrice = product.price * quantity;
+      const totalOriginalPrice = hasDiscount
+        ? product.base_price * quantity
+        : 0;
+
+      // Update the total price display
+      cartItem.querySelector(".values__current").textContent =
+        formatPrice(totalPrice);
+
+      // Update original price if there's a discount
+      const originalTotalElement = cartItem.querySelector(".values__original");
+      if (hasDiscount) {
+        originalTotalElement.textContent = formatPrice(totalOriginalPrice);
+        originalTotalElement.style.display = "";
+      } else {
+        originalTotalElement.style.display = "none";
+      }
+
+      // Update overall cart totals
+      updateCartTotalsLocally();
+    }
+  }
 }
 
 async function addProductToCartHandler(btn) {
