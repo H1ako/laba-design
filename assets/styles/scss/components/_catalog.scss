@@ -13,7 +13,7 @@
 
     .list__item {
       position: relative;
-
+      
       .item__image {
         position: relative;
         border: 2px solid var(--color-text-semivisible);
@@ -101,6 +101,68 @@
           text-align: center;
           width: 100%;
         }
+
+        .actions__change-quantity {
+          display: none;
+          align-items: stretch;
+          justify-content: space-between;
+          gap: .5em;
+          width: 100%;
+
+          .change-quantity__action-btn {
+            @include button($border-radius: 0.5em);
+            @include yandexDisplayFont;
+
+            font-size: var(--font-size-4);
+            color: var(--color-bg);
+            background: var(--color-main);
+            padding: 1em 1em;
+            text-align: center;
+            flex: 0 0 auto;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .change-quantity__input {
+            @include yandexDisplayFont;
+
+            font-size: var(--font-size-5);
+            color: var(--color-text);
+            background: var(--color-text-light);
+            padding: 0.75em 1em;
+            text-align: center;
+            width: 100%;
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5em;
+            transition: var(--transition-slow);
+            outline: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+            -webkit-rtl-ordering: logical;
+            -moz-rtl-ordering: logical;
+            flex-grow: 1;
+
+            &:hover {
+              border-color: #c0c0c0;
+            }
+
+            &:focus {
+              border-color: var(--color-main);
+              box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+            }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+          }
+        }
       }
 
       &:hover,
@@ -108,6 +170,16 @@
         .image__description {
           opacity: 1;
           translate: 0 0;
+        }
+      }
+
+      &.in-cart {
+        .actions__change-quantity {
+          display: flex;
+        }
+
+        .actions__add-to-cart {
+          display: none;
         }
       }
     }

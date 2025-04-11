@@ -85,8 +85,9 @@ $data = [
 
 <div class="catalog">
     <ul class="catalog__list">
-        <?php foreach ($data as $item) : ?>
-        <li class="list__item">
+        <?php foreach ($data as $key => $item) : ?>
+        <!-- <li class="list__item" data-catalog-product-id="<?= $item['id'] ?>"> -->
+        <li class="list__item" data-catalog-product-id="<?= $key ?>">
             <div class="item__image">
                 <div class="image__description">
                     <p class="description__text">
@@ -108,6 +109,11 @@ $data = [
             </div>
             <div class="item__actions">
                 <button class="actions__add-to-cart">В Корзину</button>
+                <div class="actions__change-quantity">
+                    <button class="change-quantity__action-btn" product-quantity-minus>-</button>
+                    <input product-quantity type="number" class="change-quantity__input" value="1" min="1" max="99" step="1">
+                    <button class="change-quantity__action-btn" product-quantity-plus>+</button>
+                </div>
             </div>
         </li>
         <?php endforeach; ?>
