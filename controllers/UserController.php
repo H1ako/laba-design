@@ -28,7 +28,7 @@ class UserController extends Controller
             $quantity = $cart_item['quantity'] ?? 1;
             $cart_item_data = $product->to_array();
             $cart_item_data['price'] = $product->price;
-            $cart_item_data['product']['discount'] = $product->discount;
+            $cart_item_data['discount'] = $product->discount;
             $cart_output[] = [
                 'product' => $cart_item_data,
                 'quantity' => $quantity,
