@@ -71,6 +71,25 @@
         }
       }
     }
+
+    .top-section__control {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+
+      .control__my-orders {
+
+        .my-orders__link {
+          color: var(--color-text);
+          text-decoration: none;
+          
+          &:hover,
+          &:focus-within {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
 
   &__main-section {

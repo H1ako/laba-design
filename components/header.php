@@ -18,6 +18,9 @@
             </ul>
         </nav>
         <div class="top-section__control">
+            <div class="control__my-orders">
+                <a href="<?= Router::getRoute('/orders') ?>" class="my-orders__link">Мои заказы</a>
+            </div>
             <div class="control__basket">
                 <?php include('components/basket-link.php'); ?>
             </div>

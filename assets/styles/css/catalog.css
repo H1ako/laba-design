@@ -535,6 +535,18 @@
   font-size: var(--font-size-1);
   color: var(--color-text);
 }
+.main-header__top-section .top-section__control {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.main-header__top-section .top-section__control .control__my-orders .my-orders__link {
+  color: var(--color-text);
+  text-decoration: none;
+}
+.main-header__top-section .top-section__control .control__my-orders .my-orders__link:hover, .main-header__top-section .top-section__control .control__my-orders .my-orders__link:focus-within {
+  text-decoration: underline;
+}
 .main-header__main-section {
   position: absolute;
   top: 50%;

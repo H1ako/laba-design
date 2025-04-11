@@ -137,14 +137,13 @@ function validateForm() {
     hideError(phoneError);
   }
 
-  // Validate email (only if provided)
+  // Validate email
   const emailField = form.querySelector("#email");
   const emailError = form.querySelector('[data-error="email"]');
-  if (
-    emailField &&
-    emailField.value.trim() &&
-    !isValidEmail(emailField.value)
-  ) {
+  if (emailField && !emailField.value.trim()) {
+    showError(emailError, "Пожалуйста, введите email адрес");
+    isValid = false;
+  } else if (emailField && !isValidEmail(emailField.value)) {
     showError(emailError, "Пожалуйста, введите корректный email");
     isValid = false;
   } else {
@@ -305,8 +304,7 @@ async function handleOrderSubmit() {
       }
 
       // Clear cart
-      clearCart()
-      
+      clearCart();
     } else {
       // Order failed
       cartResultSuccess.classList.remove("active");
@@ -326,26 +324,28 @@ async function handleOrderSubmit() {
 function clearCart() {
   // Clear cart data in localStorage
   localStorage.removeItem("cartData");
-  
+
   // Clear all in-cart indicators in catalog
-  const catalogProducts = document.querySelectorAll("[data-catalog-product-id]");
-  catalogProducts.forEach(productElement => {
+  const catalogProducts = document.querySelectorAll(
+    "[data-catalog-product-id]"
+  );
+  catalogProducts.forEach((productElement) => {
     productElement.classList.remove("in-cart");
     productElement.removeAttribute("in-cart");
-    
+
     // Reset quantity input to 1
     const quantityInput = productElement.querySelector("[product-quantity]");
     if (quantityInput) {
       quantityInput.value = 1;
     }
-    
+
     // Reset state of minus/plus buttons
     const minusBtn = productElement.querySelector("[product-quantity-minus]");
     const plusBtn = productElement.querySelector("[product-quantity-plus]");
     if (minusBtn) minusBtn.classList.remove("remove");
     if (plusBtn) plusBtn.classList.remove("disabled");
   });
-  
+
   // Reset cart count indicators (if present in header)
   const headerCartCount = document.querySelector("[cart-items-count]");
   if (headerCartCount) {
@@ -360,12 +360,12 @@ function clearCart() {
   }
   const cartTotal = document.querySelector("[cart-total]");
   if (cartTotal) cartTotal.textContent = "0 ₽";
-  
+
   // Clear cart items container
   if (cartItemsContainer) {
-    cartItemsContainer.innerHTML = '';
+    cartItemsContainer.innerHTML = "";
   }
-  
+
   // Update cart UI to show empty state
   updateEmptyCartState(true);
 }

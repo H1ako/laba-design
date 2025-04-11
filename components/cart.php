@@ -78,8 +78,8 @@
                     </div>
                     
                     <div class="form__field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="example@email.com">
+                        <label for="email">Email*</label>
+                        <input type="email" id="email" name="email" required placeholder="example@email.com">
                         <span class="field__error" data-error="email"></span>
                     </div>
                     
