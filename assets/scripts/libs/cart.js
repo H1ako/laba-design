@@ -409,7 +409,6 @@ function formatPrice(price) {
 }
 
 async function updateCartUI(cartInfo) {
-  console.log(cartInfo);
   if (!cartInfo || !cartInfo.items || cartInfo.items.length === 0) {
     updateEmptyCartState(true);
     return;
