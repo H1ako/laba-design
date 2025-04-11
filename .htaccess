@@ -3,7 +3,7 @@
   RewriteBase /laba_dis/
 
   # RewriteCond %{HTTP_HOST} ^localhost
-  # RewriteRule (.*) http://localhost/laba_dis/$1 [R=301,L]
+  # RewriteRule (.*) /laba_dis/$1 [R=301,L]
 
   # Redirect to api.php if URL starts with /api/
   RewriteCond %{REQUEST_URI} !(\.png|\.jpg|\.webp|\.gif|\.jpeg|\.zip|\.css|\.svg|\.js|\.pdf|\.mo|\.ttf|\.woff2|\.po)$ [NC]

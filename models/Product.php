@@ -38,6 +38,11 @@ class Product extends BaseModel
         return static::format_price($this->price);
     }
 
+    public function get_base_price_formatted_attribute()
+    {
+        return static::format_price($this->base_price);
+    }
+
     public function get_discount_price_formatted_attribute()
     {
         return static::format_price($this->discount_price);
@@ -45,7 +50,7 @@ class Product extends BaseModel
 
     public function get_discount_attribute()
     {
-        return $this->discount_price > 0 ? round($this->discount_price / $this->base_price * 100) : 0;
+        return $this->discount_price > 0 ? round(100 - ($this->discount_price / $this->base_price * 100)) : 0;
     }
 
     public function get_discount_sum_attribute()

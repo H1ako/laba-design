@@ -18,7 +18,30 @@
   position: relative;
   border: 2px solid var(--color-text-semivisible);
   z-index: 1;
-  overflow: hidden;
+}
+.catalog__list .list__item .item__image .image__discount-badge {
+  position: absolute;
+  top: 1.2em;
+  right: -1rem;
+  background-color: var(--color-delete);
+  color: white;
+  padding: 0.5em 1em 0.5em 1.2em;
+  font-weight: 700;
+  font-size: var(--font-size-5);
+  z-index: 3;
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateX(-0.1em);
+  animation: badge-enter 0.3s ease-out;
+}
+@keyframes badge-enter {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-0.1em);
+  }
 }
 .catalog__list .list__item .item__image .image__description {
   position: absolute;
@@ -55,21 +78,12 @@
   align-items: center;
   gap: 1.5em;
   justify-content: space-between;
+  height: 4em;
 }
 .catalog__list .list__item .item__info .info__left {
   display: flex;
   flex-direction: column;
   gap: 0.25em;
-}
-.catalog__list .list__item .item__info .info__left .left__category {
-  opacity: 0.5;
-  font-size: var(--font-size-5);
-  font-weight: 100;
-}
-@media screen and (width < 768px) {
-  .catalog__list .list__item .item__info .info__left .left__category {
-    font-size: var(--font-size-4);
-  }
 }
 .catalog__list .list__item .item__info .info__left .left__name {
   font-size: var(--font-size-4);
@@ -84,11 +98,24 @@
 .catalog__list .list__item .item__info .info__right .right__price {
   font-size: var(--font-size-4);
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2em;
 }
 @media screen and (width < 768px) {
   .catalog__list .list__item .item__info .info__right .right__price {
     font-size: var(--font-size-3);
   }
+}
+.catalog__list .list__item .item__info .info__right .right__price--discount .price__current {
+  color: var(--color-main);
+  font-weight: 700;
+}
+.catalog__list .list__item .item__info .info__right .right__price--discount .price__original {
+  font-size: var(--font-size-5);
+  text-decoration: line-through;
+  color: var(--color-text-darker);
 }
 .catalog__list .list__item .item__actions {
   margin-top: 1em;
@@ -399,6 +426,7 @@
 .basket-link {
   font-size: var(--font-size-4);
   display: flex;
+  background: none;
 }
 .basket-link__title {
   background: var(--color-bg);

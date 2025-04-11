@@ -50,4 +50,5 @@
         <p class="container__rights">Bce права защищены © 2025</p>
     </div>
 </footer>
+<?php include_once('components/cart.php'); ?>
 <?php include_once('components/loading-screen.php'); ?>

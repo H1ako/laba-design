@@ -31,6 +31,11 @@ class Session
         echo '<input type="hidden" name="csrf" value="' . $this->get_csrf_token() . '">';
     }
 
+    public function set_csrf_meta()
+    {
+        echo '<meta name="csrf-token" content="' . $this->get_csrf_token() . '">';
+    }
+
     protected function generate_csrf_token()
     {
         $_SESSION['csrf'] = bin2hex(random_bytes(32));

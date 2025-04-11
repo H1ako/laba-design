@@ -13,12 +13,38 @@
 
     .list__item {
       position: relative;
-      
+
       .item__image {
         position: relative;
         border: 2px solid var(--color-text-semivisible);
         z-index: 1;
-        overflow: hidden;
+        // overflow: hidden;
+
+        .image__discount-badge {
+          position: absolute;
+          top: 1.2em;
+          right: -1rem;
+          background-color: var(--color-delete);
+          color: white;
+          padding: 0.5em 1em 0.5em 1.2em;
+          font-weight: 700;
+          font-size: var(--font-size-5);
+          z-index: 3;
+          border-top-left-radius: 2em;
+          border-bottom-left-radius: 2em;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          transform: translateX(-0.1em);
+          animation: badge-enter 0.3s ease-out;
+
+          @keyframes badge-enter {
+            from {
+              transform: translateX(100%);
+            }
+            to {
+              transform: translateX(-0.1em);
+            }
+          }
+        }
 
         .image__description {
           position: absolute;
@@ -58,21 +84,12 @@
         align-items: center;
         gap: 1.5em;
         justify-content: space-between;
+        height: 4em;
 
         .info__left {
           display: flex;
           flex-direction: column;
           gap: 0.25em;
-
-          .left__category {
-            opacity: 0.5;
-            font-size: var(--font-size-5);
-            font-weight: 100;
-
-            @media screen and (width < 768px) {
-              font-size: var(--font-size-4);
-            }
-          }
 
           .left__name {
             font-size: var(--font-size-4);
@@ -89,9 +106,26 @@
           .right__price {
             font-size: var(--font-size-4);
             white-space: nowrap;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.2em;
 
             @media screen and (width < 768px) {
               font-size: var(--font-size-3);
+            }
+
+            &--discount {
+              .price__current {
+                color: var(--color-main);
+                font-weight: 700;
+              }
+
+              .price__original {
+                font-size: var(--font-size-5);
+                text-decoration: line-through;
+                color: var(--color-text-darker);
+              }
             }
           }
         }
@@ -123,7 +157,7 @@
           display: none;
           align-items: stretch;
           justify-content: space-between;
-          gap: .5em;
+          gap: 0.5em;
           width: 100%;
 
           .change-quantity__action-btn {
@@ -234,7 +268,6 @@
   }
 }
 
-
 .brand-marquee {
-    margin-top: 10em;
+  margin-top: 10em;
 }

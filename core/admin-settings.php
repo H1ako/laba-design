@@ -2,14 +2,15 @@
 set_time_limit(20);
 
 // Socials and Main Settings
-$SITE_URL = 'http://localhost/laba_dis';
-$PROJECT_ROOT = 'C:/php_projects/laba_dis';
-$DEV_URL_PART = '/laba_dis';
+$SITE_URL = 'http://zovisland.ru';
+$PROJECT_ROOT = '/zovisland_ru/public_html';
+$DEV_URL_PART = '';
 
-$DATABASE_SERVERNAME = 'localhost';
-$DATABASE_USERNAME = 'root';
-$DATABASE_PASSWORD = 'root';
-$DATABASE_NAME = 'bd_20_laba';
+$DATABASE_SERVERNAME = '127.0.0.1';
+$DATABASE_USERNAME = 'h1ako_zovisland';
+$DATABASE_PASSWORD = '&25Qw^67@890';
+$DATABASE_NAME = 'h1ako_zovisland';
+$DATABASE_PORT = 3308;
 
 
 // function connectDb()

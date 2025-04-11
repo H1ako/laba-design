@@ -13,7 +13,8 @@ class Database
             $GLOBALS['DATABASE_SERVERNAME'],
             $GLOBALS['DATABASE_USERNAME'],
             $GLOBALS['DATABASE_PASSWORD'],
-            $GLOBALS['DATABASE_NAME']
+            $GLOBALS['DATABASE_NAME'],
+            $GLOBALS['DATABASE_PORT']
         );
 
         if ($this->connection->connect_error) {

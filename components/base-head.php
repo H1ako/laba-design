@@ -1,4 +1,8 @@
-<?php global $SITE_URL;
+<?php
+
+global $SITE_URL, $session;
+
+$session->set_csrf_meta();
 ?>
 <link rel="stylesheet" href="<?= $SITE_URL ?>/assets/styles/css/global.css">
 <script defer src="<?= $SITE_URL ?>/assets/scripts/libs/loadingScreen.js"></script>

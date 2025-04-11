@@ -1,110 +1,41 @@
 <?php
-$data = [
-    [
-        'category' => 'Верхняя одежда',
-        'name' => 'Куртка "Tactical Field"',
-        'price' => '32 500 ₽',
-        'description' => 'Укороченная куртка из вощеного хлопка с водоотталкивающей пропиткой. Детали: съемный капюшон, металлические заклепки, 6 функциональных карманов.',
-        'sizes' => 'S–XL',
-        'colors' => 'хаки, черный, оливковый'
-    ],
-    [
-        'category' => 'Брюки',
-        'name' => 'Брюки "Urban Soldier"',
-        'price' => '18 900 ₽',
-        'description' => 'Прямые брюки из плотного хлопка-рипстопа с накладными карманами и регулируемым поясом. Усиленные колени и манжеты.',
-        'sizes' => '46–56 (RU)',
-        'colors' => 'графитовый, камуфляж, темно-синий'
-    ],
-    [
-        'category' => 'Верхняя одежда',
-        'name' => 'Commander Oversized',
-        'price' => '14 700 ₽',
-        'description' => 'Свободная рубашка милитари-кроя с контрастными патчами на плечах. Материал: смесь льна и хлопка.',
-        'sizes' => 'XS–XL',
-        'colors' => 'песочный, мокко, болотный'
-    ],
-    [
-        'category' => 'Верхняя одежда',
-        'name' => 'Парка "Arctic Shield"',
-        'price' => '47 800 ₽',
-        'description' => 'Теплая удлиненная парка с меховой отделкой капюшона. Внутренняя подкладка из термофлиса, ветрозащитные манжеты.',
-        'sizes' => 'M–XXL',
-        'colors' => 'белый камуфляж, стальной'
-    ],
-    [
-        'category' => 'Аксессуары',
-        'name' => 'Жилет "Cargo Utility"',
-        'price' => '22 300 ₽',
-        'description' => 'Унисекс-жилет с 8 карманами, включая скрытые отсеки для гаджетов. Создан из нейлона с армированными вставками.',
-        'sizes' => 'универсальный (регулируется ремнями)',
-        'colors' => 'хаки, черный, серый'
-    ],
-    [
-        'category' => 'Обувь',
-        'name' => 'Tundra Boots',
-        'price' => '29 500 ₽',
-        'description' => 'Высокие ботинки на массивной подошве с противоскользящим протектором. Материал: водоотталкивающая кожа и замша.',
-        'sizes' => '36–45',
-        'colors' => 'коричневый, черный'
-    ],
-    [
-        'category' => 'Футболки',
-        'name' => 'Футболка "Base Camp"',
-        'price' => '6 900 ₽',
-        'description' => 'Мужская футболка из органического хлопка с принтом в виде топографической карты. Усиленный воротник-стойка.',
-        'sizes' => 'S–XL',
-        'colors' => 'угольный, оливковый, белый'
-    ],
-    [
-        'category' => 'Юбки',
-        'name' => 'Юбка "Barracks Midi"',
-        'price' => '16 200 ₽',
-        'description' => 'Юбка-трапеция с кожаными ремнями и металлическими пряжками. Карманы в стиле "карго", пояс на шлевках.',
-        'sizes' => 'XS–L',
-        'colors' => 'хаки, темно-зеленый, черный'
-    ],
-    [
-        'category' => 'Аксессуары',
-        'name' => 'Рюкзак "Tactical Night"',
-        'price' => '25 000 ₽',
-        'description' => 'Вместительный рюкзак с MOLLE-системой для крепления аксессуаров. Водонепроницаемая ткань, светоотражающие элементы.',
-        'sizes' => '30×45×15 см',
-        'colors' => 'черный, оливковый, камуфляж'
-    ],
-    [
-        'category' => 'Костюмы',
-        'name' => 'Костюм "Stealth Uniform"',
-        'price' => '54 000 ₽',
-        'description' => 'Женский комплект (куртка + брюки) из бесшумной ткани со стрейчем. Маскировочный принт, съемные нашивки.',
-        'sizes' => 'XS–L',
-        'colors' => 'ночной камуфляж, темно-серый'
-    ]
-];
+
+use app\models\Product;
+
+// Get all products from the database
+$products = Product::get_all();
 ?>
 
 <div class="catalog">
     <ul class="catalog__list">
-        <?php foreach ($data as $key => $item) : ?>
-            <!-- <li class="list__item" data-catalog-product-id="<?= $item['id'] ?>"> -->
-            <li class="list__item" data-catalog-product-id="<?= $key ?>">
+        <?php foreach ($products as $product) : ?>
+            <li class="list__item" data-catalog-product-id="<?= $product->id ?>">
                 <div class="item__image">
+                    <?php if ($product->discount > 0) : ?>
+                        <div class="image__discount-badge">-<?= $product->discount ?>%</div>
+                    <?php endif; ?>
                     <div class="image__description">
                         <p class="description__text">
-                            <?= $item['description'] ?>
+                            <?= $product->description ?>
                         </p>
                     </div>
-                    <img src="<?= Router::getRoute('/assets/images/product.png') ?>" alt="" class="image__src">
+                    <img src="<?= $product->thumb_url ?>" alt="<?= $product->name ?>" class="image__src">
                 </div>
                 <div class="item__info">
                     <div class="info__left">
-                        <p class="left__category"><?= $item['category']  ?></p>
-                        <p class="left__name"><?= $item['name']  ?></p>
+                        <p class="left__name"><?= $product->name ?></p>
                     </div>
                     <div class="info__right">
-                        <p class="right__price">
-                            <?= $item['price']  ?>
-                        </p>
+                        <?php if ($product->discount > 0) : ?>
+                            <p class="right__price right__price--discount">
+                                <span class="price__current"><?= $product->price_formatted ?></span>
+                                <span class="price__original"><?= $product->base_price_formatted ?></span>
+                            </p>
+                        <?php else : ?>
+                            <p class="right__price">
+                                <?= $product->price_formatted ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="item__actions">
