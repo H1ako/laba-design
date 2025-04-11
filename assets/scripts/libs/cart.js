@@ -350,7 +350,6 @@ function clearCart() {
   const headerCartCount = document.querySelector("[cart-items-count]");
   if (headerCartCount) {
     headerCartCount.textContent = "0";
-    headerCartCount.classList.add("hidden");
   }
   const cartSubtotal = document.querySelector("[cart-subtotal]");
   if (cartSubtotal) cartSubtotal.textContent = "0 ₽";
