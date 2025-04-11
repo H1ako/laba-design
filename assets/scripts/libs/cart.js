@@ -843,6 +843,7 @@ function changeQuantity(quantity, quantityElement) {
 
   if (quantity == minValue) {
     productQuantityMinusElement?.classList.add("remove");
+    productQuantityPlusElement?.classList.remove("disabled");
   } else if (quantity == maxValue) {
     productQuantityMinusElement?.classList.remove("remove");
     productQuantityPlusElement?.classList.add("disabled");
