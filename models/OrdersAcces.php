@@ -37,4 +37,20 @@ class OrdersAccess extends BaseModel
     {
         return Order::where('customer_email', '=', $this->email)->get();
     }
+
+    public static function generate_key()
+    {
+        return bin2hex(random_bytes(16));
+    }
+
+    public static function create($data) {
+        $email = $data['email'] ?? null;
+        if (!$email) {
+            return null;
+        }
+        $data['key'] = static::generate_key();
+        $data['expires_at'] = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+        return parent::create($data);
+    }
 }
