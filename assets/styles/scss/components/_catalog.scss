@@ -68,12 +68,20 @@
             opacity: 0.5;
             font-size: var(--font-size-5);
             font-weight: 100;
+
+            @media screen and (width < 768px) {
+              font-size: var(--font-size-4);
+            }
           }
 
           .left__name {
             font-size: var(--font-size-4);
             color: var(--color-main);
             font-weight: normal;
+
+            @media screen and (width < 768px) {
+              font-size: var(--font-size-3);
+            }
           }
         }
 
@@ -81,6 +89,10 @@
           .right__price {
             font-size: var(--font-size-4);
             white-space: nowrap;
+
+            @media screen and (width < 768px) {
+              font-size: var(--font-size-3);
+            }
           }
         }
       }
@@ -100,6 +112,11 @@
           padding: 1em 2.5em;
           text-align: center;
           width: 100%;
+          height: 3em;
+
+          @media screen and (width < 768px) {
+            height: 3.5em;
+          }
         }
 
         .actions__change-quantity {
@@ -151,7 +168,7 @@
 
             @media screen and (width < 768px) {
               aspect-ratio: 1;
-              height: 4em;
+              height: 3.5em;
               font-size: var(--font-size-5);
             }
           }
