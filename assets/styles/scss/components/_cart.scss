@@ -393,6 +393,41 @@
           color: var(--color-delete);
         }
       }
+
+      .result__buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin-top: 2em;
+        width: 100%;
+        max-width: 300px;
+  
+        .result__order-link {
+          @include button(var(--border-radius-main));
+          @include cleanLink;
+          font-size: var(--font-size-4);
+          color: var(--color-bg);
+          background-color: var(--color-accent);
+          padding: 0.75em 2em;
+          text-align: center;
+          border-radius: var(--border-radius-main);
+          display: block;
+  
+          &:hover {
+            background-color: var(--color-main);
+            transform: translateY(-2px);
+          }
+        }
+  
+        .content__continue-btn {
+          margin-top: 0;
+        }
+      }
+  
+      // Remove this from the original button
+      .content__continue-btn {
+        margin-top: 0;
+      }
     }
 
     .content__continue-btn {
@@ -415,7 +450,7 @@
     animation: cart-item-enter 0.3s ease;
 
     &:not(:last-of-type) {
-        border-bottom: 1px solid var(--color-text-semivisible);
+      border-bottom: 1px solid var(--color-text-semivisible);
     }
 
     @keyframes cart-item-enter {

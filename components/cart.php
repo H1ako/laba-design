@@ -110,8 +110,11 @@
                     </svg>
                     <h2>Заказ оформлен!</h2>
                     <p>Спасибо за ваш заказ. В ближайшее время с вами свяжется наш менеджер.</p>
+                    <div class="result__buttons">
+                        <a href="#" class="result__order-link" cart-order-link>Посмотреть заказ</a>
+                        <button class="content__continue-btn" cart-continue-shopping>Вернуться к покупкам</button>
+                    </div>
                 </div>
-                
                 <div class="content__result content__result--error" cart-result-error>
                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -120,9 +123,10 @@
                     </svg>
                     <h2>Что-то пошло не так</h2>
                     <p>К сожалению, не удалось оформить заказ. Пожалуйста, попробуйте позже.</p>
+                    <div class="result__buttons">
+                        <button class="content__continue-btn" cart-continue-shopping>Вернуться к покупкам</button>
+                    </div>
                 </div>
-                
-                <button class="content__continue-btn" cart-continue-shopping>Вернуться к покупкам</button>
             </div>
         </div>
     </div>

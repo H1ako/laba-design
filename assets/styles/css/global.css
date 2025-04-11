@@ -1178,6 +1178,55 @@ b {
 .cart .scene_result .content__result--error svg {
   color: var(--color-delete);
 }
+.cart .scene_result .content__result .result__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 2em;
+  width: 100%;
+  max-width: 300px;
+}
+.cart .scene_result .content__result .result__buttons .result__order-link {
+  position: relative;
+  border-radius: var(--border-radius-main);
+  z-index: 1;
+  text-decoration: none;
+  transition: var(--transition-main);
+  cursor: pointer;
+  outline: transparent;
+  font-size: var(--font-size-4);
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  padding: 0.75em 2em;
+  text-align: center;
+  border-radius: var(--border-radius-main);
+  display: block;
+}
+.cart .scene_result .content__result .result__buttons .result__order-link:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: var(--transition-main);
+  background: inherit;
+  border-radius: var(--border-radius-main);
+  z-index: -1;
+}
+.cart .scene_result .content__result .result__buttons .result__order-link:hover:before, .cart .scene_result .content__result .result__buttons .result__order-link:focus-within:focus-visible:before {
+  filter: brightness(0.8);
+}
+.cart .scene_result .content__result .result__buttons .result__order-link svg {
+  width: 1em;
+}
+.cart .scene_result .content__result .result__buttons .result__order-link:hover {
+  background-color: var(--color-main);
+  transform: translateY(-2px);
+}
+.cart .scene_result .content__result .result__buttons .content__continue-btn {
+  margin-top: 0;
+}
+.cart .scene_result .content__result .content__continue-btn {
+  margin-top: 0;
+}
 .cart .scene_result .content__continue-btn {
   position: relative;
   border-radius: var(--border-radius-main);

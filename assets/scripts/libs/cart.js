@@ -236,9 +236,11 @@ function initFormValidation() {
   const countryCodes = document.querySelectorAll(".input-group__country-code");
   countryCodes.forEach((select) => {
     select.addEventListener("change", (e) => {
-      const phoneField = e.target.closest(".field--phone").querySelector("[phone-field]");
+      const phoneField = e.target
+        .closest(".field--phone")
+        .querySelector("[phone-field]");
       phoneField.value = "";
-      
+
       // Change placeholder based on country code
       if (e.target.value === "+7") {
         phoneField.placeholder = "(999) 123-45-67";
@@ -254,6 +256,7 @@ async function handleOrderSubmit() {
   if (!form) return;
 
   const formData = new FormData(form);
+  // Get cart data from localStorage
   const cartData = await getCartData();
 
   const orderData = {
@@ -292,8 +295,18 @@ async function handleOrderSubmit() {
       cartResultSuccess.classList.add("active");
       cartResultError.classList.remove("active");
 
+      // Set the order link URL if available
+      const orderLink = document.querySelector("[cart-order-link]");
+      if (orderLink && result.data && result.data.redirect) {
+        orderLink.href = result.data.redirect;
+        orderLink.style.display = "inline-block";
+      } else if (orderLink) {
+        orderLink.style.display = "none";
+      }
+
       // Clear cart
-      localStorage.removeItem("cartData");
+      clearCart()
+      
     } else {
       // Order failed
       cartResultSuccess.classList.remove("active");
@@ -305,6 +318,57 @@ async function handleOrderSubmit() {
     cartResultSuccess.classList.remove("active");
     cartResultError.classList.add("active");
   }
+}
+
+/**
+ * Clear cart data and reset UI elements
+ */
+function clearCart() {
+  // Clear cart data in localStorage
+  localStorage.removeItem("cartData");
+  
+  // Clear all in-cart indicators in catalog
+  const catalogProducts = document.querySelectorAll("[data-catalog-product-id]");
+  catalogProducts.forEach(productElement => {
+    productElement.classList.remove("in-cart");
+    productElement.removeAttribute("in-cart");
+    
+    // Reset quantity input to 1
+    const quantityInput = productElement.querySelector("[product-quantity]");
+    if (quantityInput) {
+      quantityInput.value = 1;
+    }
+    
+    // Reset state of minus/plus buttons
+    const minusBtn = productElement.querySelector("[product-quantity-minus]");
+    const plusBtn = productElement.querySelector("[product-quantity-plus]");
+    if (minusBtn) minusBtn.classList.remove("remove");
+    if (plusBtn) plusBtn.classList.remove("disabled");
+  });
+  
+  // Reset cart count indicators (if present in header)
+  const headerCartCount = document.querySelector("[cart-items-count]");
+  if (headerCartCount) {
+    headerCartCount.textContent = "0";
+    headerCartCount.classList.add("hidden");
+  }
+  const cartSubtotal = document.querySelector("[cart-subtotal]");
+  if (cartSubtotal) cartSubtotal.textContent = "0 ₽";
+
+  const cartDiscount = document.querySelector("[cart-discount]");
+  if (cartDiscount) {
+    cartDiscount.textContent = "-0 ₽";
+  }
+  const cartTotal = document.querySelector("[cart-total]");
+  if (cartTotal) cartTotal.textContent = "0 ₽";
+  
+  // Clear cart items container
+  if (cartItemsContainer) {
+    cartItemsContainer.innerHTML = '';
+  }
+  
+  // Update cart UI to show empty state
+  updateEmptyCartState(true);
 }
 
 async function initItemsInCart() {
@@ -344,12 +408,44 @@ async function getCartData() {
 
 async function initCart() {
   var cartInfo = await getCart();
+  removeFromCartDataMissingProducts(cartInfo);
+
   if (!cartInfo) {
     updateEmptyCartState(true);
     return;
   }
 
   await updateCartUI(cartInfo);
+}
+
+async function removeFromCartDataMissingProducts(cartInfo) {
+  const cartData = await getCartData();
+
+  if (!cartData || cartData.length === 0) return;
+  if (!cartInfo || !cartInfo.items) return;
+
+  // Get product IDs from local storage cart and server response
+  const cartProductIds = cartData.map((item) => item.product_id.toString());
+  const availableProductIds = cartInfo.items.map((item) =>
+    item.product.id.toString()
+  );
+
+  // Find products in localStorage that aren't in server response
+  const missingProductIds = cartProductIds.filter(
+    (id) => !availableProductIds.includes(id)
+  );
+
+  if (missingProductIds.length > 0) {
+    console.log("Removing missing products from cart:", missingProductIds);
+
+    // Filter out missing products from cart data
+    const filteredCartData = cartData.filter(
+      (item) => !missingProductIds.includes(item.product_id.toString())
+    );
+
+    // Update localStorage with filtered cart data
+    localStorage.setItem("cartData", JSON.stringify(filteredCartData));
+  }
 }
 
 async function getCart() {
