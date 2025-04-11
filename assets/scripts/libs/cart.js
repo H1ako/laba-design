@@ -236,10 +236,15 @@ function initFormValidation() {
   const countryCodes = document.querySelectorAll(".input-group__country-code");
   countryCodes.forEach((select) => {
     select.addEventListener("change", (e) => {
-      const phoneField = e.target
-        .closest(".field--phone")
-        .querySelector("[phone-field]");
+      const phoneField = e.target.closest(".field--phone").querySelector("[phone-field]");
       phoneField.value = "";
+      
+      // Change placeholder based on country code
+      if (e.target.value === "+7") {
+        phoneField.placeholder = "(999) 123-45-67";
+      } else if (e.target.value === "+375") {
+        phoneField.placeholder = "(99) 123-45-67";
+      }
     });
   });
 }
