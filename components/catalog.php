@@ -86,36 +86,39 @@ $data = [
 <div class="catalog">
     <ul class="catalog__list">
         <?php foreach ($data as $key => $item) : ?>
-        <!-- <li class="list__item" data-catalog-product-id="<?= $item['id'] ?>"> -->
-        <li class="list__item" data-catalog-product-id="<?= $key ?>">
-            <div class="item__image">
-                <div class="image__description">
-                    <p class="description__text">
-                        <?= $item['description'] ?>
-                    </p>
+            <!-- <li class="list__item" data-catalog-product-id="<?= $item['id'] ?>"> -->
+            <li class="list__item" data-catalog-product-id="<?= $key ?>">
+                <div class="item__image">
+                    <div class="image__description">
+                        <p class="description__text">
+                            <?= $item['description'] ?>
+                        </p>
+                    </div>
+                    <img src="<?= Router::getRoute('/assets/images/product.png') ?>" alt="" class="image__src">
                 </div>
-                <img src="<?= Router::getRoute('/assets/images/product.png') ?>" alt="" class="image__src">
-            </div>
-            <div class="item__info">
-                <div class="info__left">
-                    <p class="left__category"><?= $item['category']  ?></p>
-                    <p class="left__name"><?= $item['name']  ?></p>
+                <div class="item__info">
+                    <div class="info__left">
+                        <p class="left__category"><?= $item['category']  ?></p>
+                        <p class="left__name"><?= $item['name']  ?></p>
+                    </div>
+                    <div class="info__right">
+                        <p class="right__price">
+                            <?= $item['price']  ?>
+                        </p>
+                    </div>
                 </div>
-                <div class="info__right">
-                    <p class="right__price">
-                        <?= $item['price']  ?>
-                    </p>
+                <div class="item__actions">
+                    <button class="actions__add-to-cart" product-add-to-cart>В Корзину</button>
+                    <div class="actions__change-quantity">
+                        <button class="change-quantity__action-btn" product-quantity-minus>
+                            <span class="action-btn__default"><?php include('icons/minus.php') ?></span>
+                            <span class="action-btn__secondary"><?php include('icons/trash.php') ?></span>
+                        </button>
+                        <input product-quantity type="number" class="change-quantity__input" value="1" min="1" max="99" step="1">
+                        <button class="change-quantity__action-btn" product-quantity-plus><?php include('icons/plus.php') ?></button>
+                    </div>
                 </div>
-            </div>
-            <div class="item__actions">
-                <button class="actions__add-to-cart">В Корзину</button>
-                <div class="actions__change-quantity">
-                    <button class="change-quantity__action-btn" product-quantity-minus>-</button>
-                    <input product-quantity type="number" class="change-quantity__input" value="1" min="1" max="99" step="1">
-                    <button class="change-quantity__action-btn" product-quantity-plus>+</button>
-                </div>
-            </div>
-        </li>
+            </li>
         <?php endforeach; ?>
     </ul>
 </div>

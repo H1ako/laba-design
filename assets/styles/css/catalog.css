@@ -116,16 +116,17 @@
   border-radius: 0.5em;
   z-index: 1;
   font-family: "YandexSansDisplay", sans-serif;
-  font-size: var(--font-size-4);
+  font-size: var(--font-size-5);
   color: var(--color-bg);
   background: var(--color-main);
   padding: 1em 1em;
   text-align: center;
-  flex: 0 0 auto;
+  flex: 0 0 3em;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 3em;
 }
 .catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn:before {
   content: "";
@@ -138,6 +139,23 @@
 }
 .catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn:hover:before, .catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn:focus-within:focus-visible:before {
   filter: brightness(0.8);
+}
+.catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn .action-btn__default {
+  display: initial;
+}
+.catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn .action-btn__secondary {
+  display: none;
+}
+.catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn.remove .action-btn__secondary {
+  display: initial;
+}
+.catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__action-btn.remove .action-btn__default {
+  display: none;
 }
 .catalog__list .list__item .item__actions .actions__change-quantity .change-quantity__input {
   font-family: "YandexSansDisplay", sans-serif;

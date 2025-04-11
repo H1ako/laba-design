@@ -113,16 +113,41 @@
             @include button($border-radius: 0.5em);
             @include yandexDisplayFont;
 
-            font-size: var(--font-size-4);
+            font-size: var(--font-size-5);
             color: var(--color-bg);
             background: var(--color-main);
             padding: 1em 1em;
             text-align: center;
-            flex: 0 0 auto;
+            flex: 0 0 3em;
             aspect-ratio: 1;
             display: flex;
             align-items: center;
             justify-content: center;
+            height: 3em;
+
+            .action-btn__default {
+              display: initial;
+            }
+
+            .action-btn__secondary {
+              display: none;
+            }
+
+            &.disabled {
+              cursor: not-allowed;
+              pointer-events: none;
+              opacity: 0.5;
+            }
+
+            &.remove {
+              .action-btn__secondary {
+                display: initial;
+              }
+
+              .action-btn__default {
+                display: none;
+              }
+            }
           }
 
           .change-quantity__input {
