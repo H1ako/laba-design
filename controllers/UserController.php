@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\controllers\core\Controller;
+use app\models\Order;
+use app\models\OrderProduct;
 use app\models\Product;
 use app\models\Session;
 use app\models\User;
@@ -61,14 +63,56 @@ class UserController extends Controller
             'fullname' => 'required|string|min:8|max:60',
             'email' => 'required|string|email',
             'phone' => 'required|string|phone_number',
-            'address' => 'string|min:8|max:160',
+            'address' => 'reuired|string|min:8|max:160',
         ]);
         if (!$is_validated) {
-            return static::response_error(400, 'Invalid data');
+            return static::response_error(400, 'Invalid data. Invalid customer data');
         }
 
-        
-        
+        $cart = $data['cart'] ?? null;
+        if (!$cart) {
+            return static::response_error(400, 'Invalid data. No cart found');
+        }
+
+        $cart_items = [];
+        foreach ($cart as $cart_item) {
+            $product = Product::get_by_id($cart_item['product_id']);
+            if (!$product || !$cart_item['quantity']) {
+                return static::response_error(400, 'Invalid data. No such product found');
+            }
+
+            $cart_items[] = [
+                'product' => $product,
+                'quantity' => $cart_item['quantity'] ?? 1,
+            ];
+        }
+
+        $newOrder = Order::create([
+            'customer_full_name' => $customer['fullname'],
+            'customer_email' => $customer['email'],
+            'customer_phone_number' => $customer['phone'],
+            'customer_address' => $customer['address'],
+        ]);
+        foreach ($cart_items as $cart_item) {
+            $product = $cart_item['product'];
+            $quantity = $cart_item['quantity'];
+
+            $newOrderProduct = OrderProduct::create([
+                'product_id' => $product->id,
+                'order_id' => $newOrder->id,
+                'quantity' => $quantity,
+                'price' => $product->price,
+                'discount_sum' => $product->discount_sum,
+            ]);
+            // if ($product->quantity < $quantity) {
+            //     return static::response_error(400, 'Invalid data. Not enough product in stock');
+            // }
+        }
+
+        return static::response_success([
+            'order' => $newOrder->id,
+            'redirect' => $newOrder->url,
+        ]);
     }
 
     // public static function sign_in()

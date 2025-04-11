@@ -139,7 +139,10 @@ abstract class Controller
             if ($part === 'string' && !is_string($value)) return false;
             if ($part === 'int' && !is_numeric($value)) return false;
             if ($part === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) return false;
-            if ($part === 'phone_number' && !preg_match('/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/', $value)) return false;
+            if ($part === 'phone_number') {
+                $cleaned = preg_replace('/[\+\(\)\s\-]/', '', $value);
+                if (!ctype_digit($cleaned) || strlen($cleaned) < 7 || strlen($cleaned) > 15) return false;
+            }
             if ($part === 'datetime' && !preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(:\d{2})?$/', $value)) return false;
             if (strpos($part, 'min:') !== false && strlen($value) < substr($part, 4)) return false;
             if (strpos($part, 'max:') !== false && strlen($value) > substr($part, 4)) return false;
