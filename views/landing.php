@@ -2,6 +2,8 @@
 
 global $SITE_URL, $session;
 
+
+$productsToShow = 8;
 ?>
 <!DOCTYPE html>
 <html>

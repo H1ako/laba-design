@@ -3,7 +3,11 @@
 use app\models\Product;
 
 // Get all products from the database
+$productsToShow = $productsToShow ?? 'all';
 $products = Product::get_all();
+if ($productsToShow !== 'all') {
+    $products = $products->take($productsToShow);
+}
 ?>
 
 <div class="catalog">

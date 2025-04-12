@@ -11,9 +11,9 @@ global $SITE_URL;
 
 $session = Session::get();
 
-Router::get('/', 'views/index.php');
+Router::get('/', 'views/landing.php');
 Router::get('/catalog', 'views/catalog.php');
-Router::get('/landing', 'views/landing.php');
+// Router::get('/landing', 'views/landing.php');
 Router::get('/orders', [OrderController::class, 'index']);
 Router::get('/orders/%s', [OrderController::class, 'show_order']);
 
