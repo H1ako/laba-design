@@ -162,8 +162,8 @@ class OrderController extends Controller
                     <p>{$access->access_url}</p>
                 </div>
                 <div class='footer'>
-                    <p>С уважением, Команда поддержки магазина</p>
-                    <p>© " . date('Y') . " Ваш интернет-магазин</p>
+                    <p>С уважением, Команда поддержки магазина ZoVisland</p>
+                    <p>© " . date('Y') . " ZoVisland</p>
                 </div>
             </div>
         </body>
