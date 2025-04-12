@@ -381,22 +381,40 @@ async function initItemsInCart() {
   cartData.forEach((cartItem) => {
     const productId = cartItem.product_id;
     const quantity = cartItem.quantity;
+    const size = cartItem.size;
 
-    const productItem = document.querySelector(
-      `[data-catalog-product-id="${productId}"]`
-    );
-    if (!productItem) {
-      console.log(`Product item with ID ${productId} not found in page`);
-      return;
+    // For catalog page (no size selector), only update UI for items with null/empty size
+    if (
+      !document.getElementById("product-sizes") &&
+      (size === null || size === undefined || size === "")
+    ) {
+      const productItem = document.querySelector(
+        `[data-catalog-product-id="${productId}"]`
+      );
+      if (!productItem) {
+        console.log(`Product item with ID ${productId} not found in page`);
+        return;
+      }
+
+      // Update UI for product
+      productItem.classList.add("in-cart");
+      productItem.setAttribute("in-cart", "");
+
+      const quantityElement = productItem.querySelector("[product-quantity]");
+      if (quantityElement) {
+        quantityElement.value = quantity;
+      }
+
+      const minusBtn = productItem.querySelector("[product-quantity-minus]");
+      if (minusBtn) {
+        minusBtn.classList.toggle("remove", quantity <= 1);
+      }
+
+      const plusBtn = productItem.querySelector("[product-quantity-plus]");
+      if (plusBtn) {
+        plusBtn.classList.toggle("disabled", quantity >= 99);
+      }
     }
-
-    const quantityElement = productItem.querySelector("[product-quantity]");
-    if (!quantityElement) {
-      console.log(`Quantity element not found for product ID ${productId}`);
-      return;
-    }
-
-    changeQuantity(quantity, quantityElement);
   });
 }
 
@@ -853,15 +871,37 @@ function updateCartProductQuantityUI(productId, quantity) {
 
 async function addProductToCartHandler(btn) {
   const productElement = btn.closest("[data-catalog-product-id]");
+  if (!productElement) return;
+
   const quantity =
-    parseInt(productElement.querySelector("[product-quantity]").value) || 1;
+    parseInt(productElement.querySelector("[product-quantity]")?.value) || 1;
   const productId = productElement.getAttribute("data-catalog-product-id");
 
-  const quantityResult = await addProductToCart(productId, quantity);
+  // Call addProductToCart with null size for catalog items
+  const quantityResult = await addProductToCart(productId, quantity, null);
 
+  // Update UI to reflect the item is now in cart
+  productElement.classList.add("in-cart");
+  productElement.setAttribute("in-cart", "");
+
+  const quantityInput = productElement.querySelector("[product-quantity]");
+  if (quantityInput) {
+    quantityInput.value = quantityResult;
+  }
+
+  const minusBtn = productElement.querySelector("[product-quantity-minus]");
+  const plusBtn = productElement.querySelector("[product-quantity-plus]");
+
+  if (minusBtn) {
+    minusBtn.classList.toggle("remove", quantityResult <= 1);
+  }
+
+  if (plusBtn) {
+    plusBtn.classList.toggle("disabled", quantityResult >= 99);
+  }
+
+  // Reload cart UI
   addProductToCartUI(productId, quantityResult);
-  // Open cart after adding product
-  // openCart();
 }
 
 async function addProductToCart(productId, quantity, size) {
@@ -1025,9 +1065,12 @@ productAddToCartBtns.forEach((btn) => {
       return;
     }
 
-    // Only run this handler if we're not on a product detail page with sizes
+    // If we're not on a product detail page with sizes, handle the add to cart
     if (!document.getElementById("product-sizes")) {
+      e.preventDefault();
       addProductToCartHandler(btn);
+      // Optionally open the cart to show the added item
+      // openCart();
     }
   });
 });
