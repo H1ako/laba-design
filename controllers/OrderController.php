@@ -94,19 +94,13 @@ class OrderController extends Controller
         ]);
 
         if (!$is_validated) {
-            return static::response_success([
-                'status' => 'error',
-                'message' => 'Неверный email адрес'
-            ]);
+            return static::response_error(400, 'Неправильный формат email');
         }
 
         // Check if orders exist for this email
         $orders = Order::where('customer_email', '=', $email)->get();
         if (count($orders) === 0) {
-            return static::response_success([
-                'status' => 'error',
-                'message' => 'Заказов с таким email не найдено'
-            ]);
+            return static::response_error(400, 'Заказы не найдены для этого email');
         }
 
         // Create or refresh access
@@ -117,7 +111,7 @@ class OrderController extends Controller
         if (!$access) {
             return static::response_success([
                 'status' => 'error',
-                'message' => 'Не удалось создать доступ'
+                'message' => 'Не удалось создать доступ. Попробуйте позже.'
             ]);
         }
 
