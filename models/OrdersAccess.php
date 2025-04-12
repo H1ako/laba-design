@@ -40,6 +40,17 @@ class OrdersAccess extends BaseModel
         return Order::where('customer_email', '=', $this->email)->order_by('created_at', 'desc')->get();
     }
 
+    public function get_order_url($order) {
+        $id = $order->id ?? null;
+        if (!$id) {
+            return null;
+        }
+        return Router::getRoute("/orders/$id", [
+            'key' => $this->key,
+            'email' => $this->email,
+        ]);
+    }
+
     public function get_access_url_attribute()
     {
         return Router::getRoute('/orders', [

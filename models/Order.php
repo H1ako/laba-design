@@ -21,13 +21,6 @@ class Order extends BaseModel
 
     protected $items_data;
 
-    public function get_url_attribute()
-    {
-        global $SITE_URL;
-
-        return "$SITE_URL/orders/$this->id&email=$this->customer_email&phone=$this->customer_phone_number";
-    }
-
 
     public function get_items_attribute()
     {

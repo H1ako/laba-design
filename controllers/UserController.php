@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\controllers\core\Controller;
 use app\models\Order;
 use app\models\OrderProduct;
+use app\models\OrdersAccess;
 use app\models\Product;
 use app\models\Session;
 use app\models\User;
@@ -14,7 +15,8 @@ class UserController extends Controller
 {
     protected static $model = User::class;
 
-    public static function get_cart() {
+    public static function get_cart()
+    {
         $data = static::get_post_field('data');
 
         if (!$data) {
@@ -55,7 +57,8 @@ class UserController extends Controller
         ]);
     }
 
-    public static function purchase_cart() {
+    public static function purchase_cart()
+    {
         $data = static::get_post_data(['cart' => 'cart', 'customer' => 'customer']);
         $customer = $data['customer'] ?? null;
 
@@ -109,9 +112,12 @@ class UserController extends Controller
             // }
         }
 
+        $access = OrdersAccess::create([
+            'email' => $customer['email'],
+        ]);
         return static::response_success([
             'order' => $newOrder->id,
-            'redirect' => $newOrder->url,
+            'redirect' => $access->get_order_url($newOrder),
         ]);
     }
 
