@@ -1,15 +1,6 @@
 <?php
 
-use app\models\Product;
-
 global $SITE_URL, $session;
-
-$order = $data['order'] ?? null;
-$access = $data['access'] ?? null;
-
-if (!$order || !$access) {
-  return Router::redirect_to('/orders');
-}
 
 $items = $order->items;
 ?>
