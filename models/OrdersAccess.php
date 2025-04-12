@@ -10,8 +10,8 @@ class OrdersAccess extends BaseModel
 {
     protected static $table_name = 'orders_access';
 
-    protected static $public_fields = ['key', 'email'];
-    protected static $private_fields = ['id', 'updated_at', 'expires_at', 'created_at'];
+    protected static $public_fields = ['key', 'email', 'expires_at'];
+    protected static $private_fields = ['id', 'updated_at', 'created_at'];
 
     public $key;
     public $email;
@@ -23,6 +23,7 @@ class OrdersAccess extends BaseModel
         $access = static::where('key', '=', $key)
         ->where('email', '=', $email)
         ->where('expires_at', '>', date('Y-m-d H:i:s'))
+        ->get()
         ->first();
         if (!$access) {
             return null;
@@ -41,7 +42,7 @@ class OrdersAccess extends BaseModel
 
     public function get_access_url_attribute()
     {
-        return Router::getRoute('/order', [
+        return Router::getRoute('/orders', [
             'key' => $this->key,
             'email' => $this->email,
         ]);

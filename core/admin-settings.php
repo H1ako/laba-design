@@ -2,7 +2,7 @@
 set_time_limit(20);
 
 // Socials and Main Settings
-$SITE_URL = 'http://zovisland.ru';
+$SITE_URL = 'https://zovisland.ru';
 $PROJECT_ROOT = '/zovisland_ru/public_html';
 $DEV_URL_PART = '';
 

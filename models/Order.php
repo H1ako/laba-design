@@ -64,7 +64,8 @@ class Order extends BaseModel
 
     public function get_total_price_attribute()
     {
-        $itemsCost = array_reduce($this->items, function ($carry, $item) {
+        error_log('asdas ' . count($this->items));
+        $itemsCost = $this->items->reduce(function ($carry, $item) {
             return $carry + $item->price * $item->quantity;
         }, 0);
         return $itemsCost - $this->discount_value;
@@ -77,7 +78,7 @@ class Order extends BaseModel
 
     public function get_total_discount_sum_attribute()
     {
-        $itemsDiscount = array_reduce($this->items, function ($carry, $item) {
+        $itemsDiscount = $this->items->reduce(function ($carry, $item) {
             return $carry + $item->discount_sum * $item->quantity;
         }, 0);
         return $itemsDiscount + $this->discount_value;
@@ -95,7 +96,7 @@ class Order extends BaseModel
 
     public function get_total_quantity_attribute()
     {
-        return array_reduce($this->items, function ($carry, $item) {
+        return $this->items->reduce(function ($carry, $item) {
             return $carry + $item->quantity;
         }, 0);
     }

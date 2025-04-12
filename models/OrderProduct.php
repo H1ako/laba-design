@@ -24,7 +24,7 @@ class OrderProduct extends BaseModel
     public function get_product_attribute()
     {
         if (!isset($this->product_data)) {
-            $this->product_data = OrderProduct::get_by_id($this->product_id);
+            $this->product_data = Product::get_by_id($this->product_id);
         }
         return $this->product_data;
     }

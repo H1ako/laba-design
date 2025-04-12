@@ -3,7 +3,7 @@
 namespace app\models\core;
 
 
-class Collection implements \IteratorAggregate, \Countable
+class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
 {
     protected $model;
 
@@ -102,5 +102,78 @@ class Collection implements \IteratorAggregate, \Countable
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->items);
+    }
+
+    /**
+     * Reduce the collection to a single value using a callback function
+     *
+     * @param callable $callback The function to apply to each item
+     * @param mixed $initial The initial value for the carry parameter
+     * @return mixed The final reduced value
+     */
+    public function reduce(callable $callback, $initial = null)
+    {
+        return array_reduce($this->items, $callback, $initial);
+    }
+
+    /**
+     * Determine if an item exists at an offset.
+     *
+     * @param mixed $offset
+     * @return bool
+     */
+    public function offsetExists($offset): bool
+    {
+        return isset($this->items[$offset]);
+    }
+
+    /**
+     * Get an item at a given offset.
+     *
+     * @param mixed $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->items[$offset] ?? null;
+    }
+
+    /**
+     * Set the item at a given offset.
+     *
+     * @param mixed $offset
+     * @param mixed $value
+     * @return void
+     */
+    public function offsetSet($offset, $value): void
+    {
+        if (is_null($offset)) {
+            $this->add($value);
+        } else {
+            if ($value instanceof $this->model) {
+                $this->items[$offset] = $value;
+                if (!in_array($value->get_id(), $this->items_ids)) {
+                    $this->items_ids[] = $value->id;
+                }
+            }
+        }
+    }
+
+    /**
+     * Unset the item at a given offset.
+     *
+     * @param mixed $offset
+     * @return void
+     */
+    public function offsetUnset($offset): void
+    {
+        if (isset($this->items[$offset])) {
+            $item = $this->items[$offset];
+            $key = array_search($item->id, $this->items_ids);
+            if ($key !== false) {
+                unset($this->items_ids[$key]);
+            }
+            unset($this->items[$offset]);
+        }
     }
 }

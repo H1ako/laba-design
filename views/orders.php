@@ -145,12 +145,12 @@ $access = $data['access'] ?? null;
                                     <div class="item__products">
                                         <?php
                                         $items = $order->items;
-                                        $displayCount = min(count($items), 4);
-                                        $remainder = count($items) - $displayCount;
+                                        $displayCount = min($items->count(), 4);
+                                        $remainder = $items->count() - $displayCount;
 
                                         for ($i = 0; $i < $displayCount; $i++):
                                             $item = $items[$i];
-                                            $product = Product::get_by_id($item->product_id);
+                                            $product = $item->product;
                                             if (!$product) continue;
                                         ?>
                                             <div class="products__thumbnail">
