@@ -145,7 +145,7 @@ $access = $data['access'] ?? null;
                                     <div class="item__products">
                                         <?php
                                         $items = $order->items;
-                                        $displayCount = min($items->count(), 4);
+                                        $displayCount = min($items->count(), 6);
                                         $remainder = $items->count() - $displayCount;
 
                                         for ($i = 0; $i < $displayCount; $i++):
