@@ -11,6 +11,7 @@ use app\controllers\UserController;
 use app\controllers\admin\AdminServiceController;
 use app\controllers\admin\AdminServiceHistoryController;
 use app\controllers\admin\AdminUserController;
+use app\controllers\OrderController;
 
 global $SITE_URL;
 
@@ -18,6 +19,8 @@ $session = Session::get();
 
 
 Router::set_route_prefix('api');
+
+Router::post('/orders/generate-access', [OrderController::class, 'genererate_access']);
 
 Router::post('/cart', [UserController::class, 'get_cart']);
 

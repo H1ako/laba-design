@@ -6,10 +6,14 @@ class Router
 {
   protected static $endpoint = '';
 
-  public static function getRoute($path) {
+  public static function getRoute($path, $data=null) {
     global $SITE_URL;
 
-    return $SITE_URL . $path;
+    $url = $SITE_URL . $path;
+    if ($data) {
+      $url .= '?' . http_build_query($data);
+    }
+    return $url;
   }
 
   public static function set_route_prefix($route)
@@ -141,7 +145,7 @@ class Router
 
         $path_to_include = $template;
       }
-      include_once __DIR__ . "/../$path_to_include";
+      static::render($path_to_include);
       exit();
     }
     if (is_callable($callback)) {
@@ -150,8 +154,16 @@ class Router
 
       $path_to_include = $template;
     }
-    include_once __DIR__ . "/../$path_to_include";
+    static::render($path_to_include);
     exit();
+  }
+
+  public static function render($path_to_include, $data = [])
+  {
+    if (is_array($data)) {
+      extract($data);
+    }
+    include_once __DIR__ . "/../$path_to_include";
   }
 
   protected static function route_callback($callback, $parameters)

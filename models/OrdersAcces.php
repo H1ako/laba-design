@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\models\core\BaseModel;
 use app\models\core\Collection;
+use Router;
 
 class OrdersAccess extends BaseModel
 {
@@ -36,6 +37,14 @@ class OrdersAccess extends BaseModel
     public function get_orders_attribute()
     {
         return Order::where('customer_email', '=', $this->email)->get();
+    }
+
+    public function get_access_url_attribute()
+    {
+        return Router::getRoute('/order', [
+            'key' => $this->key,
+            'email' => $this->email,
+        ]);
     }
 
     public static function generate_key()

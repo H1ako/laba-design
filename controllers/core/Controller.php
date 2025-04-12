@@ -3,11 +3,16 @@
 namespace app\controllers\core;
 
 use app\models\core\Collection;
+use Router;
 
 abstract class Controller
 {
     protected static $model;
 
+
+    public static function redirect($route) {
+        return Router::redirect_to($route);
+    }
 
     protected static function get_model_instance($raw_instance)
     {
@@ -167,8 +172,6 @@ abstract class Controller
 
     protected static function view($view, $data = [])
     {
-        extract($data);
-        
-        return $view;
+        return Router::render($view, $data);
     }
 }
