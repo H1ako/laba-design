@@ -88,6 +88,7 @@ class UserController extends Controller
 
             $cart_items[] = [
                 'product' => $product,
+                'size' => $cart_item['size'] ?? null,
                 'quantity' => $cart_item['quantity'] ?? 1,
             ];
         }
