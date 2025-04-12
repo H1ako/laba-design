@@ -37,9 +37,34 @@ class OrderProduct extends BaseModel
         return $this->order_data;
     }
 
+    public function get_total_price_attribute()
+    {
+        return $this->price * $this->quantity;
+    }
+
+    public function get_total_price_formatted_attribute()
+    {
+        return static::format_price($this->total_price);
+    }
+
     public function get_price_formatted_attribute()
     {
         return static::format_price($this->price);
+    }
+
+    public function get_discount_sum_formatted_attribute()
+    {
+        return static::format_price($this->discount_sum);
+    }
+
+    public function get_price_original_attribute()
+    {
+        return $this->price + $this->discount_sum;
+    }
+
+    public function get_price_original_formatted_attribute()
+    {
+        return static::format_price($this->price_original);
     }
 
     public function get_discount_attribute()

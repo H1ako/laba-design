@@ -137,7 +137,7 @@ $items = $order->items;
       <div class="order__products">
         <ul class="products__list">
           <?php foreach ($items as $item):
-            $product = Product::get_by_id($item->product_id);
+            $product = $item->product;
             if (!$product) continue;
           ?>
             <li class="list__item">
@@ -158,7 +158,7 @@ $items = $order->items;
                       <span class="item__value">
                         <?php if ($item->discount_sum > 0): ?>
                           <span class="value__discounted"><?= $item->price_formatted ?> ₽</span>
-                          <span class="value__original"><?= static::format_price($item->price + ($item->discount_sum / $item->quantity)) ?> ₽</span>
+                          <span class="value__original"><?= $item->price_original_formatted ?> ₽</span>
                         <?php else: ?>
                           <?= $item->price_formatted ?> ₽
                         <?php endif; ?>
@@ -171,12 +171,12 @@ $items = $order->items;
                     <?php if ($item->discount_sum > 0): ?>
                       <div class="pricing__item">
                         <span class="item__label">Скидка:</span>
-                        <span class="item__value discount-value">-<?= static::format_price($item->discount_sum) ?> ₽</span>
+                        <span class="item__value discount-value">-<?= $item->discount_sum_formatted ?> ₽</span>
                       </div>
                     <?php endif; ?>
                     <div class="pricing__item total-item">
                       <span class="item__label">Итого:</span>
-                      <span class="item__value total-value"><?= static::format_price($item->price * $item->quantity) ?> ₽</span>
+                      <span class="item__value total-value"><?= $item->total_price_formatted ?> ₽</span>
                     </div>
                   </div>
                 </div>
