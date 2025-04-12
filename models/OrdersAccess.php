@@ -37,7 +37,7 @@ class OrdersAccess extends BaseModel
 
     public function get_orders_attribute()
     {
-        return Order::where('customer_email', '=', $this->email)->get();
+        return Order::where('customer_email', '=', $this->email)->order_by('created_at', 'desc')->get();
     }
 
     public function get_access_url_attribute()
