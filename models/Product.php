@@ -16,6 +16,10 @@ class Product extends BaseModel
     public $thumb;
     public $description;
 
+    protected $images_data;
+    protected $characteristics_data;
+    protected $sizes_data;
+
     public function get_thumb_url_attribute()
     {
         global $SITE_URL;
@@ -60,6 +64,32 @@ class Product extends BaseModel
         }
 
         return 0;
+    }
+
+    public function get_images_attribute()
+    {
+        if (!isset($this->images_data)) {
+            $this->images_data = ProductImage::where('product_id', '=', $this->id)
+                ->order_by('sort_order', 'ASC')
+                ->get();
+        }
+        return $this->images_data;
+    }
+
+    public function get_characteristics_attribute()
+    {
+        if (!isset($this->characteristics_data)) {
+            $this->characteristics_data = ProductCharacteristic::where('product_id', '=', $this->id)->get();
+        }
+        return $this->characteristics_data;
+    }
+
+    public function get_sizes_attribute()
+    {
+        if (!isset($this->sizes_data)) {
+            $this->sizes_data = ProductSize::where('product_id', '=', $this->id)->get();
+        }
+        return $this->sizes_data;
     }
 
     public static function create($data)

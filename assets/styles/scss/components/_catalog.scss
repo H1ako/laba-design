@@ -14,6 +14,17 @@
     .list__item {
       position: relative;
 
+      .item__link {
+        @include cleanLink;
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+        
+        &:focus {
+          outline: none;
+        }
+      }
+
       .item__image {
         position: relative;
         border: 2px solid var(--color-text-semivisible);
@@ -110,6 +121,7 @@
             flex-direction: column;
             align-items: flex-end;
             gap: 0.2em;
+            color: var(--color-text);
 
             @media screen and (width < 768px) {
               font-size: var(--font-size-3);

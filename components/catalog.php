@@ -14,34 +14,36 @@ if ($productsToShow !== 'all') {
     <ul class="catalog__list">
         <?php foreach ($products as $product) : ?>
             <li class="list__item" data-catalog-product-id="<?= $product->id ?>">
-                <div class="item__image">
-                    <?php if ($product->discount > 0) : ?>
-                        <div class="image__discount-badge">-<?= $product->discount ?>%</div>
-                    <?php endif; ?>
-                    <div class="image__description">
-                        <p class="description__text">
-                            <?= $product->description ?>
-                        </p>
-                    </div>
-                    <img src="<?= $product->thumb_url ?>" alt="<?= $product->name ?>" class="image__src">
-                </div>
-                <div class="item__info">
-                    <div class="info__left">
-                        <p class="left__name"><?= $product->name ?></p>
-                    </div>
-                    <div class="info__right">
+                <a href="<?= Router::getRoute('/catalog/' . $product->id) ?>" class="item__link">
+                    <div class="item__image">
                         <?php if ($product->discount > 0) : ?>
-                            <p class="right__price right__price--discount">
-                                <span class="price__current"><?= $product->price_formatted ?></span>
-                                <span class="price__original"><?= $product->base_price_formatted ?></span>
-                            </p>
-                        <?php else : ?>
-                            <p class="right__price">
-                                <?= $product->price_formatted ?>
-                            </p>
+                            <div class="image__discount-badge">-<?= $product->discount ?>%</div>
                         <?php endif; ?>
+                        <div class="image__description">
+                            <p class="description__text">
+                                <?= $product->description ?>
+                            </p>
+                        </div>
+                        <img src="<?= $product->thumb_url ?>" alt="<?= $product->name ?>" class="image__src">
                     </div>
-                </div>
+                    <div class="item__info">
+                        <div class="info__left">
+                            <p class="left__name"><?= $product->name ?></p>
+                        </div>
+                        <div class="info__right">
+                            <?php if ($product->discount > 0) : ?>
+                                <p class="right__price right__price--discount">
+                                    <span class="price__current"><?= $product->price_formatted ?></span>
+                                    <span class="price__original"><?= $product->base_price_formatted ?></span>
+                                </p>
+                            <?php else : ?>
+                                <p class="right__price">
+                                    <?= $product->price_formatted ?>
+                                </p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </a>
                 <div class="item__actions">
                     <button class="actions__add-to-cart" product-add-to-cart>В Корзину</button>
                     <div class="actions__change-quantity">

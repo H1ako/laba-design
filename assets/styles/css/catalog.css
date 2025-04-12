@@ -14,6 +14,21 @@
 .catalog__list .list__item {
   position: relative;
 }
+.catalog__list .list__item .item__link {
+  text-decoration: none;
+  transition: var(--transition-main);
+  cursor: pointer;
+  outline: transparent;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+.catalog__list .list__item .item__link svg {
+  width: 1em;
+}
+.catalog__list .list__item .item__link:focus {
+  outline: none;
+}
 .catalog__list .list__item .item__image {
   position: relative;
   border: 2px solid var(--color-text-semivisible);
@@ -102,6 +117,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 0.2em;
+  color: var(--color-text);
 }
 @media screen and (width < 768px) {
   .catalog__list .list__item .item__info .info__right .right__price {
