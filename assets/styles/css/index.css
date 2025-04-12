@@ -310,6 +310,18 @@
     font-size: var(--font-size-2);
   }
 }
+.hero-header__top-section .top-section__control {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.hero-header__top-section .top-section__control .control__my-orders .my-orders__link {
+  color: var(--color-text);
+  text-decoration: none;
+}
+.hero-header__top-section .top-section__control .control__my-orders .my-orders__link:hover, .hero-header__top-section .top-section__control .control__my-orders .my-orders__link:focus-within {
+  text-decoration: underline;
+}
 .hero-header__main-section {
   position: absolute;
   top: 50%;
