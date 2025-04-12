@@ -1282,6 +1282,23 @@ b {
     transform: translateY(0);
   }
 }
+.cart .cart-item .content__size {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  margin-bottom: 0.5em;
+}
+.cart .cart-item .content__size .size__label {
+  color: var(--color-text-darker);
+  font-size: var(--font-size-5);
+}
+.cart .cart-item .content__size .size__value {
+  font-weight: 500;
+}
+.cart .cart-item .content__size .size__value--not-selected {
+  color: var(--color-text-darker);
+  font-style: italic;
+}
 .cart .cart-item__image {
   width: 8em;
   height: 10em;

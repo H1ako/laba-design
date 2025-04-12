@@ -709,6 +709,7 @@ body {
   border: 2px solid var(--color-bg);
   overflow: hidden;
   margin-left: -0.75em;
+  position: relative;
 }
 .orders-container .orders__list .list__item .item__products .products__thumbnail:first-child {
   margin-left: 0;
@@ -718,6 +719,17 @@ body {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.orders-container .orders__list .list__item .item__products .products__thumbnail .thumbnail__size {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--color-main);
+  color: var(--color-bg);
+  padding: 0.1em 0.3em;
+  font-size: var(--font-size-6);
+  font-weight: bold;
+  border-top-left-radius: 0.3em;
 }
 .orders-container .orders__list .list__item .item__products .products__remainder {
   width: 3em;

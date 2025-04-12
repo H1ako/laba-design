@@ -9,7 +9,7 @@ class OrderProduct extends BaseModel
 {
     protected static $table_name = 'order_products';
 
-    protected static $public_fields = ['product_id', 'order_id', 'quantity', 'price', 'discount_sum'];
+    protected static $public_fields = ['product_id', 'order_id', 'quantity', 'price', 'discount_sum', 'size'];
     protected static $private_fields = ['id', 'updated_at', 'created_at'];
 
     public $product_id;
@@ -17,6 +17,7 @@ class OrderProduct extends BaseModel
     public $quantity;
     public $price;
     public $discount_sum;
+    public $size;
 
     protected $product_data;
     protected $order_data;

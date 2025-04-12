@@ -1,5 +1,5 @@
 <template id="cart-product-template">
-    <div class="cart-item" data-cart-product-id="">
+    <div class="cart-item" data-cart-product-id="" data-cart-product-size="">
         <div class="cart-item__image">
             <img src="" alt="" class="image__src">
             <div class="image__discount-badge" style="display: none;"></div>
@@ -15,6 +15,10 @@
                         <line x1="14" y1="11" x2="14" y2="17"></line>
                     </svg>
                 </button>
+            </div>
+            <div class="content__size">
+                <span class="size__label">Размер:</span>
+                <span class="size__value"></span>
             </div>
             <div class="content__price-info">
                 <div class="price-info__current">

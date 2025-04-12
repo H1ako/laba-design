@@ -153,8 +153,11 @@ $access = $data['access'] ?? null;
                                             $product = $item->product;
                                             if (!$product) continue;
                                         ?>
-                                            <div class="products__thumbnail">
+                                            <div class="products__thumbnail" title="<?= $product->name ?><?= $item->size ? ' - ' . $item->size : '' ?>">
                                                 <img src="<?= $product->thumb_url ?>" alt="<?= $product->name ?>">
+                                                <?php if ($item->size): ?>
+                                                    <span class="thumbnail__size"><?= htmlspecialchars($item->size) ?></span>
+                                                <?php endif; ?>
                                             </div>
                                         <?php endfor; ?>
 

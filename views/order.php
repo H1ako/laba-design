@@ -140,6 +140,15 @@ $items = $order->items;
               </div>
               <div class="item__content">
                 <h3 class="content__name"><?= htmlspecialchars($product->name) ?></h3>
+
+                <!-- Add size display -->
+                <div class="content__size">
+                  <span class="size__label">Размер:</span>
+                  <span class="size__value <?= $item->size ? '' : 'size__value--not-selected' ?>">
+                    <?= $item->size ? htmlspecialchars($item->size) : 'Размер не выбран' ?>
+                  </span>
+                </div>
+
                 <p class="content__description"><?= substr(htmlspecialchars($product->description), 0, 100) ?>...</p>
 
                 <div class="content__info">

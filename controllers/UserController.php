@@ -30,12 +30,14 @@ class UserController extends Controller
             if (!$product) continue;
 
             $quantity = $cart_item['quantity'] ?? 1;
+            $size = $cart_item['size'] ?? null;
             $cart_item_data = $product->to_array();
             $cart_item_data['price'] = $product->price;
             $cart_item_data['discount'] = $product->discount;
             $cart_output[] = [
                 'product' => $cart_item_data,
                 'quantity' => $quantity,
+                'size' => $size, // Include size in output
                 'total_price' => $product->price * $quantity,
                 'total_discount_sum' => $product->discount_sum * $quantity,
             ];
@@ -96,9 +98,11 @@ class UserController extends Controller
             'customer_phone_number' => $customer['phone'],
             'customer_address' => $customer['address'],
         ]);
+
         foreach ($cart_items as $cart_item) {
             $product = $cart_item['product'];
             $quantity = $cart_item['quantity'];
+            $size = $cart_item['size'] ?? null; // Get size from cart item
 
             $newOrderProduct = OrderProduct::create([
                 'product_id' => $product->id,
@@ -106,10 +110,8 @@ class UserController extends Controller
                 'quantity' => $quantity,
                 'price' => $product->price,
                 'discount_sum' => $product->discount_sum,
+                'size' => $size // Store size in the order product
             ]);
-            // if ($product->quantity < $quantity) {
-            //     return static::response_error(400, 'Invalid data. Not enough product in stock');
-            // }
         }
 
         $access = OrdersAccess::create([

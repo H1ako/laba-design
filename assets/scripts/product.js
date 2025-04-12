@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initProductSlider();
   initSizeSelector();
   checkProductInCart();
+  initAddToCartButton();
+  initQuantityControls()
 });
 
 function initProductSlider() {
@@ -132,6 +134,9 @@ function initSizeSelector() {
           item.getAttribute("data-size")
         );
       }
+
+      // Check if this size is in cart and update UI accordingly
+      checkProductInCart();
     });
   });
 
@@ -172,7 +177,24 @@ function checkProductInCart() {
 
   const productId = productElement.getAttribute("data-catalog-product-id");
 
-  const inCart = cartItems.find((item) => item.product_id == productId);
+  // Get the selected size
+  const selectedSizeElement = document.querySelector(
+    "#product-sizes .list__item.active"
+  );
+  // Normalize size value
+  let selectedSize = selectedSizeElement
+    ? selectedSizeElement.getAttribute("data-size")
+    : null;
+
+  // Find item in cart matching this product ID and size specifically
+  // Handle null/undefined/empty sizes consistently
+  const inCart = cartItems.find(
+    (item) =>
+      item.product_id == productId &&
+      ((selectedSize === null &&
+        (item.size === null || item.size === undefined || item.size === "")) ||
+        selectedSize === item.size)
+  );
 
   if (inCart) {
     productElement.classList.add("in-cart");
@@ -188,12 +210,231 @@ function checkProductInCart() {
     const minusBtn = productElement.querySelector("[product-quantity-minus]");
     const plusBtn = productElement.querySelector("[product-quantity-plus]");
 
-    if (inCart.quantity <= 1 && minusBtn) {
-      minusBtn.classList.add("remove");
+    if (minusBtn) {
+      if (inCart.quantity <= 1) {
+        minusBtn.classList.add("remove");
+      } else {
+        minusBtn.classList.remove("remove");
+      }
     }
 
-    if (inCart.quantity >= 99 && plusBtn) {
-      plusBtn.classList.add("disabled");
+    if (plusBtn) {
+      if (inCart.quantity >= 99) {
+        plusBtn.classList.add("disabled");
+      } else {
+        plusBtn.classList.remove("disabled");
+      }
+    }
+  } else {
+    // If not in cart with this size, reset the UI
+    productElement.classList.remove("in-cart");
+    productElement.removeAttribute("in-cart");
+
+    const quantityInput = productElement.querySelector("[product-quantity]");
+    if (quantityInput) {
+      quantityInput.value = 1;
+    }
+
+    const minusBtn = productElement.querySelector("[product-quantity-minus]");
+    if (minusBtn) {
+      minusBtn.classList.remove("remove");
+    }
+
+    const plusBtn = productElement.querySelector("[product-quantity-plus]");
+    if (plusBtn) {
+      plusBtn.classList.remove("disabled");
     }
   }
 }
+
+function initAddToCartButton() {
+  const addToCartBtn = document.querySelector(".actions__add-to-cart");
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener("click", function (e) {
+      // Stop event propagation to prevent the global handler from firing too
+      e.stopPropagation();
+
+      // Prevent the default cart handler execution by marking this as handled
+      if (typeof e.target.dataset === "object") {
+        e.target.dataset.handled = true;
+      }
+
+      const productElement = this.closest("[data-catalog-product-id]");
+      if (!productElement) return;
+
+      const productId = productElement.getAttribute("data-catalog-product-id");
+
+      // Get the selected size from the active size element
+      const selectedSizeElement = document.querySelector(
+        "#product-sizes .list__item.active"
+      );
+
+      // Normalize size value to prevent undefined/null inconsistency
+      let selectedSize = selectedSizeElement
+        ? selectedSizeElement.getAttribute("data-size")
+        : null;
+
+      // Add product to cart with selected size
+      const event = new CustomEvent("add-to-cart", {
+        detail: {
+          productId: productId,
+          size: selectedSize,
+          quantity: 1,
+        },
+      });
+
+      document.dispatchEvent(event);
+
+      // Update the UI immediately
+      setTimeout(() => {
+        checkProductInCart();
+      }, 100);
+    });
+  }
+}
+
+
+function initQuantityControls() {
+    const productElement = document.querySelector("[data-catalog-product-id]");
+    if (!productElement) return;
+    
+    const minusBtn = productElement.querySelector("[product-quantity-minus]");
+    const plusBtn = productElement.querySelector("[product-quantity-plus]");
+    const quantityInput = productElement.querySelector("[product-quantity]");
+    
+    if (!minusBtn || !plusBtn || !quantityInput) return;
+    
+    // Override existing event listeners with our custom ones
+    minusBtn.addEventListener("click", function(e) {
+      e.stopPropagation(); // Stop propagation to prevent the global handler
+      
+      // Get selected size
+      const selectedSizeElement = document.querySelector("#product-sizes .list__item.active");
+      const selectedSize = selectedSizeElement ? selectedSizeElement.getAttribute("data-size") : null;
+      
+      const productId = productElement.getAttribute("data-catalog-product-id");
+      const currentQuantity = parseInt(quantityInput.value) || 1;
+      const newQuantity = Math.max(0, currentQuantity - 1);
+      
+      if (newQuantity === 0) {
+        // If quantity becomes zero, remove the item from cart
+        removeFromCartWithSize(productId, selectedSize);
+      } else {
+        // Otherwise update the quantity
+        updateCartWithSize(productId, newQuantity, selectedSize);
+      }
+      
+      // Update UI
+      setTimeout(() => {
+        checkProductInCart();
+      }, 100);
+    });
+    
+    plusBtn.addEventListener("click", function(e) {
+      e.stopPropagation(); // Stop propagation to prevent the global handler
+      
+      // Get selected size
+      const selectedSizeElement = document.querySelector("#product-sizes .list__item.active");
+      const selectedSize = selectedSizeElement ? selectedSizeElement.getAttribute("data-size") : null;
+      
+      const productId = productElement.getAttribute("data-catalog-product-id");
+      const currentQuantity = parseInt(quantityInput.value) || 1;
+      const newQuantity = Math.min(99, currentQuantity + 1);
+      
+      updateCartWithSize(productId, newQuantity, selectedSize);
+      
+      // Update UI
+      setTimeout(() => {
+        checkProductInCart();
+      }, 100);
+    });
+    
+    quantityInput.addEventListener("change", function(e) {
+      e.stopPropagation(); // Stop propagation to prevent the global handler
+      
+      // Get selected size
+      const selectedSizeElement = document.querySelector("#product-sizes .list__item.active");
+      const selectedSize = selectedSizeElement ? selectedSizeElement.getAttribute("data-size") : null;
+      
+      const productId = productElement.getAttribute("data-catalog-product-id");
+      const newQuantity = parseInt(this.value) || 1;
+      
+      if (newQuantity <= 0) {
+        // If quantity becomes zero or negative, remove the item from cart
+        removeFromCartWithSize(productId, selectedSize);
+      } else {
+        // Otherwise update the quantity
+        updateCartWithSize(productId, newQuantity, selectedSize);
+      }
+      
+      // Update UI
+      setTimeout(() => {
+        checkProductInCart();
+      }, 100);
+    });
+  }
+
+  function updateCartWithSize(productId, quantity, size) {
+    // Get cart data
+    const cartData = JSON.parse(localStorage.getItem("cartData") || "[]");
+    
+    // Normalize size for comparison
+    size = (size === undefined || size === '') ? null : size;
+    
+    // Find matching item
+    const itemIndex = cartData.findIndex(
+      (item) => 
+        item.product_id == productId && 
+        ((size === null && (item.size === null || item.size === undefined || item.size === '')) ||
+          size === item.size)
+    );
+    
+    if (itemIndex !== -1) {
+      // Update quantity
+      cartData[itemIndex].quantity = quantity;
+    } else {
+      // Add new item
+      cartData.push({
+        product_id: productId,
+        size: size,
+        quantity: quantity
+      });
+    }
+    
+    // Save updated cart
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+    
+    // Update cart UI if needed
+    if (typeof initCart === 'function') {
+      initCart();
+    }
+  }
+
+  function removeFromCartWithSize(productId, size) {
+    // Get cart data
+    const cartData = JSON.parse(localStorage.getItem("cartData") || "[]");
+    
+    // Normalize size for comparison
+    size = (size === undefined || size === '') ? null : size;
+    
+    // Find matching item
+    const itemIndex = cartData.findIndex(
+      (item) => 
+        item.product_id == productId && 
+        ((size === null && (item.size === null || item.size === undefined || item.size === '')) ||
+          size === item.size)
+    );
+    
+    if (itemIndex !== -1) {
+      // Remove the item
+      cartData.splice(itemIndex, 1);
+      
+      // Save updated cart
+      localStorage.setItem("cartData", JSON.stringify(cartData));
+      
+      // Update cart UI if needed
+      if (typeof initCart === 'function') {
+        initCart();
+      }
+    }
+  }

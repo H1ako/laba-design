@@ -401,7 +401,7 @@
         margin-top: 2em;
         width: 100%;
         max-width: 300px;
-  
+
         .result__order-link {
           @include button(var(--border-radius-main));
           @include cleanLink;
@@ -412,18 +412,18 @@
           text-align: center;
           border-radius: var(--border-radius-main);
           display: block;
-  
+
           &:hover {
             background-color: var(--color-main);
             transform: translateY(-2px);
           }
         }
-  
+
         .content__continue-btn {
           margin-top: 0;
         }
       }
-  
+
       // Remove this from the original button
       .content__continue-btn {
         margin-top: 0;
@@ -461,6 +461,27 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    .content__size {
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      margin-bottom: 0.5em;
+
+      .size__label {
+        color: var(--color-text-darker);
+        font-size: var(--font-size-5);
+      }
+
+      .size__value {
+        font-weight: 500;
+
+        &--not-selected {
+          color: var(--color-text-darker);
+          font-style: italic;
+        }
       }
     }
 

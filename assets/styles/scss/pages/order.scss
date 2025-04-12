@@ -315,6 +315,27 @@ body {
           gap: 1em;
           flex: 1;
 
+          .content__size {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            margin-bottom: 0.5em;
+
+            .size__label {
+              color: var(--color-text-darker);
+              font-size: var(--font-size-5);
+            }
+
+            .size__value {
+              font-weight: 500;
+
+              &--not-selected {
+                color: var(--color-text-darker);
+                font-style: italic;
+              }
+            }
+          }
+
           .content__name {
             font-size: var(--font-size-4);
             color: var(--color-main);
