@@ -10,7 +10,9 @@ use app\controllers\UserController;
 
 use app\controllers\admin\AdminServiceController;
 use app\controllers\admin\AdminServiceHistoryController;
-use app\controllers\admin\AdminUserController;
+use app\controllers\admin\AdminOrdersController;
+use app\controllers\admin\AdminProductsController;
+use app\controllers\admin\AdminUsersController;
 use app\controllers\OrderController;
 
 global $SITE_URL;
@@ -38,22 +40,33 @@ Router::post('/cart/purchase', [UserController::class, 'purchase_cart']);
 // Router::post('/service-history/create', [ServiceHistoryController::class, 'create']);
 // Router::put('/service-history/%s/edit', [ServiceHistoryController::class, 'edit']);
 
-if (!$session->user->is_admin) {
-    return Router::not_found();
-}
 
 Router::set_route_prefix('api/admin');
 
-Router::post('/users/create', [AdminUserController::class, 'create']);
-Router::put('/users/%s/edit', [AdminUserController::class, 'edit']);
-Router::delete('/users/%s/delete', [AdminUserController::class, 'delete']);
+// Orders management
+Router::put('/orders/%s', [AdminOrdersController::class, 'update']);
+Router::put('/orders/%s/status', [AdminOrdersController::class, 'update_status']);
+Router::delete('/orders/%s', [AdminOrdersController::class, 'delete']);
+Router::delete('/orders/%s/items/%s', [AdminOrdersController::class, 'remove_item']);
 
-// Router::post('/services/create', [AdminServiceController::class, 'create']);
-// Router::post('/services/%s/edit', [AdminServiceController::class, 'edit']);
-// Router::delete('/services/%s/delete', [AdminServiceController::class, 'delete']);
+// Products management
+Router::post('/products', [AdminProductsController::class, 'store']);
+Router::put('/products/%s', [AdminProductsController::class, 'update']);
+Router::delete('/products/%s', [AdminProductsController::class, 'delete']);
 
-// Router::post('/service_history/create', [AdminServiceHistoryController::class, 'create']);
-// Router::put('/service_history/%s/edit', [AdminServiceHistoryController::class, 'edit']);
-// Router::delete('/service_history/%s/delete', [AdminServiceHistoryController::class, 'delete']);
+// Product characteristics
+Router::post('/products/%s/characteristics', [AdminProductsController::class, 'add_characteristic']);
+Router::put('/products/%s/characteristics/%s', [AdminProductsController::class, 'update_characteristic']);
+Router::delete('/products/%s/characteristics/%s', [AdminProductsController::class, 'remove_characteristic']);
+
+// Product sizes
+Router::post('/products/%s/sizes', [AdminProductsController::class, 'add_size']);
+Router::put('/products/%s/sizes/%s', [AdminProductsController::class, 'update_size']);
+Router::delete('/products/%s/sizes/%s', [AdminProductsController::class, 'remove_size']);
+
+// Product images
+Router::post('/products/%s/images', [AdminProductsController::class, 'add_image']);
+Router::put('/products/%s/images/%s/sort', [AdminProductsController::class, 'update_image_sort']);
+Router::delete('/products/%s/images/%s', [AdminProductsController::class, 'remove_image']);
 
 Router::not_found();

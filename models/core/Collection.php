@@ -11,7 +11,13 @@ class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
     protected $items_ids = [];
 
     public $where_pairs = [];
+    public $where_raw_conditions = [];
+    public $or_where_pairs = [];
     public $sort_pairs = [];
+    public $limit_value = null;
+    public $offset_value = null;
+    public $select_fields = ['*'];
+    public $group_by_columns = [];
 
     public function __construct($data)
     {
@@ -22,10 +28,38 @@ class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
 
             foreach ($data as $item) {
                 $this->add($item);
-            }            
+            }
         } else {
             $this->model = $data;
         }
+    }
+
+    /**
+     * Group results by one or more columns
+     * 
+     * @param string|array $columns Column(s) to group by
+     * @return Collection
+     */
+    public function group_by($columns): Collection
+    {
+        if (is_string($columns)) {
+            $this->group_by_columns[] = $columns;
+        } else if (is_array($columns)) {
+            $this->group_by_columns = array_merge($this->group_by_columns ?? [], $columns);
+        }
+        return $this;
+    }
+
+    /**
+     * Add raw data item to collection (for custom SELECT queries)
+     * 
+     * @param array $data Raw data array
+     * @return Collection
+     */
+    public function addRaw($data)
+    {
+        $this->items[] = $data;
+        return $this;
     }
 
     public function add($item): Collection
@@ -65,10 +99,6 @@ class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
         return $data;
     }
 
-    public function count(): int
-    {
-        return count($this->items);
-    }
 
     public function to_array(): array
     {
@@ -133,6 +163,7 @@ class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
      * @param mixed $offset
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->items[$offset] ?? null;
@@ -175,5 +206,95 @@ class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
             }
             unset($this->items[$offset]);
         }
+    }
+
+    /**
+     * Add a raw where condition to the query
+     * @param string $sql Raw SQL condition
+     * @param array $params Parameters to bind
+     * @return Collection
+     */
+    public function where_raw($sql, $params = []): Collection
+    {
+        $this->where_raw_conditions[] = ['sql' => $sql, 'params' => $params];
+        return $this;
+    }
+
+    /**
+     * Add an OR WHERE condition to the query
+     * @param string $field Field name
+     * @param string $operator Comparison operator
+     * @param mixed $value Value to compare against
+     * @return Collection
+     */
+    public function or_where($field, $operator, $value): Collection
+    {
+        $this->or_where_pairs[] = [$field, $operator, $value];
+        return $this;
+    }
+
+    /**
+     * Limit the result set to a specific number of records
+     * @param int $limit Number of records to return
+     * @return Collection
+     */
+    public function limit($limit): Collection
+    {
+        $this->limit_value = (int)$limit;
+        return $this;
+    }
+
+    /**
+     * Skip a specific number of records
+     * @param int $offset Number of records to skip
+     * @return Collection
+     */
+    public function offset($offset): Collection
+    {
+        $this->offset_value = (int)$offset;
+        return $this;
+    }
+
+    /**
+     * Select specific fields from the database
+     * @param string|array $fields Fields to select
+     * @return Collection
+     */
+    public function select($fields): Collection
+    {
+        if (is_string($fields)) {
+            $this->select_fields = explode(',', $fields);
+            // Trim whitespace from field names
+            $this->select_fields = array_map('trim', $this->select_fields);
+        } else if (is_array($fields)) {
+            $this->select_fields = $fields;
+        }
+        return $this;
+    }
+
+    /**
+     * Count the number of records that match the query
+     * @return int
+     */
+    public function count(): int
+    {
+        if (
+            empty($this->where_pairs) && empty($this->where_raw_conditions) &&
+            empty($this->or_where_pairs) && count($this->items) > 0
+        ) {
+            return count($this->items);
+        }
+
+        // Set the select field to COUNT(*)
+        $original_select = $this->select_fields;
+        $this->select_fields = ['COUNT(*) as count_total'];
+
+        // Get the count from the database
+        $collection = $this->model::_get_query_count($this);
+
+        // Restore the original select
+        $this->select_fields = $original_select;
+
+        return $collection;
     }
 }

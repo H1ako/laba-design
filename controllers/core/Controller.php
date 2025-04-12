@@ -172,6 +172,7 @@ abstract class Controller
 
     protected static function view($view, $data = [])
     {
-        return Router::render($view, $data);
+        Router::render($view, $data);
+        exit;
     }
 }

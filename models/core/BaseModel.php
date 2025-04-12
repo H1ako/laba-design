@@ -53,24 +53,24 @@ abstract class BaseModel
     protected function belongsToMany($related_class, $pivot_table = null, $foreign_key = null, $related_key = null)
     {
         static::connect();
-        
+
         // Default naming convention if not specified
         $pivot_table = $pivot_table ?? $this->getPivotTableName(static::$table_name, $related_class::$table_name);
         $foreign_key = $foreign_key ?? $this->getSingularTableName(static::$table_name) . '_id';
         $related_key = $related_key ?? $this->getSingularTableName($related_class::$table_name) . '_id';
-        
+
         $collection = new Collection($related_class);
-        
+
         $query = "SELECT r.*, p.* 
                 FROM " . $related_class::$table_name . " r
                 JOIN $pivot_table p ON r.id = p.$related_key
                 WHERE p.$foreign_key = ?";
-        
+
         $stmt = static::$conn->prepare($query);
         $stmt->bind_param('i', $this->id);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         while ($row = $result->fetch_assoc()) {
             // Extract pivot data
             $pivot_data = [];
@@ -80,12 +80,12 @@ abstract class BaseModel
                     $pivot_data[$key] = $value;
                 }
             }
-            
+
             $related_object = new $related_class($row);
             $related_object->pivot = (object)$pivot_data;
             $collection->add($related_object);
         }
-        
+
         return $collection;
     }
 
@@ -101,12 +101,12 @@ abstract class BaseModel
     public function attach($related_class, $ids, $pivot = [], $pivot_table = null, $foreign_key = null, $related_key = null)
     {
         static::connect();
-        
+
         // Default naming convention if not specified
         $pivot_table = $pivot_table ?? $this->getPivotTableName(static::$table_name, $related_class::$table_name);
         $foreign_key = $foreign_key ?? $this->getSingularTableName(static::$table_name) . '_id';
         $related_key = $related_key ?? $this->getSingularTableName($related_class::$table_name) . '_id';
-        
+
         // Convert single ID to array
         if (!is_array($ids)) {
             $ids = [$ids => $pivot];
@@ -120,10 +120,10 @@ abstract class BaseModel
             }
             $ids = $idsWithPivot;
         }
-        
+
         // Begin transaction
         static::$conn->begin_transaction();
-        
+
         try {
             foreach ($ids as $id => $pivotData) {
                 // Build field and value lists
@@ -131,7 +131,7 @@ abstract class BaseModel
                 $values = [$this->id, $id];
                 $types = 'ii'; // Integer types for the IDs
                 $placeholders = ['?', '?'];
-                
+
                 // Add additional pivot data if provided
                 foreach ($pivotData as $key => $value) {
                     $fields[] = $key;
@@ -139,25 +139,25 @@ abstract class BaseModel
                     $placeholders[] = '?';
                     $types .= $this->getBindType($value);
                 }
-                
+
                 $fieldsStr = implode(', ', $fields);
                 $placeholdersStr = implode(', ', $placeholders);
-                
+
                 // Build ON DUPLICATE KEY UPDATE part for existing relationships
                 $updates = [];
                 foreach ($pivotData as $key => $value) {
                     $updates[] = "$key = VALUES($key)";
                 }
                 $updateStr = !empty($updates) ? " ON DUPLICATE KEY UPDATE " . implode(', ', $updates) : '';
-                
+
                 $query = "INSERT INTO $pivot_table ($fieldsStr) VALUES ($placeholdersStr)$updateStr";
-                
+
                 $stmt = static::$conn->prepare($query);
                 $stmt->bind_param($types, ...$values);
                 $stmt->execute();
                 $stmt->close();
             }
-            
+
             // Commit transaction
             static::$conn->commit();
             return true;
@@ -179,15 +179,15 @@ abstract class BaseModel
     public function detach($related_class, $ids = null, $pivot_table = null, $foreign_key = null, $related_key = null)
     {
         static::connect();
-        
+
         // Default naming convention if not specified
         $pivot_table = $pivot_table ?? $this->getPivotTableName(static::$table_name, $related_class::$table_name);
         $foreign_key = $foreign_key ?? $this->getSingularTableName(static::$table_name) . '_id';
         $related_key = $related_key ?? $this->getSingularTableName($related_class::$table_name) . '_id';
-        
+
         // Begin transaction
         static::$conn->begin_transaction();
-        
+
         try {
             if ($ids === null) {
                 // Detach all relationships
@@ -199,23 +199,23 @@ abstract class BaseModel
                 if (!is_array($ids)) {
                     $ids = [$ids];
                 }
-                
+
                 // Build placeholders for IDs
                 $placeholders = implode(',', array_fill(0, count($ids), '?'));
                 $query = "DELETE FROM $pivot_table WHERE $foreign_key = ? AND $related_key IN ($placeholders)";
-                
+
                 $stmt = static::$conn->prepare($query);
-                
+
                 // Create bind param types and values
                 $types = 'i' . str_repeat('i', count($ids));
                 $bindValues = array_merge([$this->id], $ids);
-                
+
                 $stmt->bind_param($types, ...$bindValues);
             }
-            
+
             $stmt->execute();
             $stmt->close();
-            
+
             // Commit transaction
             static::$conn->commit();
             return true;
@@ -237,24 +237,24 @@ abstract class BaseModel
     public function sync($related_class, $ids, $pivot_table = null, $foreign_key = null, $related_key = null)
     {
         static::connect();
-        
+
         // Default naming convention if not specified
         $pivot_table = $pivot_table ?? $this->getPivotTableName(static::$table_name, $related_class::$table_name);
         $foreign_key = $foreign_key ?? $this->getSingularTableName(static::$table_name) . '_id';
         $related_key = $related_key ?? $this->getSingularTableName($related_class::$table_name) . '_id';
-        
+
         // Begin transaction
         static::$conn->begin_transaction();
-        
+
         try {
             // First detach all
             $this->detach($related_class, null, $pivot_table, $foreign_key, $related_key);
-            
+
             // Then attach the new ones
             if (!empty($ids)) {
                 $this->attach($related_class, $ids, [], $pivot_table, $foreign_key, $related_key);
             }
-            
+
             // Commit transaction
             static::$conn->commit();
             return true;
@@ -347,24 +347,76 @@ abstract class BaseModel
         return $collection;
     }
 
-    public static function _get_query($collection)
+    /**
+     * Group results by one or more columns
+     * @param string|array $columns Column(s) to group by
+     * @return Collection
+     */
+    public static function group_by($columns): Collection
+    {
+        $collection = new Collection(static::class);
+        return $collection->group_by($columns);
+    }
+
+    /**
+     * Execute a raw query and return the count result
+     * @param Collection $collection Collection with query parameters
+     * @return int
+     */
+    public static function _get_query_count($collection)
     {
         static::connect();
 
         $table_name = static::$table_name;
+        $fields = implode(', ', $collection->select_fields);
 
         // Start building the query
-        $query = "SELECT * FROM `$table_name`";
+        $query = "SELECT $fields FROM `$table_name`";
+        $params = [];
 
         // Add WHERE clauses
         $where_clauses = [];
         foreach ($collection->where_pairs as [$field, $operator, $value]) {
-            $sanitized_value = static::$conn->real_escape_string($value);
-            $where_clauses[] = "`$field` $operator '$sanitized_value'";
+            $where_clauses[] = "`$field` $operator ?";
+            $params[] = $value;
         }
 
-        if (!empty($where_clauses)) {
+        // Add raw WHERE clauses
+        foreach ($collection->where_raw_conditions as $condition) {
+            $where_clauses[] = "(" . $condition['sql'] . ")";
+            $params = array_merge($params, $condition['params']);
+        }
+
+        // Add OR WHERE clauses
+        $or_where_clauses = [];
+        foreach ($collection->or_where_pairs as [$field, $operator, $value]) {
+            $or_where_clauses[] = "`$field` $operator ?";
+            $params[] = $value;
+        }
+
+        // Combine WHERE and OR WHERE clauses
+        if (!empty($where_clauses) && !empty($or_where_clauses)) {
+            $query .= " WHERE (" . implode(' AND ', $where_clauses) . ") OR (" . implode(' OR ', $or_where_clauses) . ")";
+        } elseif (!empty($where_clauses)) {
             $query .= " WHERE " . implode(' AND ', $where_clauses);
+        } elseif (!empty($or_where_clauses)) {
+            $query .= " WHERE " . implode(' OR ', $or_where_clauses);
+        }
+
+        // Special handling for COUNT with GROUP BY
+        if (!empty($collection->group_by_columns)) {
+            // Use a subquery to count grouped results
+            $original_select = $collection->select_fields;
+            $collection->select_fields = ['*'];
+            $subquery = static::_build_query($collection, false);
+
+            $query = "SELECT COUNT(*) as count_total FROM ($subquery) as subq";
+
+            // Restore original select
+            $collection->select_fields = $original_select;
+        } else {
+            $query = "SELECT COUNT(*) as count_total FROM `$table_name`";
+            // ... add WHERE clauses as before ...
         }
 
         // Add sorting
@@ -377,17 +429,318 @@ abstract class BaseModel
             $query .= " ORDER BY " . implode(', ', $sort_clauses);
         }
 
-        $result = static::$conn->query($query);
+        // Add LIMIT and OFFSET if specified
+        if ($collection->limit_value !== null) {
+            $query .= " LIMIT ?";
+            $params[] = $collection->limit_value;
 
-        if (!$result) {
-            throw new \Exception("Database Query Error: " . static::$conn->error);
+            if ($collection->offset_value !== null) {
+                $query .= " OFFSET ?";
+                $params[] = $collection->offset_value;
+            }
         }
 
+        // Prepare and execute statement
+        $stmt = static::$conn->prepare($query);
+
+        if ($params) {
+            // Determine parameter types
+            $types = '';
+            foreach ($params as $param) {
+                if (is_int($param)) {
+                    $types .= 'i';
+                } elseif (is_float($param)) {
+                    $types .= 'd';
+                } else {
+                    $types .= 's';
+                }
+            }
+
+            $stmt->bind_param($types, ...$params);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return (int)($row['count_total'] ?? 0);
+        }
+
+        return 0;
+    }
+
+    /**
+     * Build a query string without executing it
+     * @param Collection $collection Collection with query parameters
+     * @param bool $includeLimit Whether to include LIMIT/OFFSET clauses
+     * @return string The constructed query string
+     */
+    protected static function _build_query($collection, $includeLimit = true)
+    {
+        $table_name = static::$table_name;
+        $fields = implode(', ', $collection->select_fields);
+
+        // Start building the query
+        $query = "SELECT $fields FROM `$table_name`";
+        $params = [];
+
+        // Add WHERE clauses
+        $where_clauses = [];
+        foreach ($collection->where_pairs as [$field, $operator, $value]) {
+            $where_clauses[] = "`$field` $operator ?";
+            $params[] = $value;
+        }
+
+        // Add raw WHERE clauses
+        foreach ($collection->where_raw_conditions as $condition) {
+            $where_clauses[] = "(" . $condition['sql'] . ")";
+            $params = array_merge($params, $condition['params']);
+        }
+
+        // Add OR WHERE clauses
+        $or_where_clauses = [];
+        foreach ($collection->or_where_pairs as [$field, $operator, $value]) {
+            $or_where_clauses[] = "`$field` $operator ?";
+            $params[] = $value;
+        }
+
+        // Combine WHERE and OR WHERE clauses
+        if (!empty($where_clauses) && !empty($or_where_clauses)) {
+            $query .= " WHERE (" . implode(' AND ', $where_clauses) . ") OR (" . implode(' OR ', $or_where_clauses) . ")";
+        } elseif (!empty($where_clauses)) {
+            $query .= " WHERE " . implode(' AND ', $where_clauses);
+        } elseif (!empty($or_where_clauses)) {
+            $query .= " WHERE " . implode(' OR ', $or_where_clauses);
+        }
+
+        // Add GROUP BY if specified
+        if (!empty($collection->group_by_columns)) {
+            $query .= " GROUP BY " . implode(', ', array_map(function ($column) {
+                return "`$column`";
+            }, $collection->group_by_columns));
+        }
+
+        // Add sorting
+        $sort_clauses = [];
+        foreach ($collection->sort_pairs as [$field, $direction]) {
+            $sort_clauses[] = "`$field` $direction";
+        }
+
+        if (!empty($sort_clauses)) {
+            $query .= " ORDER BY " . implode(', ', $sort_clauses);
+        }
+
+        // Add LIMIT and OFFSET if specified and includeLimit is true
+        if ($includeLimit && $collection->limit_value !== null) {
+            $query .= " LIMIT ?";
+            $params[] = $collection->limit_value;
+
+            if ($collection->offset_value !== null) {
+                $query .= " OFFSET ?";
+                $params[] = $collection->offset_value;
+            }
+        }
+
+        // Convert parameters to their actual values in the query string
+        foreach ($params as $param) {
+            $position = strpos($query, '?');
+            if ($position !== false) {
+                if (is_null($param)) {
+                    $replacement = 'NULL';
+                } elseif (is_numeric($param)) {
+                    $replacement = $param;
+                } else {
+                    $replacement = "'" . static::$conn->real_escape_string($param) . "'";
+                }
+                $query = substr_replace($query, $replacement, $position, 1);
+            }
+        }
+
+        return $query;
+    }
+
+    /**
+     * Execute a query and return the results
+     * @param Collection $collection Collection with query parameters
+     * @return Collection
+     */
+    public static function _get_query($collection)
+    {
+        static::connect();
+
+        $table_name = static::$table_name;
+        $fields = implode(', ', $collection->select_fields);
+
+        // Start building the query
+        $query = "SELECT $fields FROM `$table_name`";
+        $params = [];
+
+        // Add WHERE clauses
+        $where_clauses = [];
+        foreach ($collection->where_pairs as [$field, $operator, $value]) {
+            $where_clauses[] = "`$field` $operator ?";
+            $params[] = $value;
+        }
+
+        // Add raw WHERE clauses
+        foreach ($collection->where_raw_conditions as $condition) {
+            $where_clauses[] = "(" . $condition['sql'] . ")";
+            $params = array_merge($params, $condition['params']);
+        }
+
+        // Add OR WHERE clauses
+        $or_where_clauses = [];
+        foreach ($collection->or_where_pairs as [$field, $operator, $value]) {
+            $or_where_clauses[] = "`$field` $operator ?";
+            $params[] = $value;
+        }
+
+        // Combine WHERE and OR WHERE clauses
+        if (!empty($where_clauses) && !empty($or_where_clauses)) {
+            $query .= " WHERE (" . implode(' AND ', $where_clauses) . ") OR (" . implode(' OR ', $or_where_clauses) . ")";
+        } elseif (!empty($where_clauses)) {
+            $query .= " WHERE " . implode(' AND ', $where_clauses);
+        } elseif (!empty($or_where_clauses)) {
+            $query .= " WHERE " . implode(' OR ', $or_where_clauses);
+        }
+
+        // Add GROUP BY if specified
+        if (!empty($collection->group_by_columns)) {
+            $query .= " GROUP BY " . implode(', ', array_map(function ($column) {
+                return "`$column`";
+            }, $collection->group_by_columns));
+        }
+
+        // Add sorting
+        $sort_clauses = [];
+        foreach ($collection->sort_pairs as [$field, $direction]) {
+            $sort_clauses[] = "`$field` $direction";
+        }
+
+        if (!empty($sort_clauses)) {
+            $query .= " ORDER BY " . implode(', ', $sort_clauses);
+        }
+
+        // Add LIMIT and OFFSET if specified
+        if ($collection->limit_value !== null) {
+            $query .= " LIMIT ?";
+            $params[] = $collection->limit_value;
+
+            if ($collection->offset_value !== null) {
+                $query .= " OFFSET ?";
+                $params[] = $collection->offset_value;
+            }
+        }
+
+        // Prepare and execute statement
+        $stmt = static::$conn->prepare($query);
+
+        if ($params) {
+            // Determine parameter types
+            $types = '';
+            foreach ($params as $param) {
+                if (is_int($param)) {
+                    $types .= 'i';
+                } elseif (is_float($param)) {
+                    $types .= 'd';
+                } else {
+                    $types .= 's';
+                }
+            }
+
+            $stmt->bind_param($types, ...$params);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+
         while ($row = $result->fetch_assoc()) {
-            $collection->add(new static($row));
+            $newRow = new static($row);
+            $collection->add($newRow);
+            // if ($fields === '*' || in_array('*', $collection->select_fields)) {
+            // } else {
+            //     // For custom SELECT queries, just return the raw data
+            //     $collection->addRaw($row);
+            // }
         }
 
         return $collection;
+    }
+
+    public static function query()
+    {
+        $collection = new Collection(static::class);
+        return $collection;
+    }
+
+    /**
+     * Static method to get count directly
+     * @return int
+     */
+    public static function count()
+    {
+        $collection = new Collection(static::class);
+        return $collection->count();
+    }
+
+    /**
+     * Static method to select fields
+     * @param string|array $fields Fields to select
+     * @return Collection
+     */
+    public static function select($fields)
+    {
+        $collection = new Collection(static::class);
+        return $collection->select($fields);
+    }
+
+    /**
+     * Add a raw where condition
+     * @param string $sql Raw SQL condition
+     * @param array $params Parameters to bind
+     * @return Collection
+     */
+    public static function where_raw($sql, $params = [])
+    {
+        $collection = new Collection(static::class);
+        return $collection->where_raw($sql, $params);
+    }
+
+    /**
+     * Add an OR WHERE condition
+     * @param string $field Field name
+     * @param string $operator Comparison operator
+     * @param mixed $value Value to compare against
+     * @return Collection
+     */
+    public static function or_where($field, $operator, $value)
+    {
+        $collection = new Collection(static::class);
+        return $collection->or_where($field, $operator, $value);
+    }
+
+    /**
+     * Limit the result set
+     * @param int $limit Number of records to return
+     * @return Collection
+     */
+    public static function limit($limit)
+    {
+        $collection = new Collection(static::class);
+        return $collection->limit($limit);
+    }
+
+    /**
+     * Skip a specific number of records
+     * @param int $offset Number of records to skip
+     * @return Collection
+     */
+    public static function offset($offset)
+    {
+        $collection = new Collection(static::class);
+        return $collection->offset($offset);
     }
 
     protected static function get_fields()
