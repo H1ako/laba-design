@@ -685,13 +685,7 @@ function updateCartTotalsLocally() {
 
   const totalDiscountSum = Math.max(0, totalOriginalPrice - totalPrice);
 
-  // Update cart UI
-  if (cartItems.length === 0) {
-    updateEmptyCartState(true);
-    return;
-  }
-
-  updateEmptyCartState(false);
+  updateEmptyCartState(cartItems.length === 0);
 
   // Update totals in UI
   if (cartItemsCount) cartItemsCount.textContent = totalItems;
@@ -775,13 +769,14 @@ async function removeFromCart(productId) {
     `.cart-item[data-cart-product-id="${productId}"]`
   );
   if (cartItem) {
-    cartItem.classList.add("removing");
-    setTimeout(() => {
-      cartItem.remove();
+    cartItem.remove();
 
       // Update cart totals based on remaining items
-      updateCartTotalsLocally();
-    }, 300);
+    updateCartTotalsLocally();
+    // cartItem.classList.add("removing");
+    // setTimeout(() => {
+      
+    // }, 300);
   }
 
   // Update catalog item if present
