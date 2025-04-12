@@ -27,6 +27,7 @@ $items = $order->items;
     const SITE_URL = '<?= $SITE_URL ?>';
   </script>
   <script defer src="<?= $SITE_URL ?>/assets/scripts/libs/fetchHandlers.js"></script>
+  <script type="module" defer src="<?= $SITE_URL ?>/assets/scripts/libs/marquee.js"></script>
   <script defer src="<?= $SITE_URL ?>/assets/scripts/order.js"></script>
 </head>
 
