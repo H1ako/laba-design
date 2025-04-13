@@ -40,12 +40,14 @@ $productsToShow = 8;
     <!-- <section class="main-content__section section_reviews">
       <h2 class="section__title">Reviews</h2>
       <?php include_once('components/reviews-marquee.php'); ?>
-    </section>
+    </section> -->
     <section class="main-content__section section_news">
       <h2 class="section__title">Last News</h2>
-      <?php include_once('components/news.php'); ?>
+      <?php
+      $newsLimit = 4;
+      include_once('components/news.php'); ?>
       <a href="<?= Router::getRoute('/news') ?>" class="section__action-btn">смотреть все новости</a>
-    </section> -->
+    </section>
   </main>
   <?php include_once('components/footer.php'); ?>
 </body>
