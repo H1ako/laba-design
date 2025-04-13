@@ -105,15 +105,4 @@ class Order extends BaseModel
 
         $this->status = $status;
     }
-
-    public static function create($data)
-    {
-        if (isset($data['service_id'])) {
-            $service = Service::get_by_id($data['service_id']);
-            $data['initial_price'] = $service->base_price;
-            $data['total_price'] = $service->base_price;
-        }
-
-        return parent::create($data);
-    }
 }

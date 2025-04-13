@@ -657,8 +657,8 @@ abstract class BaseModel
 
 
         while ($row = $result->fetch_assoc()) {
-            $newRow = new static($row);
-            $collection->add($newRow);
+            $collection->add(new static($row));
+            
             // if ($fields === '*' || in_array('*', $collection->select_fields)) {
             // } else {
             //     // For custom SELECT queries, just return the raw data

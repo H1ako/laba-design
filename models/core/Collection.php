@@ -78,6 +78,30 @@ class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
         return $this;
     }
 
+    public function add_at_start($item): Collection
+    {
+        if (!isset($this->model)) {
+            $this->model = get_class($item);
+        }
+
+        if (!in_array($item->get_id(), $this->items_ids)) {
+            if ($item instanceof $this->model) {
+                array_unshift($this->items, $item);
+                array_unshift($this->items_ids, $item->id);
+            }
+        }
+
+        return $this;
+    }
+
+    public function add_at_start_raw($item): Collection
+    {
+        array_unshift($this->items, $item);
+        array_unshift($this->items_ids, $item->id);
+
+        return $this;
+    }
+
     public function where($field, $operator, $value): Collection
     {
         $this->where_pairs[] = [$field, $operator, $value];
@@ -279,8 +303,7 @@ class Collection implements \IteratorAggregate, \Countable, \ArrayAccess
     public function count(): int
     {
         if (
-            empty($this->where_pairs) && empty($this->where_raw_conditions) &&
-            empty($this->or_where_pairs) && count($this->items) > 0
+            count($this->items) > 0
         ) {
             return count($this->items);
         }
