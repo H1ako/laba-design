@@ -84,8 +84,8 @@ Router::post('/upload/image', [AdminNewsController::class, 'upload_image']);
 
 // Pages management
 Router::post('/pages', [AdminPagesController::class, 'store']);
+Router::post('/pages/order', [AdminPagesController::class, 'updateOrder']);
 Router::post('/pages/%s', [AdminPagesController::class, 'update']);
 Router::delete('/pages/%s', [AdminPagesController::class, 'delete']);
-Router::post('/pages/order', [AdminPagesController::class, 'updateOrder']);
 
 Router::not_found();

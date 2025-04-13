@@ -117,7 +117,7 @@ class CustomPage extends BaseModel
      */
     protected static function slugExists($slug)
     {
-        $page = self::where('slug', '=', $slug)->first();
+        $page = self::where('slug', '=', $slug)->get()->first();
         return $page !== null;
     }
 
