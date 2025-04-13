@@ -1160,6 +1160,8 @@ body {
   text-decoration: none;
   cursor: pointer;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .news__list .list__item .item__link svg {
   width: 1em;
@@ -1217,6 +1219,7 @@ body {
   padding: 1.5em 1.8em;
   border-bottom: 1px solid var(--color-text-semivisible);
   min-height: 12em;
+  flex-grow: 1;
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__info {
@@ -1236,6 +1239,7 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   height: auto;
+  height: 3em;
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__info .info__title {
@@ -1264,6 +1268,7 @@ body {
   padding: 1.2em 1.8em 1.5em;
   display: flex;
   justify-content: flex-end;
+  margin-top: auto;
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__action {
@@ -1527,6 +1532,8 @@ body {
   text-decoration: none;
   cursor: pointer;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .news__list .list__item .item__link svg {
   width: 1em;
@@ -1584,6 +1591,7 @@ body {
   padding: 1.5em 1.8em;
   border-bottom: 1px solid var(--color-text-semivisible);
   min-height: 12em;
+  flex-grow: 1;
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__info {
@@ -1603,6 +1611,7 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   height: auto;
+  height: 3em;
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__info .info__title {
@@ -1631,6 +1640,7 @@ body {
   padding: 1.2em 1.8em 1.5em;
   display: flex;
   justify-content: flex-end;
+  margin-top: auto;
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__action {

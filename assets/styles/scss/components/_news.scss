@@ -41,10 +41,13 @@
 
       .item__link {
         @include cleanLink;
+
         display: block;
         text-decoration: none;
         cursor: pointer;
         height: 100%;
+        display: flex;
+        flex-direction: column;
 
         &:focus {
           outline: none;
@@ -96,6 +99,7 @@
         padding: 1.5em 1.8em;
         border-bottom: 1px solid var(--color-text-semivisible);
         min-height: 12em;
+        flex-grow: 1;
 
         @media screen and (width < 768px) {
           padding: 1.2em;
@@ -114,6 +118,7 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           height: auto;
+          height: 3em;
 
           @media screen and (width < 768px) {
             font-size: var(--font-size-5);
@@ -143,6 +148,7 @@
         padding: 1.2em 1.8em 1.5em;
         display: flex;
         justify-content: flex-end;
+        margin-top: auto;
 
         @media screen and (width < 768px) {
           padding: 1em 1.2em 1.2em;
