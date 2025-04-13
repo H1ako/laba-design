@@ -17,6 +17,9 @@
                             <a href="<?= Router::getRoute('/') ?>" class="item__link">Главная</a>
                         </li>
                         <li class="list__item">
+                            <a href="<?= Router::getRoute('/orders') ?>" class="item__link">Мои заказы</a>
+                        </li>
+                        <li class="list__item">
                             <a href="<?= Router::getRoute('/catalog') ?>" class="item__link">Каталог</a>
                         </li>
                         <li class="list__item">

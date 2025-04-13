@@ -1,5 +1,6 @@
 //------COMPONENTS------
 @import "../components/basket-link";
+@import "../components/menu-button";
 
 .main-header {
   position: relative;
@@ -58,34 +59,6 @@
 
     @media screen and (width < 768px) {
       padding: 2em;
-    }
-
-    .top-section__menu-button {
-      @include cleanButton;
-      width: 4.5rem;
-      height: 4.5rem;
-      border-radius: 50%;
-      background-color: var(--color-bg-element);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform var(--transition-main),
-        background-color var(--transition-main);
-
-      svg {
-        width: 2.2rem;
-        height: 2.2rem;
-        stroke: var(--color-text);
-        transition: transform var(--transition-main);
-      }
-
-      &:hover {
-        background-color: var(--color-text-semivisible);
-
-        svg {
-          transform: scale(1.1);
-        }
-      }
     }
 
     .top-section__control {
@@ -156,52 +129,6 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition-main);
-
-    .fixed__menu-button {
-      background-color: rgba(0, 0, 0, 0.05);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-      border-radius: var(--border-radius-big);
-      padding: 0.5em;
-      transform: translateY(10px);
-      transition: transform var(--transition-slow)
-          cubic-bezier(0.34, 1.56, 0.64, 1),
-        background-color var(--transition-main);
-
-      .menu-button__wrapper {
-        @include cleanButton;
-
-        width: 4.5rem;
-        height: 4.5rem;
-        border-radius: 50%;
-        background-color: var(--color-bg);
-        // backdrop-filter: blur(10px);
-        // -webkit-backdrop-filter: blur(10px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        // box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        transition: transform var(--transition-slow)
-            cubic-bezier(0.34, 1.56, 0.64, 1),
-          background-color var(--transition-main);
-
-        svg {
-          width: 2.2rem;
-          height: 2.2rem;
-          stroke: var(--color-text);
-          transition: transform var(--transition-main);
-        }
-      }
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-
-        svg {
-          transform: scale(1.1);
-        }
-      }
-    }
 
     .fixed__basket {
       transform: translateY(10px);
