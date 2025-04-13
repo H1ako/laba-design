@@ -156,7 +156,7 @@ class AdminUsersController extends Controller
             return static::redirect('/admin/users');
         }
 
-        return static::view('views/admin/users/edit_admin.php', [
+        return static::view('views/admin/users/edit.php', [
             'user' => $session->user,
             'admin' => $admin
         ]);

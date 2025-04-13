@@ -55,9 +55,6 @@ ob_start();
                 <label for="role">Role*</label>
                 <select id="role" name="role" class="form-control" required>
                     <option value="admin" <?= $admin_user->role === 'admin' ? 'selected' : '' ?>>Administrator</option>
-                    <?php if ($user->role === 'super_admin'): ?>
-                        <option value="super_admin" <?= $admin_user->role === 'super_admin' ? 'selected' : '' ?>>Super Administrator</option>
-                    <?php endif; ?>
                 </select>
                 <div class="invalid-feedback" data-error-for="role"></div>
             </div>
