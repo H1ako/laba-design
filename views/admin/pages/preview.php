@@ -7,7 +7,7 @@ $page = $data['page'] ?? null;
 $title = "Предпросмотр: " . ($page ? htmlspecialchars($page->title) : 'Страница');
 
 if (!$page) {
-    return Router::redir('/admin/pages');
+    return Router::redirect_to('/admin/pages');
 }
 
 $header_actions = [
