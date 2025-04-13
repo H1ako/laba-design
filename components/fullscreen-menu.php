@@ -7,7 +7,7 @@
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
-        
+
         <div class="fullscreen-menu__content">
             <div class="content__column column-main">
                 <h3 class="column__title">Main</h3>
@@ -28,7 +28,7 @@
                     </ul>
                 </nav>
             </div>
-            
+
             <div class="content__column column-company">
                 <h3 class="column__title">Company</h3>
                 <nav class="column__nav">
@@ -51,16 +51,7 @@
                     </ul>
                 </nav>
             </div>
-            
-            <div class="content__column column-about">
-                <h3 class="column__title">About Us</h3>
-                <p class="column__text">
-                    Время приёма заказов: круглосуточно 7 дней в неделю.<br>
-                    Время обработки заказов, прием звонков: пн-пт.<br>
-                    c 9-00 до 21-00 (по Московскому времени).
-                </p>
-            </div>
-            
+
             <div class="content__column column-contacts">
                 <h3 class="column__title">Contact Us</h3>
                 <div class="column__phones">
@@ -76,6 +67,17 @@
                 <div class="column__socials">
                     <?php include('components/socials.php'); ?>
                 </div>
+            </div>
+        </div>
+
+        <div class="fullscreen-menu__about">
+            <div class="about__container">
+                <h3 class="about__title">About Us</h3>
+                <p class="about__text">
+                    Время приёма заказов: круглосуточно 7 дней в неделю.
+                    Время обработки заказов, прием звонков: пн-пт.
+                    c 9-00 до 21-00 (по Московскому времени).
+                </p>
             </div>
         </div>
     </div>
