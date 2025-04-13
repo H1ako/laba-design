@@ -964,6 +964,8 @@ function changeQuantity(quantity, quantityElement) {
   );
 
   if (quantity < minValue) {
+    productElement.classList.remove("in-cart");
+    productElement.setAttribute("in-cart", false);
     removeProductFromCartHandler(productId);
     return 0;
   }

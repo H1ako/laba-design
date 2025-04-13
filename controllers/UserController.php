@@ -33,6 +33,7 @@ class UserController extends Controller
             $size = $cart_item['size'] ?? null;
             $cart_item_data = $product->to_array();
             $cart_item_data['price'] = $product->price;
+            $cart_item_data['thumb_url'] = $product->thumb_url;
             $cart_item_data['discount'] = $product->discount;
             $cart_output[] = [
                 'product' => $cart_item_data,
