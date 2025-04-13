@@ -43,7 +43,7 @@ class News extends BaseModel
     public function get_reading_time_attribute()
     {
         // Calculate approximate reading time (average reading speed is 200 words per minute)
-        $wordCount = str_word_count(strip_tags($this->content));
+        $wordCount = str_word_count($this->content);
         $minutes = ceil($wordCount / 200);
         return $minutes;
     }

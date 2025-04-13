@@ -14,81 +14,151 @@ function initRichTextEditor() {
   const contentField = document.getElementById("content");
   if (!contentField) return;
 
-  // Load EasyMDE if not already loaded
-  if (typeof EasyMDE === "undefined") {
+  // Create a container for Quill
+  const quillContainer = document.createElement("div");
+  quillContainer.id = "quill-editor";
+  quillContainer.style.backgroundColor = "white";
+  quillContainer.style.minHeight = "400px";
+  quillContainer.innerHTML = contentField.value; // Transfer any existing content
+
+  // Insert the container before the textarea and hide the textarea
+  contentField.parentNode.insertBefore(quillContainer, contentField);
+  contentField.style.display = "none";
+
+  // Load Quill if not already loaded
+  if (typeof Quill === "undefined") {
+    // Load Quill CSS
+    const quillCSS = document.createElement("link");
+    quillCSS.rel = "stylesheet";
+    quillCSS.href = "https://cdn.quilljs.com/1.3.7/quill.snow.css";
+    document.head.appendChild(quillCSS);
+
+    // Load Quill JS
     const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js";
+    script.src = "https://cdn.quilljs.com/1.3.7/quill.min.js";
     script.onload = function () {
-      createEditor(contentField);
+      createEditor(contentField, quillContainer);
     };
     document.head.appendChild(script);
   } else {
-    createEditor(contentField);
+    createEditor(contentField, quillContainer);
   }
 
-  function createEditor(textarea) {
-    const easyMDE = new EasyMDE({
-      element: textarea,
-      autofocus: true,
-      spellChecker: false,
-      autoDownloadFontAwesome: true,
-      status: ["lines", "words"],
-      uploadImage: true,
-      toolbar: [
-        "bold",
-        "italic",
-        "heading",
-        "|",
-        "quote",
-        "unordered-list",
-        "ordered-list",
-        "|",
-        "link",
-        "image",
-        "table",
-        "|",
-        "preview",
-        "side-by-side",
-        "fullscreen",
-        "|",
-        "guide",
-      ],
-      imageUploadFunction: function (file, onSuccess, onError) {
-        // Create FormData for file upload
-        const formData = new FormData();
-        formData.append("image", file);
+  function createEditor(textarea, container) {
+    // Get CSRF token
+    const csrfToken =
+      document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute("content") || "";
 
-        // Get CSRF token
-        const csrfToken =
-          document
-            .querySelector('meta[name="csrf-token"]')
-            ?.getAttribute("content") || "";
+    // Setup image upload handler
+    const imageHandler = function () {
+      const input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*");
+      input.click();
 
-        // Upload image
-        fetch("/api/admin/upload/image", {
-          method: "POST",
-          headers: {
-            "X-CSRF-Token": csrfToken,
-          },
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((result) => {
+      input.onchange = async () => {
+        const file = input.files[0];
+        if (file) {
+          // Create FormData
+          const formData = new FormData();
+          formData.append("image", file);
+
+          // Show loading state in editor
+          const range = this.quill.getSelection(true);
+          this.quill.insertText(
+            range.index,
+            "Загрузка изображения...",
+            { italic: true },
+            true
+          );
+
+          try {
+            // Upload image
+            const response = await fetch("/api/admin/upload/image", {
+              method: "POST",
+              headers: {
+                "X-CSRF-Token": csrfToken,
+              },
+              body: formData,
+            });
+
+            const result = await response.json();
+
+            // Remove loading text
+            this.quill.deleteText(
+              range.index,
+              "Загрузка изображения...".length
+            );
+
             if (result.status === "success") {
-              onSuccess(result.url);
+              // Insert the image
+              this.quill.insertEmbed(range.index, "image", result.data.url);
             } else {
-              onError(result.message || "Image upload failed");
+              // Show error message
+              this.quill.insertText(
+                range.index,
+                "Ошибка загрузки изображения",
+                { color: "red" },
+                true
+              );
             }
-          })
-          .catch((error) => {
+          } catch (error) {
             console.error("Error uploading image:", error);
-            onError("Upload failed");
-          });
+            this.quill.deleteText(
+              range.index,
+              "Загрузка изображения...".length
+            );
+            this.quill.insertText(
+              range.index,
+              "Ошибка загрузки изображения",
+              { color: "red" },
+              true
+            );
+          }
+        }
+      };
+    };
+
+    // Initialize Quill
+    const toolbarOptions = [
+      ["bold", "italic", "underline", "strike"],
+      ["blockquote", "code-block"],
+      [{ header: 1 }, { header: 2 }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ script: "sub" }, { script: "super" }],
+      [{ indent: "-1" }, { indent: "+1" }],
+      [{ direction: "rtl" }],
+      [{ size: ["small", false, "large", "huge"] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ color: [] }, { background: [] }],
+      [{ font: [] }],
+      [{ align: [] }],
+      ["clean"],
+      ["link", "image", "video"],
+    ];
+
+    const quill = new Quill(container, {
+      modules: {
+        toolbar: {
+          container: toolbarOptions,
+          handlers: {
+            image: imageHandler,
+          },
+        },
       },
+      placeholder: "Введите содержание...",
+      theme: "snow",
     });
 
+    // If there's existing content in HTML format
+    if (textarea.value) {
+      quill.root.innerHTML = textarea.value;
+    }
+
     // Save editor reference for form submission
-    textarea._editor = easyMDE;
+    textarea._editor = quill;
   }
 }
 
@@ -142,10 +212,10 @@ function initNewsForm() {
       el.classList.remove("is-invalid");
     });
 
-    // Get EasyMDE content if exists
+    // Get Quill content if editor exists
     const contentField = document.getElementById("content");
     if (contentField && contentField._editor) {
-      contentField.value = contentField._editor.value();
+      contentField.value = contentField._editor.root.innerHTML;
     }
 
     // Prepare form data

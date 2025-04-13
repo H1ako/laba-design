@@ -18,7 +18,10 @@ ob_start();
 ?>
 
 <meta name="csrf-token" content="<?= Session::get()->get_csrf_token() ?>">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 
 <div class="card">
     <div class="card-header">
@@ -42,7 +45,7 @@ ob_start();
 
             <div class="form-group">
                 <label for="content">Содержание*</label>
-                <textarea id="content" name="content" class="form-control" rows="15" required></textarea>
+                <textarea id="content" name="content" class="form-control" rows="15" style="display: none;"></textarea>
                 <div class="invalid-feedback" data-error-for="content"></div>
             </div>
 

@@ -2920,3 +2920,109 @@ textarea.form-control {
 .admin-sidebar .sidebar-nav .nav-list .nav-item[href="/admin/news"] svg, .admin-sidebar .sidebar-nav .nav-list .nav-item[href^="/admin/news/"] svg {
   stroke: currentColor;
 }
+
+/* Quill Editor Styles */
+.ql-toolbar.ql-snow {
+  border-top-left-radius: var(--admin-border-radius);
+  border-top-right-radius: var(--admin-border-radius);
+  border-color: var(--admin-gray-300);
+  background-color: var(--admin-gray-100);
+}
+
+.ql-container.ql-snow {
+  border-bottom-left-radius: var(--admin-border-radius);
+  border-bottom-right-radius: var(--admin-border-radius);
+  border-color: var(--admin-gray-300);
+  min-height: 200px;
+}
+
+.ql-editor {
+  min-height: 400px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.ql-editor.ql-blank::before {
+  color: var(--admin-gray-500);
+  font-style: italic;
+}
+
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+  color: var(--admin-secondary-color);
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-weight: 600;
+}
+
+.ql-editor p {
+  margin-bottom: 1em;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border-radius: var(--admin-border-radius);
+}
+
+.ql-editor a {
+  color: var(--admin-primary-color);
+  text-decoration: none;
+}
+
+.ql-editor a:hover {
+  text-decoration: underline;
+}
+
+.ql-editor blockquote {
+  border-left: 4px solid var(--admin-primary-color);
+  padding: 0.5em 1em;
+  background-color: var(--admin-gray-100);
+  margin: 1em 0;
+  font-style: italic;
+}
+
+.ql-editor pre {
+  background-color: var(--admin-gray-800);
+  color: white;
+  padding: 1em;
+  border-radius: var(--admin-border-radius);
+  margin: 1em 0;
+}
+
+.ql-editor code {
+  background-color: var(--admin-gray-200);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+/* Fix Quill focus styles */
+.ql-container.ql-snow.ql-focus {
+  border-color: var(--admin-primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--admin-primary-color-rgb), 0.15);
+}
+
+/* Fix Quill toolbar button hover */
+.ql-toolbar.ql-snow button:hover,
+.ql-toolbar.ql-snow .ql-picker-label:hover {
+  color: var(--admin-primary-color) !important;
+}
+
+.ql-toolbar.ql-snow button.ql-active,
+.ql-toolbar.ql-snow .ql-picker-label.ql-active {
+  color: var(--admin-primary-color) !important;
+}
+
+.ql-toolbar.ql-snow .ql-picker-item:hover {
+  color: var(--admin-primary-color) !important;
+}
+
+.ql-toolbar.ql-snow .ql-picker-item.ql-selected {
+  color: var(--admin-primary-color) !important;
+}
