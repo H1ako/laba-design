@@ -9,3 +9,4 @@ $session->set_csrf_meta();
 <script defer src="<?= $SITE_URL ?>/assets/scripts/libs/phoneFieldFormatter.js"></script>
 <script defer src="<?= $SITE_URL ?>/assets/scripts/libs/banner.js"></script>
 <script defer src="<?= $SITE_URL ?>/assets/scripts/libs/cart.js"></script>
+<script defer src="<?= $SITE_URL ?>/assets/scripts/libs/header.js"></script>

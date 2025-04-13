@@ -2,7 +2,7 @@
     <div class="cart__overlay" cart-overlay></div>
     <div class="cart__wrapper">
         <button class="wrapper__close-cart" close-cart>
-            <?php include_once('icons/close.php'); ?>
+            <?php include('icons/close.php'); ?>
         </button>
         
         <!-- Scene 1: Cart Items -->

@@ -10,6 +10,7 @@
   pointer-events: none;
   transition: visibility 0.3s;
   visibility: hidden;
+  z-index: 999999999999999999999;
 
   &__overlay {
     position: absolute;
