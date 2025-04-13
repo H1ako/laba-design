@@ -20,7 +20,6 @@ global $SITE_URL, $session;
   </script>
   <script defer src="<?= $SITE_URL ?>/assets/scripts/libs/fetchHandlers.js"></script>
   <script type="module" defer src="<?= $SITE_URL ?>/assets/scripts/libs/marquee.js"></script>
-  <script defer src="<?= $SITE_URL ?>/assets/scripts/catalog.js"></script>
 </head>
 
 <body>
