@@ -1,0 +1,217 @@
+@import "../main/mixins";
+//------COMPONENTS------
+@import "../components/news";
+@import "../components/banner";
+@import "../components/header";
+@import "../components/brand-marquee";
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.main-content {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-article {
+  width: var(--width-main-content);
+  max-width: 900px;
+  margin: 3em auto 5em;
+  padding: 0 2em;
+
+  &__header {
+    margin-bottom: 2em;
+
+    .header__meta {
+      display: flex;
+      gap: 1.5em;
+      margin-bottom: 1.5em;
+
+      .meta__date,
+      .meta__reading-time {
+        font-size: var(--font-size-5);
+        color: var(--color-text-darker);
+      }
+    }
+
+    .header__title {
+      @include yandexDisplayFont;
+      font-size: clamp(var(--font-size-1), 5vw, var(--font-size-0));
+      color: var(--color-main);
+      line-height: 1.2;
+      margin: 0 0 0.5em;
+    }
+
+    .header__description {
+      font-size: var(--font-size-3);
+      color: var(--color-text);
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    margin-bottom: 2em;
+    border: 2px solid var(--color-text-semivisible);
+
+    .image__src {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    font-size: var(--font-size-4);
+    line-height: 1.7;
+    color: var(--color-text);
+
+    h2 {
+      font-size: var(--font-size-2);
+      color: var(--color-main);
+      margin: 1.5em 0 0.75em;
+    }
+
+    h3 {
+      font-size: var(--font-size-3);
+      color: var(--color-main);
+      margin: 1.25em 0 0.5em;
+    }
+
+    p {
+      margin: 1em 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 1.5em 0;
+      border: 1px solid var(--color-text-semivisible);
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--color-main);
+        text-decoration: underline;
+      }
+    }
+
+    ul,
+    ol {
+      padding-left: 2em;
+      margin: 1em 0;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--color-main);
+      padding-left: 1.5em;
+      margin-left: 0;
+      font-style: italic;
+      color: var(--color-text-darker);
+    }
+  }
+
+  &__footer {
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid var(--color-text-semivisible);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+
+    .footer__share {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+
+      .share__title {
+        font-size: var(--font-size-5);
+        color: var(--color-text-darker);
+      }
+
+      .share__buttons {
+        display: flex;
+        gap: 0.75em;
+
+        .share-button {
+          @include cleanLink;
+          width: 2.5em;
+          height: 2.5em;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+
+          svg {
+            width: 1.2em;
+            height: 1.2em;
+          }
+
+          &:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+          }
+
+          &.facebook {
+            background-color: var(--color-facebook);
+          }
+
+          &.twitter {
+            background-color: var(--color-accent);
+          }
+
+          &.telegram {
+            background-color: var(--color-telegram);
+          }
+        }
+      }
+    }
+
+    .footer__back-link {
+      @include cleanLink;
+      @include button(var(--border-radius-small));
+
+      font-size: var(--font-size-5);
+      color: var(--color-text);
+      background: var(--color-bg-element);
+      padding: 0.75em 1.5em;
+      text-align: center;
+
+      &:hover {
+        color: var(--color-main);
+      }
+    }
+  }
+}
+
+.related-news {
+  margin: 2em 0 5em;
+
+  .related-news__title {
+    @include yandexDisplayFont;
+
+    font-size: var(--font-size-2);
+    color: var(--color-main);
+    text-align: center;
+    margin-bottom: 1.5em;
+  }
+}
+
+.brand-marquee {
+  margin-top: 5em;
+}

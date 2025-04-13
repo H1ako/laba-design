@@ -1,0 +1,51 @@
+@import "../main/mixins";
+//------COMPONENTS------
+@import "../components/news";
+@import "../components/banner";
+@import "../components/header";
+@import "../components/brand-marquee";
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.main-content {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &__section {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+
+    .section__title {
+      @include oliverFont;
+
+      font-size: var(--font-size-extra-big);
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      letter-spacing: 5px;
+      text-align: center;
+      margin: 0.5em 0 0.75em;
+
+      @media screen and (width < 748px) {
+        font-size: var(--font-size-0);
+      }
+    }
+
+    &.section_news {
+      margin-top: 2em;
+    }
+  }
+}
+
+.brand-marquee {
+  margin-top: 5em;
+}

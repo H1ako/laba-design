@@ -8,9 +8,11 @@ use app\controllers\OrderController;
 use app\controllers\ProductController;
 use app\controllers\admin\AdminAuthController;
 use app\controllers\admin\AdminDashboardController;
+use app\controllers\admin\AdminNewsController;
 use app\controllers\admin\AdminOrdersController;
 use app\controllers\admin\AdminProductsController;
 use app\controllers\admin\AdminUsersController;
+use app\controllers\NewsController;
 use app\models\Session;
 
 global $SITE_URL;
@@ -18,11 +20,19 @@ global $SITE_URL;
 $session = Session::get();
 
 Router::get('/', 'views/landing.php');
+// Router::get('/landing', 'views/landing.php');
+
+// Catalog routes
 Router::get('/catalog', 'views/catalog.php');
 Router::get('/catalog/%s', [ProductController::class, 'show']);
-// Router::get('/landing', 'views/landing.php');
+
+// Orders routes
 Router::get('/orders', [OrderController::class, 'index']);
 Router::get('/orders/%s', [OrderController::class, 'show_order']);
+
+// News routes
+Router::get('/news', [NewsController::class, 'index']);
+Router::get('/news/%s', [NewsController::class, 'show']);
 
 // Admin routes
 Router::get('/admin/login', [AdminAuthController::class, 'login_page']);
@@ -43,6 +53,11 @@ Router::get('/admin/products/%s/edit', [AdminProductsController::class, 'edit'])
 Router::get('/admin/users', [AdminUsersController::class, 'index']);
 Router::get('/admin/users/%s', [AdminUsersController::class, 'show']);
 Router::get('/admin/users/%s/edit', [AdminUsersController::class, 'edit_admin']);
+
+Router::get('/admin/news', [AdminNewsController::class, 'index']);
+Router::get('/admin/news/create', [AdminNewsController::class, 'create']);
+Router::get('/admin/news/%s', [AdminNewsController::class, 'show']);
+Router::get('/admin/news/%s/edit', [AdminNewsController::class, 'edit']);
 
 
 // if ($session->user->is_admin) {
