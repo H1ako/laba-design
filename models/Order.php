@@ -64,6 +64,11 @@ class Order extends BaseModel
         return $itemsCost - $this->discount_value;
     }
 
+    public function get_discount_value_formatted_attribute()
+    {
+        return static::format_price($this->discount_value);
+    }
+
     public function get_total_price_formatted_attribute()
     {
         return static::format_price($this->total_price);
@@ -94,7 +99,7 @@ class Order extends BaseModel
         }, 0);
     }
 
-    protected function set_status($status)
+    public function set_status($status)
     {
         if (!in_array($status, ['initial', 'working', 'success', 'canceled'])) return false;
 

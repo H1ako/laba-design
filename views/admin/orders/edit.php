@@ -100,57 +100,6 @@ ob_start();
     </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("order-form");
-    
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(form);
-        const data = {};
-        
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-        
-        fetch(form.action, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") || ""
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.status === "success") {
-                window.location.href = result.redirect || "<?= Router::getRoute('/admin/orders/' . $order->id) ?>";
-            } else {
-                // Handle validation errors
-                const errors = result.errors || {};
-                Object.keys(errors).forEach(field => {
-                    const errorElement = document.querySelector(`[data-error-for="${field}"]`);
-                    if (errorElement) {
-                        errorElement.textContent = errors[field];
-                        errorElement.style.display = "block";
-                        
-                        const inputElement = document.getElementById(field);
-                        if (inputElement) {
-                            inputElement.classList.add("is-invalid");
-                        }
-                    }
-                });
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("Произошла ошибка при сохранении заказа");
-        });
-    });
-});
-</script>
-
 <?php
 $content = ob_get_clean();
 $scripts = ['orders.js'];

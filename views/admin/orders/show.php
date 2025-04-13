@@ -122,7 +122,7 @@ ob_start();
                     <?php if ($order->discount_value > 0): ?>
                     <div class="summary-row">
                         <div class="summary-label">Доп. скидка:</div>
-                        <div class="summary-value discount"><?= static::format_price($order->discount_value) ?> ₽</div>
+                        <div class="summary-value discount"><?= $order->discount_value_formatted ?> ₽</div>
                     </div>
                     <?php endif; ?>
                     <div class="summary-row total">

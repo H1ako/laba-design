@@ -76,8 +76,8 @@ class AdminProductsController extends Controller
         
         $is_validated = static::validate_data($data, [
             'name' => 'required|string|min:3',
-            'base_price' => 'required|numeric|min:0',
-            'discount_price' => 'numeric|min:0',
+            'base_price' => 'required|int|min:0',
+            'discount_price' => 'int|min:0',
             'description' => 'string',
             'thumb' => 'required|file'
         ]);

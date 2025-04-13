@@ -120,7 +120,7 @@ class AdminOrdersController extends Controller
             'customer_email' => 'required|email',
             'customer_phone_number' => 'required|string',
             'customer_address' => 'required|string',
-            'discount_value' => 'numeric|min:0',
+            'discount_value' => 'int',
             'status' => 'required|in:initial,working,success,canceled'
         ]);
         
@@ -156,7 +156,7 @@ class AdminOrdersController extends Controller
             return static::response_error(400, 'Неверный статус');
         }
         
-        $order->update(['status' => $status]);
+        $order->set_status($status);
         $order->save();
         
         return static::response_success([

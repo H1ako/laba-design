@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initOrderItemRemove();
   initOrderFilters();
   initOrderSearch();
+  initOrderEditForm();
 });
 
 /**
@@ -19,7 +20,7 @@ function initOrderStatusUpdate() {
 
       try {
         const response = await fetch(`/api/admin/orders/${orderId}/status`, {
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token":
@@ -276,4 +277,90 @@ function initOrderSearch() {
       window.location.href = currentUrl.toString();
     });
   }
+}
+
+/**
+ * Initialize order edit form submission
+ */
+function initOrderEditForm() {
+  const form = document.getElementById("order-form");
+
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Reset any previous error states
+    form.querySelectorAll(".is-invalid").forEach((el) => {
+      el.classList.remove("is-invalid");
+    });
+    form.querySelectorAll(".invalid-feedback").forEach((el) => {
+      el.style.display = "none";
+      el.textContent = "";
+    });
+
+    const formData = new FormData(form);
+    const data = {};
+
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    fetch(form.action, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token":
+          document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute("content") || "",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === "success") {
+          // Use the redirect from result, or if not available, construct URL from current path
+          // window.location.href =
+          //   result.redirect || window.location.pathname.replace("/edit", "");
+
+          // Show success notification if available in the global scope
+          if (typeof showNotification === "function") {
+            showNotification("Order updated successfully", "success");
+          }
+        } else {
+          // Handle validation errors
+          const errors = result.errors || {};
+
+          Object.keys(errors).forEach((field) => {
+            const errorElement = document.querySelector(
+              `[data-error-for="${field}"]`
+            );
+            if (errorElement) {
+              errorElement.textContent = errors[field];
+              errorElement.style.display = "block";
+
+              const inputElement = document.getElementById(field);
+              if (inputElement) {
+                inputElement.classList.add("is-invalid");
+              }
+            }
+          });
+
+          // Show error notification if available
+          if (typeof showNotification === "function") {
+            showNotification("Please correct the errors in the form", "error");
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+
+        if (typeof showNotification === "function") {
+          showNotification("An error occurred while saving the order", "error");
+        } else {
+          alert("Произошла ошибка при сохранении заказа");
+        }
+      });
+  });
 }

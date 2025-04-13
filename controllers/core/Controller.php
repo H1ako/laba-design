@@ -91,12 +91,12 @@ abstract class Controller
 
     protected static function get_post_field($field, $default=null)
     {
-        return (isset($_POST[$field]) && !empty($_POST[$field])) ? $_POST[$field] : $default;
+        return isset($_POST[$field]) ? $_POST[$field] : $default;
     }
 
     protected static function get_query_field($field, $default=null)
     {
-        return (isset($_GET[$field]) && !empty($_GET[$field])) ? $_GET[$field] : $default;
+        return isset($_GET[$field]) ? $_GET[$field] : $default;
     }
 
     protected static function get_form_field($field)
