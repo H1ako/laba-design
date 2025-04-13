@@ -630,6 +630,15 @@ body {
   color: var(--color-secondary);
   letter-spacing: 5px;
 }
+.main-content__section .section__title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: var(--color-main);
+  margin: 0.5em auto 0;
+  border-radius: 2px;
+}
 .main-content__section .section__action-btn {
   position: relative;
   border-radius: var(--border-radius-main);

@@ -37,8 +37,18 @@ body {
       letter-spacing: 5px;
       text-align: center;
 
+      &::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: var(--color-main);
+        margin: 0.5em auto 0;
+        border-radius: 2px;
+      }
+
       @media screen and (width < 748px) {
-        font-size: var(--font-size-0);
+        font-size: var(--font-size-0) !important;
       }
     }
 

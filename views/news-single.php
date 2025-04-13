@@ -66,7 +66,10 @@ if (!$news) {
           </div>
         </div>
         
-        <a href="<?= Router::getRoute('/news') ?>" class="footer__back-link">Вернуться к списку новостей</a>
+        <a href="<?= Router::getRoute('/news') ?>" class="footer__back-link">
+          <?php include('icons/arrow-left.php'); ?>
+          <span>Вернуться к списку новостей</span>
+        </a>
       </footer>
     </article>
     

@@ -35,8 +35,14 @@ body {
       text-align: center;
       margin: 0.5em 0 0.75em;
 
-      @media screen and (width < 748px) {
-        font-size: var(--font-size-0);
+      &::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: var(--color-main);
+        margin: 0.5em auto 0;
+        border-radius: 2px;
       }
     }
 
@@ -48,4 +54,20 @@ body {
 
 .brand-marquee {
   margin-top: 5em;
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  .news__list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pagination {
+    margin: 3em 0;
+
+    .pagination-controls {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
 }

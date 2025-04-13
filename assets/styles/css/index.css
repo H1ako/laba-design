@@ -447,18 +447,24 @@
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
-  gap: 2em;
+  grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+  gap: 3em;
 }
 .news__list .list__empty {
   grid-column: 1/-1;
   text-align: center;
-  padding: 3em 1em;
+  padding: 5em 1em;
   color: var(--color-text-darker);
   font-size: var(--font-size-4);
+  background-color: var(--color-bg-element);
+  border-radius: var(--border-radius-main);
 }
 .news__list .list__item {
   position: relative;
+  border-radius: var(--border-radius-big);
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .news__list .list__item .item__link {
   text-decoration: none;
@@ -468,6 +474,8 @@
   display: block;
   text-decoration: none;
   cursor: pointer;
+  background: white;
+  height: 100%;
 }
 .news__list .list__item .item__link svg {
   width: 1em;
@@ -477,14 +485,13 @@
 }
 .news__list .list__item .item__image {
   position: relative;
-  border: 2px solid var(--color-text-semivisible);
   z-index: 1;
   overflow: hidden;
 }
 .news__list .list__item .item__image .image__meta {
   position: absolute;
-  top: 1em;
-  left: 1em;
+  top: 1.5em;
+  left: 1.5em;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -493,11 +500,15 @@
 .news__list .list__item .item__image .image__meta .meta__date,
 .news__list .list__item .item__image .image__meta .meta__reading-time {
   font-size: var(--font-size-5);
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   color: var(--color-text);
-  padding: 0.4em 1em;
+  padding: 0.5em 1.2em;
   border-radius: 3em;
   font-weight: 500;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 .news__list .list__item .item__image .image__src {
   -o-object-fit: cover;
@@ -509,20 +520,22 @@
   place-content: center;
   transition: var(--transition-main);
   width: 100%;
-  height: 22em;
-  transition: transform 0.3s ease;
+  height: 24em;
+  transition: transform 0.5s ease;
 }
 .news__list .list__item .item__info {
-  margin-top: 1em;
-  padding-bottom: 0.5em;
+  margin-top: 0;
+  padding: 1.5em 1.5em 0.8em;
   border-bottom: 1px solid var(--color-text-semivisible);
 }
 .news__list .list__item .item__info .info__title {
   font-size: var(--font-size-3);
   color: var(--color-main);
   font-weight: 600;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.7em;
   transition: color 0.2s ease;
+  line-height: 1.3;
+  height: 4em;
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__info .info__title {
@@ -532,9 +545,9 @@
 .news__list .list__item .item__info .info__description {
   font-size: var(--font-size-4);
   color: var(--color-text);
-  line-height: 1.5;
+  line-height: 1.6;
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 1.2em;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -547,7 +560,7 @@
   }
 }
 .news__list .list__item .item__action {
-  margin-top: 1em;
+  padding: 1em 1.5em 1.5em;
   display: flex;
   justify-content: flex-end;
 }
@@ -557,14 +570,25 @@
   font-weight: 500;
   position: relative;
   transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
 }
 .news__list .list__item .item__action .action__read-more::after {
   content: "→";
   margin-left: 0.5em;
   transition: transform 0.2s ease;
 }
+.news__list .list__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
 .news__list .list__item:hover .item__image .image__src {
-  transform: scale(1.05);
+  transform: scale(1.07);
+}
+.news__list .list__item:hover .image__meta .meta__date,
+.news__list .list__item:hover .image__meta .meta__reading-time {
+  transform: translateY(-3px);
+  background-color: white;
 }
 .news__list .list__item:hover .item__info .info__title {
   color: var(--color-accent);
@@ -580,18 +604,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em;
-  margin: 3em 0;
+  gap: 1.5em;
+  margin: 5em 0;
   width: 100%;
 }
 .pagination .pagination-info {
   font-size: var(--font-size-5);
   color: var(--color-text-darker);
+  background-color: var(--color-bg-element);
+  padding: 0.6em 1.2em;
+  border-radius: 2em;
 }
 .pagination .pagination-controls {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.7em;
 }
 .pagination .pagination-controls .pagination-link {
   text-decoration: none;
@@ -599,17 +626,19 @@
   cursor: pointer;
   outline: transparent;
   position: relative;
-  border-radius: 0.5em;
+  border-radius: 0.8em;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 2.5em;
-  height: 2.5em;
+  min-width: 3em;
+  height: 3em;
   font-size: var(--font-size-4);
   background-color: var(--color-bg-element);
   color: var(--color-text);
-  padding: 0 0.75em;
+  padding: 0 1em;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 .pagination .pagination-controls .pagination-link svg {
   width: 1em;
@@ -620,20 +649,31 @@
   inset: 0;
   transition: var(--transition-main);
   background: inherit;
-  border-radius: 0.5em;
+  border-radius: 0.8em;
   z-index: -1;
 }
 .pagination .pagination-controls .pagination-link:hover:before, .pagination .pagination-controls .pagination-link:focus-within:focus-visible:before {
   filter: brightness(0.8);
 }
+.pagination .pagination-controls .pagination-link:hover {
+  background-color: rgba(var(--color-main-rgb, 115, 145, 134), 0.1);
+}
 .pagination .pagination-controls .pagination-link.active {
   background-color: var(--color-main);
   color: white;
   font-weight: 600;
+  box-shadow: 0 5px 15px rgba(var(--color-main-rgb, 115, 145, 134), 0.3);
+}
+.pagination .pagination-controls .pagination-link.pagination-prev, .pagination .pagination-controls .pagination-link.pagination-next {
+  background-color: var(--color-bg-element);
 }
 .pagination .pagination-controls .pagination-link.pagination-prev svg, .pagination .pagination-controls .pagination-link.pagination-next svg {
-  width: 1em;
-  height: 1em;
+  width: 1.2em;
+  height: 1.2em;
+}
+.pagination .pagination-controls .pagination-link.pagination-prev:hover, .pagination .pagination-controls .pagination-link.pagination-next:hover {
+  background-color: var(--color-accent);
+  color: white;
 }
 
 body {
@@ -664,9 +704,18 @@ body {
   letter-spacing: 5px;
   text-align: center;
 }
+.main-content__section .section__title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: var(--color-main);
+  margin: 0.5em auto 0;
+  border-radius: 2px;
+}
 @media screen and (width < 748px) {
   .main-content__section .section__title {
-    font-size: var(--font-size-0);
+    font-size: var(--font-size-0) !important;
   }
 }
 .main-content__section .section__action-btn {
