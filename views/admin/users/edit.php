@@ -3,7 +3,7 @@
 use app\models\Session;
 
 global $SITE_URL;
-$title = 'Edit Administrator | Admin Panel';
+$title = 'Редактировать Админа | Админ-панель';
 $admin_user = $data['admin'] ?? null;
 
 if (!$admin_user) {
@@ -27,13 +27,13 @@ ob_start();
 
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title">Edit Administrator</h2>
+        <h2 class="card-title">Редактировать Админа</h2>
     </div>
 
     <div class="card-body">
         <form id="admin-form" action="<?= Router::getRoute('/api/admin/users/admin/' . $admin_user->id) ?>" method="post">
             <div class="form-group">
-                <label for="username">Username*</label>
+                <label for="username">Юзернейм*</label>
                 <input type="text" id="username" name="username" class="form-control" value="<?= htmlspecialchars($admin_user->username) ?>" required>
                 <div class="invalid-feedback" data-error-for="username"></div>
             </div>
@@ -45,14 +45,14 @@ ob_start();
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Пароль</label>
                 <input type="password" id="password" name="password" class="form-control">
                 <small class="form-text text-muted">Leave blank to keep the current password</small>
                 <div class="invalid-feedback" data-error-for="password"></div>
             </div>
 
             <div class="form-group">
-                <label for="role">Role*</label>
+                <label for="role">Роль*</label>
                 <select id="role" name="role" class="form-control" required>
                     <option value="admin" <?= $admin_user->role === 'admin' ? 'selected' : '' ?>>Administrator</option>
                 </select>
