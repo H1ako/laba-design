@@ -1,0 +1,286 @@
+@import "../main/mixins";
+//------COMPONENTS------
+@import "../components/banner";
+@import "../components/header";
+@import "../components/brand-marquee";
+@import "../components/footer";
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.main-content {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-page {
+  padding: 4rem 0 8rem;
+  width: 100%;
+  position: relative;
+
+  &__container {
+    max-width: var(--width-main-content);
+    margin: 0 auto;
+    padding: 0 3rem;
+
+    @media screen and (width < 768px) {
+      padding: 0 2rem;
+    }
+  }
+
+  &__preview-notice {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+    padding: 1.5rem 2rem;
+    background-color: var(--color-accent-transparent);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--border-radius-main);
+
+    @media screen and (width < 768px) {
+      flex-direction: column;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    svg {
+      width: 2.6rem;
+      height: 2.6rem;
+      stroke: var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    p {
+      font-size: var(--font-size-4);
+      color: var(--color-text);
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+
+  &__header {
+    margin-bottom: 4rem;
+  }
+
+  &__title {
+    @include oliverFont;
+    font-size: var(--font-size-1);
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    letter-spacing: 5px;
+    position: relative;
+    padding-bottom: 1.5rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background-color: var(--color-main);
+      border-radius: 2px;
+    }
+
+    @media screen and (width < 748px) {
+      font-size: clamp(3rem, 6vw, 4.2rem);
+    }
+  }
+
+  &__content {
+    font-size: var(--font-size-4);
+    line-height: 1.8;
+    color: var(--color-text);
+
+    & > * {
+        @include wrapWords;
+        
+        max-width: 100%;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 2.5em 0 1em;
+      color: var(--color-text);
+    }
+
+    h2 {
+      @include oliverFont;
+      font-size: var(--font-size-2);
+      position: relative;
+      padding-bottom: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--color-main);
+        border-radius: 2px;
+      }
+    }
+
+    h3 {
+      @include yandexDisplayFont;
+      font-size: var(--font-size-3);
+      color: var(--color-main);
+    }
+
+    h4 {
+      @include yandexDisplayFont;
+      font-size: var(--font-size-3);
+    }
+
+    p {
+      margin-bottom: 1.8em;
+
+      &:first-of-type {
+        @include yandexDisplayFont;
+        font-size: calc(var(--font-size-4) + 0.2rem);
+      }
+    }
+
+    a {
+      color: var(--color-main);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-main);
+      transition: color var(--transition-main),
+        border-color var(--transition-main);
+      padding: 0 0.1em;
+
+      &:hover {
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+      }
+    }
+
+    ul,
+    ol {
+      margin: 1.8em 0;
+      padding-left: 2.5em;
+
+      li {
+        margin-bottom: 1em;
+
+        &::marker {
+          color: var(--color-main);
+        }
+      }
+    }
+
+    blockquote {
+      margin: 3em 0;
+      padding: 2em;
+      border-left: 4px solid var(--color-main);
+      background-color: var(--color-bg-element);
+      font-style: italic;
+      border-radius: 0 var(--border-radius-main) var(--border-radius-main) 0;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -0.2em;
+        left: 0.3em;
+        font-size: 4em;
+        color: var(--color-main);
+        opacity: 0.2;
+        font-family: serif;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius-main);
+      margin: 2.5em 0;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      transition: transform var(--transition-slow);
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+
+    // Additional elements
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2.5em 0;
+      border-radius: var(--border-radius-main);
+      overflow: hidden;
+
+      th,
+      td {
+        padding: 1em;
+        text-align: left;
+        border-bottom: 1px solid var(--color-text-semivisible);
+      }
+
+      th {
+        background-color: var(--color-bg-element);
+        @include yandexDisplayFont;
+        color: var(--color-main);
+      }
+
+      tr:hover td {
+        background-color: var(--color-accent-transparent);
+      }
+    }
+
+    code {
+      font-family: monospace;
+      background-color: var(--color-bg-element);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+      color: var(--color-main);
+    }
+
+    pre {
+      background-color: var(--color-bg-element);
+      padding: 1.5em;
+      border-radius: var(--border-radius-main);
+      overflow-x: auto;
+      margin: 2em 0;
+
+      code {
+        background-color: transparent;
+        padding: 0;
+      }
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      background-color: var(--color-text-semivisible);
+      margin: 3em 0;
+    }
+
+    iframe {
+      width: 100%;
+      border: none;
+      border-radius: var(--border-radius-main);
+      margin: 2em 0;
+      min-height: 400px;
+    }
+  }
+}

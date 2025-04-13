@@ -10,9 +10,11 @@ use app\controllers\admin\AdminAuthController;
 use app\controllers\admin\AdminDashboardController;
 use app\controllers\admin\AdminNewsController;
 use app\controllers\admin\AdminOrdersController;
+use app\controllers\admin\AdminPagesController;
 use app\controllers\admin\AdminProductsController;
 use app\controllers\admin\AdminUsersController;
 use app\controllers\NewsController;
+use app\controllers\PageController;
 use app\models\Session;
 
 global $SITE_URL;
@@ -33,6 +35,10 @@ Router::get('/orders/%s', [OrderController::class, 'show_order']);
 // News routes
 Router::get('/news', [NewsController::class, 'index']);
 Router::get('/news/%s', [NewsController::class, 'show']);
+
+// Pages routes
+Router::get('/page/%s', [PageController::class, 'show']);
+Router::get('/page/%s/preview', [PageController::class, 'preview']);
 
 // Admin routes
 Router::get('/admin/login', [AdminAuthController::class, 'login_page']);
@@ -58,6 +64,13 @@ Router::get('/admin/news', [AdminNewsController::class, 'index']);
 Router::get('/admin/news/create', [AdminNewsController::class, 'create']);
 Router::get('/admin/news/%s', [AdminNewsController::class, 'show']);
 Router::get('/admin/news/%s/edit', [AdminNewsController::class, 'edit']);
+
+// Admin pages routes
+Router::get('/admin/pages', [AdminPagesController::class, 'index']);
+Router::get('/admin/pages/create', [AdminPagesController::class, 'create']);
+Router::get('/admin/pages/%s', [AdminPagesController::class, 'show']);
+Router::get('/admin/pages/%s/edit', [AdminPagesController::class, 'edit']);
+Router::get('/admin/pages/%s/preview', [AdminPagesController::class, 'preview']);
 
 
 // if ($session->user->is_admin) {

@@ -12,6 +12,7 @@ use app\controllers\UserController;
 use app\controllers\admin\AdminServiceController;
 use app\controllers\admin\AdminServiceHistoryController;
 use app\controllers\admin\AdminOrdersController;
+use app\controllers\admin\AdminPagesController;
 use app\controllers\admin\AdminProductsController;
 use app\controllers\admin\AdminUsersController;
 use app\controllers\OrderController;
@@ -80,5 +81,11 @@ Router::post('/news', [AdminNewsController::class, 'store']);
 Router::post('/news/%s', [AdminNewsController::class, 'update']);
 Router::delete('/news/%s', [AdminNewsController::class, 'destroy']);
 Router::post('/upload/image', [AdminNewsController::class, 'upload_image']);
+
+// Pages management
+Router::post('/pages', [AdminPagesController::class, 'store']);
+Router::post('/pages/%s', [AdminPagesController::class, 'update']);
+Router::delete('/pages/%s', [AdminPagesController::class, 'delete']);
+Router::post('/pages/order', [AdminPagesController::class, 'updateOrder']);
 
 Router::not_found();

@@ -3026,3 +3026,326 @@ textarea.form-control {
 .ql-toolbar.ql-snow .ql-picker-item.ql-selected {
   color: var(--admin-primary-color) !important;
 }
+
+.page-list-sortable {
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+}
+.page-list-sortable tr {
+  background-color: #fff;
+  border-radius: var(--admin-border-radius);
+  box-shadow: var(--admin-box-shadow);
+  transition: box-shadow var(--admin-transition-speed), transform var(--admin-transition-speed);
+}
+.page-list-sortable tr:hover {
+  box-shadow: var(--admin-hover-shadow);
+  transform: translateY(-2px);
+}
+.page-list-sortable tr td {
+  padding: 1.2rem 1rem;
+  vertical-align: middle;
+  border: none;
+}
+.page-list-sortable tr td:first-child {
+  border-top-left-radius: var(--admin-border-radius);
+  border-bottom-left-radius: var(--admin-border-radius);
+  width: 60px;
+}
+.page-list-sortable tr td:last-child {
+  border-top-right-radius: var(--admin-border-radius);
+  border-bottom-right-radius: var(--admin-border-radius);
+  text-align: right;
+}
+.page-list-sortable .drag-handle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  border-radius: var(--admin-border-radius);
+  position: relative;
+  color: var(--admin-gray-500);
+}
+.page-list-sortable .drag-handle:hover {
+  background-color: var(--admin-gray-200);
+  color: var(--admin-gray-700);
+}
+.page-list-sortable .drag-handle:active {
+  cursor: grabbing;
+}
+.page-list-sortable .drag-handle::before {
+  content: "";
+  width: 20px;
+  height: 14px;
+  background-image: radial-gradient(circle, currentColor 1.5px, transparent 2px);
+  background-size: 6px 6px;
+  background-repeat: repeat;
+}
+.page-list-sortable tbody tr.sortable-ghost {
+  background-color: var(--admin-primary-color);
+  opacity: 0.1;
+}
+.page-list-sortable tbody tr.sortable-chosen {
+  background-color: var(--admin-gray-100);
+  border: 1px dashed var(--admin-primary-color);
+}
+
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.badge-status.published {
+  background-color: rgba(var(--admin-success-color-rgb), 0.15);
+  color: var(--admin-success-color);
+}
+.badge-status.draft {
+  background-color: rgba(var(--admin-warning-color-rgb), 0.15);
+  color: var(--admin-warning-color);
+}
+.badge-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+.badge-status.published::before {
+  background-color: var(--admin-success-color);
+}
+.badge-status.draft::before {
+  background-color: var(--admin-warning-color);
+}
+
+.page-view .page-header {
+  background-color: white;
+  border-radius: var(--admin-card-radius);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--admin-box-shadow);
+}
+.page-view .page-header .page-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--admin-gray-900);
+}
+.page-view .page-header .page-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.page-view .page-header .page-meta .meta-item {
+  display: flex;
+  padding: 0.75rem;
+  background-color: var(--admin-gray-100);
+  border-radius: var(--admin-border-radius);
+}
+.page-view .page-header .page-meta .meta-item .meta-label {
+  font-weight: 500;
+  margin-right: 0.5rem;
+  color: var(--admin-gray-700);
+  min-width: 100px;
+}
+.page-view .page-header .page-meta .meta-item .meta-value {
+  color: var(--admin-gray-900);
+}
+.page-view .page-header .page-meta .meta-item .meta-value.status-published {
+  color: var(--admin-success-color);
+  font-weight: 600;
+}
+.page-view .page-header .page-meta .meta-item .meta-value.status-draft {
+  color: var(--admin-warning-color);
+  font-weight: 600;
+}
+.page-view .page-header .page-meta .meta-item .meta-value .url-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--admin-primary-color);
+}
+.page-view .page-header .page-meta .meta-item .meta-value .url-link svg {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--admin-transition-speed);
+}
+.page-view .page-header .page-meta .meta-item .meta-value .url-link:hover svg {
+  transform: translateX(2px);
+}
+.page-view .page-header .page-description {
+  background-color: var(--admin-gray-100);
+  padding: 1rem 1.5rem;
+  border-radius: var(--admin-border-radius);
+}
+.page-view .page-header .page-description h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--admin-gray-700);
+}
+.page-view .page-header .page-description p {
+  margin: 0;
+  color: var(--admin-gray-800);
+}
+.page-view .page-content {
+  background-color: white;
+  border-radius: var(--admin-card-radius);
+  padding: 2rem;
+  box-shadow: var(--admin-box-shadow);
+}
+.page-view .page-content h1,
+.page-view .page-content h2,
+.page-view .page-content h3,
+.page-view .page-content h4,
+.page-view .page-content h5,
+.page-view .page-content h6 {
+  margin: 1.5em 0 0.75em;
+  line-height: 1.3;
+  color: var(--admin-gray-900);
+}
+.page-view .page-content h1 {
+  font-size: 2rem;
+}
+.page-view .page-content h2 {
+  font-size: 1.75rem;
+}
+.page-view .page-content h3 {
+  font-size: 1.5rem;
+}
+.page-view .page-content h4 {
+  font-size: 1.25rem;
+}
+.page-view .page-content h5 {
+  font-size: 1.125rem;
+}
+.page-view .page-content h6 {
+  font-size: 1rem;
+}
+.page-view .page-content p {
+  margin-bottom: 1.25em;
+  line-height: 1.6;
+  color: var(--admin-gray-800);
+}
+.page-view .page-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--admin-border-radius);
+  margin: 1.5em 0;
+}
+.page-view .page-content a {
+  color: var(--admin-primary-color);
+  text-decoration: none;
+}
+.page-view .page-content a:hover {
+  text-decoration: underline;
+}
+.page-view .page-content ul,
+.page-view .page-content ol {
+  margin: 1.25em 0;
+  padding-left: 2em;
+  color: var(--admin-gray-800);
+}
+.page-view .page-content ul li,
+.page-view .page-content ol li {
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
+.page-view .page-content blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.5em;
+  border-left: 4px solid var(--admin-primary-color);
+  background-color: var(--admin-gray-100);
+  font-style: italic;
+  color: var(--admin-gray-700);
+}
+.page-view .page-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+.page-view .page-content pre {
+  background-color: var(--admin-gray-100);
+  padding: 1em;
+  border-radius: var(--admin-border-radius);
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin: 1.5em 0;
+}
+.page-view .page-content code {
+  background-color: var(--admin-gray-100);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+.page-view .page-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+.page-view .page-content table th,
+.page-view .page-content table td {
+  padding: 0.75em;
+  border: 1px solid var(--admin-gray-300);
+}
+.page-view .page-content table th {
+  background-color: var(--admin-gray-100);
+  font-weight: 600;
+}
+.page-view .danger-zone {
+  background-color: rgba(var(--admin-danger-color-rgb), 0.05);
+  border: 1px solid rgba(var(--admin-danger-color-rgb), 0.2);
+  border-radius: var(--admin-card-radius);
+  padding: 1.5rem;
+}
+.page-view .danger-zone h3 {
+  color: var(--admin-danger-color);
+  margin-top: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.page-view .danger-zone p {
+  margin-bottom: 1.5rem;
+  color: var(--admin-gray-700);
+}
+
+#editor-container {
+  margin-bottom: 1rem;
+  border-radius: var(--admin-border-radius);
+  overflow: hidden;
+}
+#editor-container .ql-toolbar.ql-snow {
+  border-color: var(--admin-gray-300);
+  border-top-left-radius: var(--admin-border-radius);
+  border-top-right-radius: var(--admin-border-radius);
+  background-color: var(--admin-gray-100);
+}
+#editor-container .ql-container.ql-snow {
+  border-color: var(--admin-gray-300);
+  border-bottom-left-radius: var(--admin-border-radius);
+  border-bottom-right-radius: var(--admin-border-radius);
+  font-family: inherit;
+}
+#editor-container .ql-editor {
+  min-height: 350px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.sort-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: rgba(var(--admin-primary-color-rgb), 0.1);
+  border: none;
+  border-radius: var(--admin-border-radius);
+}
+.sort-info svg {
+  color: var(--admin-primary-color);
+}
+.sort-info span {
+  color: var(--admin-gray-800);
+}

@@ -1,3 +1,13 @@
+<?php
+
+use app\models\CustomPage;
+
+// Get published pages for menu
+$company_pages = CustomPage::where('is_published', '=', 1)
+    ->order_by('sort_order', 'ASC')
+    ->get();
+?>
+
 <div class="fullscreen-menu" id="fullscreen-menu">
     <div class="fullscreen-menu__overlay"></div>
     <div class="fullscreen-menu__container">
@@ -33,21 +43,17 @@
                 <h3 class="column__title">Company</h3>
                 <nav class="column__nav">
                     <ul class="nav__list">
-                        <li class="list__item">
-                            <a href="#" class="item__link">Политика конфиденциальности</a>
-                        </li>
-                        <li class="list__item">
-                            <a href="#" class="item__link">Как работаем</a>
-                        </li>
-                        <li class="list__item">
-                            <a href="#" class="item__link">Обработка заказов</a>
-                        </li>
-                        <li class="list__item">
-                            <a href="#" class="item__link">Скидки и цены</a>
-                        </li>
-                        <li class="list__item">
-                            <a href="#" class="item__link">Контакты</a>
-                        </li>
+                        <?php foreach ($company_pages as $page): ?>
+                            <li class="list__item">
+                                <a href="<?= Router::getRoute('/page/' . $page->slug) ?>" class="item__link"><?= htmlspecialchars($page->title) ?></a>
+                            </li>
+                        <?php endforeach; ?>
+
+                        <?php if (count($company_pages) === 0): ?>
+                            <li class="list__item">
+                                <span class="item__link disabled">Нет доступных страниц</span>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
             </div>

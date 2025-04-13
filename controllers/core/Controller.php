@@ -175,4 +175,8 @@ abstract class Controller
         Router::render($view, $data);
         exit;
     }
+
+    protected static function not_found() {
+        return Router::not_found();
+    }
 }
