@@ -202,13 +202,13 @@ ob_start();
                         
                         <div class="add-size mt-3">
                             <h3>Добавить размер</h3>
-                            <div class="form-row">
+                            <div class="form-col">
                                 <div class="form-group">
                                     <label for="new-size-name">Размер</label>
                                     <input type="text" id="new-size-name" class="form-control" placeholder="XL">
                                 </div>
                                 <div class="form-group">
-                                    <div class="form-check">
+                                    <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="new-size-in-stock" checked>
                                         <label class="form-check-label" for="new-size-in-stock">
                                             В наличии

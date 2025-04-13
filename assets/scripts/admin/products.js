@@ -211,9 +211,9 @@ function initCharacteristics() {
       
       if (result.status === "success") {
         const newItem = createCharacteristicElement(
-          result.characteristic.id,
-          result.characteristic.name,
-          result.characteristic.value,
+          result.data.characteristic.id,
+          result.data.characteristic.name,
+          result.data.characteristic.value,
           productId
         );
         
@@ -846,36 +846,7 @@ function displayFormErrors(form, errors) {
   }
 }
 
-/**
- * Show notification 
- */
-function showNotification(message, type = "success") {
-  // Check if the notification system exists
-  if (window.showNotification) {
-    window.showNotification(message, type);
-    return;
-  }
-  
-  // If no notification system exists, create a simple one
-  const notification = document.createElement("div");
-  notification.className = `notification notification-${type}`;
-  notification.textContent = message;
-  
-  document.body.appendChild(notification);
-  
-  // Show notification
-  setTimeout(() => {
-    notification.classList.add("show");
-  }, 10);
-  
-  // Hide after timeout
-  setTimeout(() => {
-    notification.classList.remove("show");
-    setTimeout(() => {
-      notification.remove();
-    }, 300);
-  }, 5000);
-}
+
 
 /**
  * Safely escape HTML to prevent XSS

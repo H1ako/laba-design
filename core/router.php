@@ -78,9 +78,6 @@ class Router
     
     if (in_array($_SERVER['REQUEST_METHOD'], $unsafeMethods, true)) {
       if ($session->is_authed && $session->user->is_admin && $_SERVER['REQUEST_METHOD'] === 'POST') return true;
-      if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
-        $_POST = json_decode(file_get_contents('php://input'), true) ?: [];
-      }
       $csrfToken = $_POST['csrf'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
 
       if (!$session->validate_csrf_token($csrfToken)) {
@@ -93,6 +90,10 @@ class Router
 
   protected static function route($route, $path_to_include)
   {
+    if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
+      $_POST = json_decode(file_get_contents('php://input'), true) ?: [];
+    }
+    
     static::validate_csrf();
 
     global $DEV_URL_PART;

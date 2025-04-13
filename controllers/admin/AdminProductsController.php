@@ -384,12 +384,10 @@ class AdminProductsController extends Controller
         }
         
         $data = static::get_post_data([
-            'size' => 'size',
             'in_stock' => 'in_stock'
         ]);
         
         $is_validated = static::validate_data($data, [
-            'size' => 'required|string',
             'in_stock' => 'boolean'
         ]);
         
