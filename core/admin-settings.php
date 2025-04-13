@@ -3,7 +3,7 @@ set_time_limit(20);
 
 // Socials and Main Settings
 $SITE_URL = 'https://zovisland.ru';
-$PROJECT_ROOT = '/zovisland_ru/public_html';
+$PROJECT_ROOT = '/home/h/h1ako/zovisland_ru/public_html';
 $DEV_URL_PART = '';
 
 $DATABASE_SERVERNAME = '127.0.0.1';

@@ -85,7 +85,7 @@ function initProductForm() {
     
     try {
       const response = await fetch(url, {
-        method: isEdit ? "PUT" : "POST",
+        method: isEdit ? "POST" : "POST",
         body: formData,
         headers: {
           "X-CSRF-Token": getCSRFToken()
@@ -384,7 +384,7 @@ function handleCharacteristicEdit(btn) {
     
     try {
       const response = await fetch(`/api/admin/products/${productId}/characteristics/${characteristicId}`, {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "X-CSRF-Token": getCSRFToken()
@@ -578,7 +578,7 @@ async function handleSizeStockUpdate(checkbox) {
   
   try {
     const response = await fetch(`/api/admin/products/${productId}/sizes/${sizeId}`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": getCSRFToken()
@@ -739,7 +739,7 @@ function initImageSorting() {
 async function updateImageOrder(productId, imageId, newOrder) {
   try {
     const response = await fetch(`/api/admin/products/${productId}/images/${imageId}/sort`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": getCSRFToken()

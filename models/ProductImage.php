@@ -19,4 +19,32 @@ class ProductImage extends BaseModel
         global $SITE_URL;
         return "$SITE_URL{$this->image_path}";
     }
+
+    public function update($data)
+    {
+        if (isset($data['image_path'])) {
+            $uploaded = static::upload_image($data['image_path']);
+            if ($uploaded) {
+                $data['image_path'] = $uploaded;
+            } else {
+                unset($data['image_path']);
+            }
+        }
+
+        return parent::update($data);
+    }
+
+    public static function create($data)
+    {
+        if (isset($data['image_path'])) {
+            $uploaded = static::upload_image($data['image_path']);
+            if ($uploaded) {
+                $data['image_path'] = $uploaded;
+            } else {
+                unset($data['image_path']);
+            }
+        }
+
+        return parent::create($data);
+    }
 }

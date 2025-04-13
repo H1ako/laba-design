@@ -129,6 +129,7 @@ class AdminOrdersController extends Controller
         }
         
         $order->update($data);
+        $order->save();
         
         return static::response_success([
             'message' => 'Заказ успешно обновлен',
@@ -156,6 +157,7 @@ class AdminOrdersController extends Controller
         }
         
         $order->update(['status' => $status]);
+        $order->save();
         
         return static::response_success([
             'message' => 'Статус заказа обновлен'

@@ -70,33 +70,20 @@ class AdminProductsController extends Controller
             'name' => 'name',
             'base_price' => 'base_price',
             'discount_price' => 'discount_price',
-            'description' => 'description'
+            'description' => 'description',
+            'thumb' => 'thumb'
         ]);
         
         $is_validated = static::validate_data($data, [
             'name' => 'required|string|min:3',
             'base_price' => 'required|numeric|min:0',
             'discount_price' => 'numeric|min:0',
-            'description' => 'string'
+            'description' => 'string',
+            'thumb' => 'required|file'
         ]);
         
         if (!$is_validated) {
             return static::response_error(400, 'Неверные данные');
-        }
-        
-        // Handle thumb upload
-        if (isset($_FILES['thumb']) && $_FILES['thumb']['error'] == 0) {
-            $upload_dir = __DIR__ . '/../../assets/images/products/';
-            $filename = uniqid() . '_' . basename($_FILES['thumb']['name']);
-            $upload_path = $upload_dir . $filename;
-            
-            if (!is_dir($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-            
-            if (move_uploaded_file($_FILES['thumb']['tmp_name'], $upload_path)) {
-                $data['thumb'] = '/assets/images/products/' . $filename;
-            }
         }
         
         $product = Product::create($data);
@@ -166,36 +153,24 @@ class AdminProductsController extends Controller
             'name' => 'name',
             'base_price' => 'base_price',
             'discount_price' => 'discount_price',
-            'description' => 'description'
+            'description' => 'description',
+            'thumb' => 'thumb'
         ]);
-        
+
         $is_validated = static::validate_data($data, [
             'name' => 'required|string|min:3',
-            'base_price' => 'required|numeric|min:0',
-            'discount_price' => 'numeric|min:0',
-            'description' => 'string'
+            'base_price' => 'required|int',
+            'discount_price' => 'int',
+            'description' => 'string',
+            'thumb' => 'file'
         ]);
         
         if (!$is_validated) {
             return static::response_error(400, 'Неверные данные');
         }
         
-        // Handle thumb upload if present
-        if (isset($_FILES['thumb']) && $_FILES['thumb']['error'] == 0) {
-            $upload_dir = __DIR__ . '/../../assets/images/products/';
-            $filename = uniqid() . '_' . basename($_FILES['thumb']['name']);
-            $upload_path = $upload_dir . $filename;
-            
-            if (!is_dir($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-            
-            if (move_uploaded_file($_FILES['thumb']['tmp_name'], $upload_path)) {
-                $data['thumb'] = '/assets/images/products/' . $filename;
-            }
-        }
-        
         $product->update($data);
+        $product->save();
         
         return static::response_success([
             'message' => 'Товар обновлен успешно',
@@ -307,6 +282,7 @@ class AdminProductsController extends Controller
         }
         
         $characteristic->update($data);
+        $characteristic->save();
         
         return static::response_success([
             'message' => 'Характеристика обновлена',
@@ -396,6 +372,7 @@ class AdminProductsController extends Controller
         }
         
         $size->update($data);
+        $size->save();
         
         return static::response_success([
             'message' => 'Размер обновлен',
@@ -445,31 +422,39 @@ class AdminProductsController extends Controller
             }
         }
         
-        // Handle image upload
-        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-            $upload_dir = __DIR__ . '/../../assets/images/products/';
-            $filename = uniqid() . '_' . basename($_FILES['image']['name']);
-            $upload_path = $upload_dir . $filename;
-            
-            if (!is_dir($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-            
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
-                $image_path = '/assets/images/products/' . $filename;
-                
-                $image = ProductImage::create([
-                    'product_id' => $product_id,
-                    'image_path' => $image_path,
-                    'sort_order' => $max_sort + 1
-                ]);
-                
-                return static::response_success([
-                    'message' => 'Изображение добавлено',
-                    'image' => $image->to_array()
-                ]);
-            }
+        if (static::get_form_field('image')) {
+            $image = ProductImage::create([
+                'product_id' => $product_id,
+                'image_path' => static::get_form_field('image'),
+                'sort_order' => $max_sort + 1
+            ]);
+    
+            return static::response_success([
+                'message' => 'Изображение добавлено',
+                'image' => $image->to_array()
+            ]);
         }
+        // Handle image upload
+        // if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        //     $upload_dir = __DIR__ . '/../../assets/images/products/';
+        //     $filename = uniqid() . '_' . basename($_FILES['image']['name']);
+        //     $upload_path = $upload_dir . $filename;
+            
+        //     if (!is_dir($upload_dir)) {
+        //         mkdir($upload_dir, 0777, true);
+        //     }
+            
+        //     if (move_uploaded_file(['tmp_name'], $upload_path)) {
+        //         $image_path = '/assets/images/products/' . $filename;
+                
+                
+                
+        //         return static::response_success([
+        //             'message' => 'Изображение добавлено',
+        //             'image' => $image->to_array()
+        //         ]);
+        //     }
+        // }
         
         return static::response_error(400, 'Ошибка загрузки изображения');
     }
@@ -493,6 +478,7 @@ class AdminProductsController extends Controller
         }
         
         $image->update(['sort_order' => $sort_order]);
+        $image->save();
         
         return static::response_success([
             'message' => 'Порядок сортировки обновлен',

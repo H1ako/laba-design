@@ -35,38 +35,38 @@ Router::post('/cart/purchase', [UserController::class, 'purchase_cart']);
 // if (!$session->is_authed) {
 //     return Router::not_found();
 // }
-// Router::put('/user/settings/edit', [UserController::class, 'edit_settings']);
+// Router::post('/user/settings/edit', [UserController::class, 'edit_settings']);
 
 // Router::post('/service-history/create', [ServiceHistoryController::class, 'create']);
-// Router::put('/service-history/%s/edit', [ServiceHistoryController::class, 'edit']);
+// Router::post('/service-history/%s/edit', [ServiceHistoryController::class, 'edit']);
 
 
 Router::set_route_prefix('api/admin');
 
 // Orders management
-Router::put('/orders/%s', [AdminOrdersController::class, 'update']);
-Router::put('/orders/%s/status', [AdminOrdersController::class, 'update_status']);
+Router::post('/orders/%s', [AdminOrdersController::class, 'update']);
+Router::post('/orders/%s/status', [AdminOrdersController::class, 'update_status']);
 Router::delete('/orders/%s', [AdminOrdersController::class, 'delete']);
 Router::delete('/orders/%s/items/%s', [AdminOrdersController::class, 'remove_item']);
 
 // Products management
 Router::post('/products', [AdminProductsController::class, 'store']);
-Router::put('/products/%s', [AdminProductsController::class, 'update']);
+Router::post('/products/%s', [AdminProductsController::class, 'update']);
 Router::delete('/products/%s', [AdminProductsController::class, 'delete']);
 
 // Product characteristics
 Router::post('/products/%s/characteristics', [AdminProductsController::class, 'add_characteristic']);
-Router::put('/products/%s/characteristics/%s', [AdminProductsController::class, 'update_characteristic']);
+Router::post('/products/%s/characteristics/%s', [AdminProductsController::class, 'update_characteristic']);
 Router::delete('/products/%s/characteristics/%s', [AdminProductsController::class, 'remove_characteristic']);
 
 // Product sizes
 Router::post('/products/%s/sizes', [AdminProductsController::class, 'add_size']);
-Router::put('/products/%s/sizes/%s', [AdminProductsController::class, 'update_size']);
+Router::post('/products/%s/sizes/%s', [AdminProductsController::class, 'update_size']);
 Router::delete('/products/%s/sizes/%s', [AdminProductsController::class, 'remove_size']);
 
 // Product images
 Router::post('/products/%s/images', [AdminProductsController::class, 'add_image']);
-Router::put('/products/%s/images/%s/sort', [AdminProductsController::class, 'update_image_sort']);
+Router::post('/products/%s/images/%s/sort', [AdminProductsController::class, 'update_image_sort']);
 Router::delete('/products/%s/images/%s', [AdminProductsController::class, 'remove_image']);
 
 Router::not_found();
