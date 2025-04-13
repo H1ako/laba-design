@@ -1615,11 +1615,6 @@ body {
   height: auto;
   height: 3em;
 }
-@media screen and (width < 768px) {
-  .news__list .list__item .item__info .info__title {
-    font-size: var(--font-size-5);
-  }
-}
 .news__list .list__item .item__info .info__description {
   font-size: var(--font-size-5);
   color: var(--color-text);
@@ -1634,7 +1629,6 @@ body {
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__info .info__description {
-    font-size: var(--font-size-6);
     -webkit-line-clamp: 2;
   }
 }
@@ -1987,11 +1981,6 @@ body {
   height: auto;
   height: 3em;
 }
-@media screen and (width < 768px) {
-  .news__list .list__item .item__info .info__title {
-    font-size: var(--font-size-5);
-  }
-}
 .news__list .list__item .item__info .info__description {
   font-size: var(--font-size-5);
   color: var(--color-text);
@@ -2006,7 +1995,6 @@ body {
 }
 @media screen and (width < 768px) {
   .news__list .list__item .item__info .info__description {
-    font-size: var(--font-size-6);
     -webkit-line-clamp: 2;
   }
 }
