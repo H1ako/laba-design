@@ -369,6 +369,7 @@ function clearCart() {
 
   // Update cart UI to show empty state
   updateEmptyCartState(true);
+  syncCatalogWithCart();
 }
 
 async function initItemsInCart() {
@@ -732,6 +733,71 @@ function updateCartTotalsLocally() {
     cartCheckoutTotal.textContent = formatPrice(totalPrice);
 }
 
+function syncCatalogWithCart() {
+  // Get all catalog product elements
+  const catalogProducts = document.querySelectorAll(
+    "[data-catalog-product-id]"
+  );
+
+  // Skip if no catalog products on page
+  if (catalogProducts.length === 0) return;
+
+  // Get current cart data
+  getCartData().then((cartData) => {
+    // Reset all catalog items to default state (not in cart)
+    catalogProducts.forEach((productElement) => {
+      const productId = productElement.getAttribute("data-catalog-product-id");
+      const quantityInput = productElement.querySelector("[product-quantity]");
+      const minusBtn = productElement.querySelector("[product-quantity-minus]");
+      const plusBtn = productElement.querySelector("[product-quantity-plus]");
+
+      // Default to not in cart
+      productElement.classList.remove("in-cart");
+      productElement.removeAttribute("in-cart");
+
+      if (quantityInput) {
+        quantityInput.value = 1;
+      }
+
+      if (minusBtn) {
+        minusBtn.classList.remove("remove");
+      }
+
+      if (plusBtn) {
+        plusBtn.classList.remove("disabled");
+      }
+
+      // Look for this product in cart (with null/empty size for catalog items)
+      const cartItem = cartData.find((item) => {
+        return (
+          item.product_id == productId &&
+          (item.size === null || item.size === undefined || item.size === "")
+        );
+      });
+
+      // If found in cart, update the catalog UI
+      if (cartItem) {
+        const quantity = cartItem.quantity;
+
+        productElement.classList.add("in-cart");
+        productElement.setAttribute("in-cart", true);
+
+        if (quantityInput) {
+          quantityInput.value = quantity;
+        }
+
+        if (minusBtn) {
+          minusBtn.classList.toggle("remove", quantity <= 1);
+        }
+
+        if (plusBtn) {
+          plusBtn.classList.toggle("disabled", quantity >= 99);
+        }
+      }
+    });
+  });
+}
+
 async function updateCartItemQuantity(productId, newQuantity, size) {
   size = size === undefined || size === "" ? null : size;
 
@@ -778,15 +844,15 @@ async function updateCartItemQuantity(productId, newQuantity, size) {
 
   // Update cart totals
   updateCartTotalsLocally();
+  syncCatalogWithCart();
 }
 
 async function removeFromCart(productId, size) {
-  // Update localStorage
-  await removeProductFromCart(productId, size);
-
   // Normalize size selector for DOM query
   const sizeSelector =
     size === null || size === undefined || size === "" ? "" : size;
+
+  await removeProductFromCart(productId, size);
 
   // Find and remove the cart item with the specific size
   const cartItem = document.querySelector(
@@ -804,6 +870,9 @@ async function removeFromCart(productId, size) {
       updateEmptyCartState(true);
     }
   }
+
+  // Sync catalog with updated cart
+  syncCatalogWithCart();
 }
 
 function addProductToCartUI(productId, quantity) {
