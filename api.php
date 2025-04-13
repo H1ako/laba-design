@@ -77,8 +77,8 @@ Router::delete('/users/admin/%s', [AdminUsersController::class, 'delete_admin'])
 
 // News management
 Router::post('/news', [AdminNewsController::class, 'store']);
-Router::post('/news/{id}', [AdminNewsController::class, 'update']);
-Router::delete('/news/{id}', [AdminNewsController::class, 'destroy']);
+Router::post('/news/%s', [AdminNewsController::class, 'update']);
+Router::delete('/news/%s', [AdminNewsController::class, 'destroy']);
 Router::post('/upload/image', [AdminNewsController::class, 'upload_image']);
 
 Router::not_found();
