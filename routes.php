@@ -41,6 +41,8 @@ Router::get('/admin/products/%s', [AdminProductsController::class, 'show']);
 Router::get('/admin/products/%s/edit', [AdminProductsController::class, 'edit']);
 
 Router::get('/admin/users', [AdminUsersController::class, 'index']);
+Router::get('/admin/users/%s', [AdminUsersController::class, 'show']);
+Router::get('/admin/users/%s/edit', [AdminUsersController::class, 'edit_admin']);
 
 
 // if ($session->user->is_admin) {

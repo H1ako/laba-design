@@ -69,4 +69,9 @@ Router::post('/products/%s/images', [AdminProductsController::class, 'add_image'
 Router::post('/products/%s/images/%s/sort', [AdminProductsController::class, 'update_image_sort']);
 Router::delete('/products/%s/images/%s', [AdminProductsController::class, 'remove_image']);
 
+// User management
+Router::delete('/users/%s', [AdminUsersController::class, 'delete']);
+Router::post('/users/admin/%s', [AdminUsersController::class, 'update_admin']);
+Router::delete('/users/admin/%s', [AdminUsersController::class, 'delete_admin']);
+
 Router::not_found();
