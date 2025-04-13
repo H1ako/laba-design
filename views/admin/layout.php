@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
         <?php endforeach; ?>
     <?php endif; ?>
 </head>
+
 <body>
     <div class="admin-layout">
         <!-- Sidebar -->
@@ -26,7 +28,7 @@
                     </svg>
                 </button>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <ul class="nav-list">
                     <li class="nav-item <?= strpos($_SERVER['REQUEST_URI'], '/admin') === 0 && strpos($_SERVER['REQUEST_URI'], '/admin/') === false ? 'active' : '' ?>">
@@ -69,9 +71,21 @@
                             <span>Пользователи</span>
                         </a>
                     </li>
+                    <li class="nav-item <?= strpos($_SERVER['REQUEST_URI'], '/admin/news') === 0 ? 'active' : '' ?>">
+                        <a href="<?= Router::getRoute('/admin/news') ?>" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span>Новости</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
-            
+
             <div class="sidebar-footer">
                 <div class="user-info">
                     <div class="user-avatar">
@@ -92,7 +106,7 @@
                 </a>
             </div>
         </aside>
-        
+
         <!-- Main Content -->
         <main class="admin-main">
             <header class="main-header">
@@ -110,11 +124,12 @@
                     <?php endif; ?>
                 </div>
             </header>
-            
+
             <div class="main-content">
                 <?= $content ?>
             </div>
         </main>
     </div>
 </body>
+
 </html>

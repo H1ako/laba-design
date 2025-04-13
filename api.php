@@ -3,6 +3,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/core/admin-settings.php';
 require_once __DIR__ . '/core/router.php';
 
+use app\controllers\admin\AdminNewsController;
 use app\models\Session;
 
 use app\controllers\ServiceHistoryController;
@@ -73,5 +74,11 @@ Router::delete('/products/%s/images/%s', [AdminProductsController::class, 'remov
 Router::delete('/users/%s', [AdminUsersController::class, 'delete']);
 Router::post('/users/admin/%s', [AdminUsersController::class, 'update_admin']);
 Router::delete('/users/admin/%s', [AdminUsersController::class, 'delete_admin']);
+
+// News management
+Router::post('/news', [AdminNewsController::class, 'store']);
+Router::post('/news/{id}', [AdminNewsController::class, 'update']);
+Router::delete('/news/{id}', [AdminNewsController::class, 'destroy']);
+Router::post('/upload/image', [AdminNewsController::class, 'upload_image']);
 
 Router::not_found();

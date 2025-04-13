@@ -75,4 +75,14 @@ class News extends BaseModel
 
         return parent::update($data);
     }
+
+    public static function uploadContentImage($file)
+    {
+        if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+            return false;
+        }
+
+        $uploaded = static::upload_image($file, '/uploads/news/content/');
+        return $uploaded ? $uploaded : false;
+    }
 }

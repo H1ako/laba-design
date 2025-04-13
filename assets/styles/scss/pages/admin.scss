@@ -76,56 +76,56 @@ a {
   &.sidebar-collapsed {
     .admin-sidebar {
       width: var(--admin-sidebar-collapsed-width);
-      
+
       .sidebar-header {
         padding: 0.75rem;
         justify-content: center;
-        
+
         .sidebar-logo {
           display: none;
         }
-        
+
         .sidebar-toggle {
           margin: 0;
         }
       }
-      
+
       .sidebar-nav {
         .nav-item {
           .nav-link {
             padding: 0.75rem;
             justify-content: center;
-            
+
             span {
               display: none;
             }
-            
+
             svg {
               margin: 0;
             }
           }
         }
       }
-      
+
       .sidebar-footer {
         padding: 1rem 0;
-        
+
         .user-info {
           flex-direction: column;
           align-items: center;
-          
+
           .user-avatar {
             margin: 0 auto 0.5rem;
             width: 40px;
             height: 40px;
             overflow: hidden;
           }
-          
+
           .user-details {
             display: none;
           }
         }
-        
+
         .logout-button {
           width: 40px;
           height: 40px;
@@ -135,11 +135,11 @@ a {
           display: flex;
           align-items: center;
           justify-content: center;
-          
+
           span {
             display: none;
           }
-          
+
           svg {
             margin: 0;
           }
@@ -196,7 +196,7 @@ a {
       padding: 0;
       transition: background-color var(--admin-transition-speed) ease;
       border-radius: 4px;
-      
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
       }
@@ -229,11 +229,11 @@ a {
 
     .nav-item {
       margin: 0;
-      
+
       &.active .nav-link {
         background-color: rgba(255, 255, 255, 0.1);
         color: white;
-        
+
         &::before {
           opacity: 1;
           height: 16px;
@@ -248,9 +248,9 @@ a {
       color: rgba(255, 255, 255, 0.8);
       transition: all var(--admin-transition-speed) ease;
       position: relative;
-      
+
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         top: 50%;
@@ -262,12 +262,12 @@ a {
         transition: all var(--admin-transition-speed) ease;
         border-radius: 0 3px 3px 0;
       }
-      
+
       svg {
         flex-shrink: 0;
         margin-right: 0.75rem;
       }
-      
+
       span {
         white-space: nowrap;
         overflow: hidden;
@@ -277,7 +277,7 @@ a {
       &:hover {
         background-color: rgba(255, 255, 255, 0.05);
         color: white;
-        
+
         &::before {
           opacity: 0.6;
           height: 12px;
@@ -312,7 +312,7 @@ a {
 
       .user-details {
         overflow: hidden;
-        
+
         .user-name {
           font-weight: 500;
           margin: 0;
@@ -321,7 +321,7 @@ a {
           text-overflow: ellipsis;
           font-size: 0.875rem;
         }
-        
+
         .user-role {
           color: rgba(255, 255, 255, 0.6);
           margin: 0;
@@ -341,12 +341,12 @@ a {
       text-align: center;
       justify-content: center;
       width: 100%;
-      
+
       svg {
         flex-shrink: 0;
         margin-right: 0.5rem;
       }
-      
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);
         color: white;
@@ -403,7 +403,7 @@ a {
   overflow: hidden;
   transition: box-shadow 0.3s ease;
   border: none;
-  
+
   &:hover {
     box-shadow: var(--admin-hover-shadow);
   }
@@ -463,7 +463,7 @@ a {
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -475,7 +475,7 @@ a {
     background-position: 50%;
     transform: scale(10, 10);
     opacity: 0;
-    transition: transform .5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
   }
 
   &:active::after {
@@ -514,7 +514,7 @@ a {
       border-color: var(--admin-primary-hover);
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -530,7 +530,7 @@ a {
       border-color: var(--admin-gray-600);
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -546,7 +546,7 @@ a {
       border-color: darken(#2ecc71, 10%);
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -562,7 +562,7 @@ a {
       border-color: darken(#e74c3c, 10%);
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -578,7 +578,7 @@ a {
       border-color: darken(#3498db, 10%);
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -594,7 +594,7 @@ a {
       border-color: darken(#f39c12, 10%);
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -610,7 +610,7 @@ a {
       color: white;
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -626,7 +626,7 @@ a {
       color: white;
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -642,7 +642,7 @@ a {
       color: white;
       transform: translateY(-1px);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -674,7 +674,7 @@ a {
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
-  
+
   .form-group {
     flex: 1 1 calc(50% - 0.5rem);
     min-width: 250px;
@@ -824,7 +824,7 @@ textarea.form-control {
     border: 1px solid var(--admin-gray-400);
     background-color: var(--admin-gray-300);
     background-repeat: no-repeat;
-    
+
     &:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba(var(--admin-primary-color-rgb), 0.2);
@@ -861,7 +861,7 @@ textarea.form-control {
   background-color: white;
   transition: border-color var(--admin-transition-speed) ease;
   cursor: pointer;
-  
+
   &:hover {
     border-color: var(--admin-gray-400);
   }
@@ -894,11 +894,11 @@ textarea.form-control {
       justify-content: center;
       gap: 0.75rem;
       color: var(--admin-gray-600);
-      
+
       svg {
         color: var(--admin-gray-500);
       }
-      
+
       span {
         font-size: 0.875rem;
       }
@@ -916,7 +916,7 @@ textarea.form-control {
         display: none;
       }
     }
-    
+
     &.dragover {
       background-color: var(--admin-gray-100);
       border: 2px dashed var(--admin-primary-color);
@@ -993,34 +993,34 @@ textarea.form-control {
   align-items: flex-start;
   gap: 0.75rem;
   position: relative;
-  
+
   &.visible {
     transform: translateX(0);
     opacity: 1;
   }
-  
+
   &.hiding {
     transform: translateX(120%);
     opacity: 0;
   }
-  
+
   .notification__icon {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    
+
     svg {
       width: 20px;
       height: 20px;
     }
   }
-  
+
   .notification__content {
     flex: 1;
     padding-right: 1.5rem;
   }
-  
+
   .notification__close {
     position: absolute;
     top: 0.5rem;
@@ -1033,44 +1033,44 @@ textarea.form-control {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     &:hover {
       color: var(--admin-gray-700);
     }
-    
+
     svg {
       width: 16px;
       height: 16px;
     }
   }
-  
+
   &.notification--success {
     border-left: 4px solid var(--admin-success-color);
-    
+
     .notification__icon {
       color: var(--admin-success-color);
     }
   }
-  
+
   &.notification--error {
     border-left: 4px solid var(--admin-danger-color);
-    
+
     .notification__icon {
       color: var(--admin-danger-color);
     }
   }
-  
+
   &.notification--warning {
     border-left: 4px solid var(--admin-warning-color);
-    
+
     .notification__icon {
       color: var(--admin-warning-color);
     }
   }
-  
+
   &.notification--info {
     border-left: 4px solid var(--admin-info-color);
-    
+
     .notification__icon {
       color: var(--admin-info-color);
     }
@@ -1090,11 +1090,11 @@ textarea.form-control {
     overflow-x: auto;
     border-bottom: 1px solid var(--admin-gray-300);
     background-color: var(--admin-gray-100);
-    
+
     &::-webkit-scrollbar {
       height: 3px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background-color: var(--admin-gray-400);
     }
@@ -1110,9 +1110,9 @@ textarea.form-control {
       font-weight: 500;
       transition: all var(--admin-transition-speed) ease;
       position: relative;
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -1px;
         left: 0;
@@ -1122,15 +1122,15 @@ textarea.form-control {
         transform: scaleX(0);
         transition: transform var(--admin-transition-speed) ease;
       }
-      
+
       &:hover {
         color: var(--admin-gray-800);
       }
-      
+
       &.active {
         color: var(--admin-primary-color);
         font-weight: 600;
-        
+
         &::after {
           transform: scaleX(1);
         }
@@ -1142,7 +1142,7 @@ textarea.form-control {
     .tab-pane {
       display: none;
       padding: 1rem;
-      
+
       &.active {
         display: block;
         animation: fadeIn 0.3s ease;
@@ -1152,35 +1152,39 @@ textarea.form-control {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Filters */
 .filters {
   width: 100%;
-  
+
   .filters-form {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.75rem;
-    
+
     .filter-group {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       flex: 1;
-      
+
       &:first-child {
         flex: 3;
         min-width: 200px;
       }
-      
+
       &:last-child {
         flex: 0 0 auto;
       }
-      
+
       .form-control {
         width: 100%;
       }
@@ -1194,20 +1198,20 @@ textarea.form-control {
   -webkit-overflow-scrolling: touch;
   border-radius: var(--admin-border-radius);
   margin-bottom: 1.5rem;
-  
+
   &::-webkit-scrollbar {
     height: 8px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: var(--admin-gray-200);
     border-radius: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: var(--admin-gray-400);
     border-radius: 4px;
-    
+
     &:hover {
       background: var(--admin-gray-500);
     }
@@ -1219,12 +1223,13 @@ textarea.form-control {
   border-collapse: separate;
   border-spacing: 0;
   margin-bottom: 0;
-  
-  th, td {
+
+  th,
+  td {
     padding: 1rem;
     vertical-align: middle;
   }
-  
+
   th {
     font-weight: 600;
     text-align: left;
@@ -1238,44 +1243,44 @@ textarea.form-control {
     font-size: 0.813rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    
+
     &:first-child {
       border-top-left-radius: var(--admin-border-radius);
     }
-    
+
     &:last-child {
       border-top-right-radius: var(--admin-border-radius);
     }
   }
-  
+
   tbody {
     tr {
       transition: all var(--admin-transition-speed) ease;
       border-bottom: 1px solid var(--admin-gray-200);
-      
+
       &:last-child {
         border-bottom: none;
-        
+
         td:first-child {
           border-bottom-left-radius: var(--admin-border-radius);
         }
-        
+
         td:last-child {
           border-bottom-right-radius: var(--admin-border-radius);
         }
       }
-      
+
       &:hover {
         background-color: rgba(var(--admin-primary-color-rgb), 0.05);
       }
     }
-    
+
     td {
       border-top: none;
       font-size: 0.875rem;
     }
   }
-  
+
   .actions {
     display: flex;
     align-items: center;
@@ -1298,35 +1303,35 @@ textarea.form-control {
   vertical-align: baseline;
   border-radius: 30px;
   transition: all var(--admin-transition-speed) ease;
-  
+
   &.badge-primary,
   &.badge-working {
     background-color: var(--admin-primary-color);
     color: white;
   }
-  
+
   &.badge-secondary {
     background-color: var(--admin-gray-500);
     color: white;
   }
-  
+
   &.badge-success {
     background-color: var(--admin-success-color);
     color: white;
   }
-  
+
   &.badge-danger,
   &.badge-canceled {
     background-color: var(--admin-danger-color);
     color: white;
   }
-  
+
   &.badge-warning,
   &.badge-initial {
     background-color: var(--admin-warning-color);
     color: var(--admin-gray-800);
   }
-  
+
   &.badge-info {
     background-color: var(--admin-info-color);
     color: white;
@@ -1343,46 +1348,46 @@ textarea.form-control {
   font-weight: 600;
   line-height: 1.2;
   gap: 0.375rem;
-  
+
   &::before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 50%;
   }
-  
+
   &.status-initial {
     background-color: rgba(243, 156, 18, 0.12);
     color: #a66d00;
-    
+
     &::before {
       background-color: var(--admin-warning-color);
     }
   }
-  
+
   &.status-working {
     background-color: rgba(79, 109, 245, 0.12);
     color: #2a3fa9;
-    
+
     &::before {
       background-color: var(--admin-primary-color);
     }
   }
-  
+
   &.status-success {
     background-color: rgba(46, 204, 113, 0.12);
     color: #1a7943;
-    
+
     &::before {
       background-color: var(--admin-success-color);
     }
   }
-  
+
   &.status-canceled {
     background-color: rgba(231, 76, 60, 0.12);
     color: #a82315;
-    
+
     &::before {
       background-color: var(--admin-danger-color);
     }
@@ -1397,17 +1402,17 @@ textarea.form-control {
   margin-top: 1.5rem;
   flex-wrap: wrap;
   gap: 1rem;
-  
+
   .pagination-info {
     color: var(--admin-gray-600);
     font-size: 0.875rem;
   }
-  
+
   .pagination-controls {
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    
+
     .pagination-btn {
       display: inline-flex;
       align-items: center;
@@ -1421,19 +1426,19 @@ textarea.form-control {
       color: var(--admin-gray-700);
       font-weight: 500;
       transition: all var(--admin-transition-speed) ease;
-      
+
       svg {
         width: 16px;
         height: 16px;
       }
-      
+
       &:hover {
         background-color: var(--admin-gray-100);
         border-color: var(--admin-gray-400);
         z-index: 2;
         transform: translateY(-1px);
       }
-      
+
       &.active {
         background-color: var(--admin-primary-color);
         border-color: var(--admin-primary-color);
@@ -1441,7 +1446,7 @@ textarea.form-control {
         z-index: 3;
       }
     }
-    
+
     .pagination-ellipsis {
       padding: 0 0.5rem;
       color: var(--admin-gray-600);
@@ -1459,13 +1464,13 @@ textarea.form-control {
   justify-content: center;
   padding: 3rem 1.5rem;
   text-align: center;
-  
+
   svg {
     color: var(--admin-gray-400);
     margin-bottom: 1.25rem;
     opacity: 0.7;
   }
-  
+
   p {
     color: var(--admin-gray-600);
     font-size: 1.1rem;
@@ -1506,24 +1511,24 @@ textarea.form-control {
       object-fit: cover;
       transition: transform 0.5s ease;
     }
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       height: 60px;
-      background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
-    
+
     &:hover {
       img {
         transform: scale(1.05);
       }
-      
+
       &::after {
         opacity: 1;
       }
@@ -1555,18 +1560,18 @@ textarea.form-control {
       align-items: center;
       gap: 0.5rem;
       flex-wrap: wrap;
-      
+
       .product-price {
         font-weight: 600;
         color: var(--admin-gray-800);
       }
-      
+
       .product-price-old {
         text-decoration: line-through;
         color: var(--admin-gray-600);
         font-size: 0.875rem;
       }
-      
+
       .product-discount {
         background-color: var(--admin-danger-color);
         color: white;
@@ -1579,24 +1584,24 @@ textarea.form-control {
 
     .product-sizes {
       margin-top: auto;
-      
+
       .size-badges {
         display: flex;
         flex-wrap: wrap;
         gap: 0.375rem;
-        
+
         .size-badge {
           display: inline-block;
           padding: 0.25rem 0.5rem;
           border-radius: 4px;
           font-size: 0.75rem;
           font-weight: 600;
-          
+
           &.in-stock {
             background-color: rgba(46, 204, 113, 0.12);
             color: var(--admin-success-color);
           }
-          
+
           &.out-of-stock {
             background-color: var(--admin-gray-200);
             color: var(--admin-gray-600);
@@ -1604,7 +1609,7 @@ textarea.form-control {
           }
         }
       }
-      
+
       .no-sizes {
         color: var(--admin-gray-600);
         font-size: 0.875rem;
@@ -1639,7 +1644,7 @@ textarea.form-control {
       border-radius: var(--admin-border-radius);
       overflow: hidden;
       box-shadow: var(--admin-box-shadow);
-      
+
       img {
         width: 100%;
         height: auto;
@@ -1651,33 +1656,33 @@ textarea.form-control {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      
+
       .product-name {
         margin: 0 0 0.5rem;
         font-size: 1.75rem;
         line-height: 1.3;
         color: var(--admin-gray-800);
       }
-      
+
       .product-pricing {
         display: flex;
         align-items: center;
         gap: 1rem;
         flex-wrap: wrap;
         margin-bottom: 0.5rem;
-        
+
         .product-price {
           font-size: 1.5rem;
           font-weight: 600;
           color: var(--admin-gray-800);
         }
-        
+
         .product-price-original {
           text-decoration: line-through;
           color: var(--admin-gray-600);
           font-size: 1.1rem;
         }
-        
+
         .product-discount-tag {
           background-color: var(--admin-danger-color);
           color: white;
@@ -1687,7 +1692,7 @@ textarea.form-control {
           font-weight: 600;
         }
       }
-      
+
       .product-meta {
         display: flex;
         flex-direction: column;
@@ -1695,18 +1700,18 @@ textarea.form-control {
         margin-top: auto;
         padding-top: 1rem;
         border-top: 1px solid var(--admin-gray-200);
-        
+
         .meta-item {
           display: flex;
           align-items: center;
           font-size: 0.875rem;
-          
+
           .meta-label {
             color: var(--admin-gray-600);
             width: 100px;
             flex-shrink: 0;
           }
-          
+
           .meta-value {
             color: var(--admin-gray-800);
             font-weight: 500;
@@ -1734,27 +1739,27 @@ textarea.form-control {
     border-radius: var(--admin-border-radius);
     overflow: hidden;
     box-shadow: var(--admin-box-shadow);
-    
+
     .gallery-link {
       display: block;
       width: 100%;
       height: 100%;
       position: relative;
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
-        background-color: rgba(0,0,0,0.2);
+        background-color: rgba(0, 0, 0, 0.2);
         opacity: 0;
         transition: opacity var(--admin-transition-speed) ease;
       }
-      
+
       &:hover {
         &::after {
           opacity: 1;
         }
-        
+
         .gallery-image {
           transform: scale(1.05);
         }
@@ -1787,15 +1792,15 @@ textarea.form-control {
     &:active {
       cursor: grabbing;
     }
-    
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: var(--admin-hover-shadow);
-      
+
       .product-image-actions {
         opacity: 1;
       }
-      
+
       .product-image::after {
         opacity: 1;
       }
@@ -1807,12 +1812,12 @@ textarea.form-control {
       background-size: cover;
       background-position: center;
       position: relative;
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
-        background-color: rgba(0,0,0,0.3);
+        background-color: rgba(0, 0, 0, 0.3);
         opacity: 0;
         transition: opacity var(--admin-transition-speed) ease;
       }
@@ -1825,7 +1830,7 @@ textarea.form-control {
       opacity: 0;
       transition: opacity var(--admin-transition-speed) ease;
       z-index: 1;
-      
+
       button {
         background-color: white;
         border-radius: 50%;
@@ -1835,8 +1840,8 @@ textarea.form-control {
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
         svg {
           width: 16px;
           height: 16px;
@@ -1862,7 +1867,7 @@ textarea.form-control {
         margin: 0;
         font-size: 1.5rem;
       }
-      
+
       .order-date {
         color: var(--admin-gray-600);
         font-size: 0.875rem;
@@ -1874,18 +1879,18 @@ textarea.form-control {
         display: flex;
         align-items: center;
         gap: 1rem;
-        
+
         .status-label {
           color: var(--admin-gray-700);
           font-weight: 500;
         }
-        
+
         .status-buttons {
           display: flex;
           border-radius: var(--admin-border-radius);
           overflow: hidden;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
           .status-btn {
             padding: 0.5rem 1rem;
             border: none;
@@ -1896,13 +1901,13 @@ textarea.form-control {
             transition: all var(--admin-transition-speed) ease;
             position: relative;
             font-weight: 500;
-            
+
             &:not(:last-child) {
               border-right: 1px solid var(--admin-gray-300);
             }
-            
+
             &::after {
-              content: '';
+              content: "";
               position: absolute;
               bottom: 0;
               left: 0;
@@ -1912,50 +1917,50 @@ textarea.form-control {
               transform: scaleX(0);
               transition: transform var(--admin-transition-speed) ease;
             }
-            
+
             &:hover {
               background-color: var(--admin-gray-300);
-              
+
               &::after {
                 transform: scaleX(0.8);
               }
             }
-            
+
             &.active {
               font-weight: 600;
-              
+
               &::after {
                 transform: scaleX(1);
               }
             }
-            
+
             &.status-btn--initial {
               color: var(--admin-warning-color);
-              
+
               &.active {
                 background-color: rgba(243, 156, 18, 0.15);
               }
             }
-            
+
             &.status-btn--working {
               color: var(--admin-primary-color);
-              
+
               &.active {
                 background-color: rgba(79, 109, 245, 0.15);
               }
             }
-            
+
             &.status-btn--success {
               color: var(--admin-success-color);
-              
+
               &.active {
                 background-color: rgba(46, 204, 113, 0.15);
               }
             }
-            
+
             &.status-btn--canceled {
               color: var(--admin-danger-color);
-              
+
               &.active {
                 background-color: rgba(231, 76, 60, 0.15);
               }
@@ -1985,14 +1990,14 @@ textarea.form-control {
 
     .info-row {
       display: flex;
-      
+
       .info-label {
         font-weight: 500;
         width: 120px;
         flex-shrink: 0;
         color: var(--admin-gray-600);
       }
-      
+
       .info-value {
         color: var(--admin-gray-800);
         font-weight: 400;
@@ -2006,36 +2011,36 @@ textarea.form-control {
       justify-content: space-between;
       padding: 0.5rem 0;
       border-bottom: 1px solid var(--admin-gray-200);
-      
+
       &:last-child {
         border-bottom: none;
       }
-      
+
       .summary-label {
         color: var(--admin-gray-600);
         font-weight: 500;
       }
-      
+
       .summary-value {
         font-weight: 500;
         color: var(--admin-gray-800);
-        
+
         &.discount {
           color: var(--admin-danger-color);
         }
       }
-      
+
       &.total {
         padding-top: 1rem;
         border-top: 2px solid var(--admin-gray-200);
         font-weight: 600;
         font-size: 1.125rem;
         margin-top: 0.5rem;
-        
+
         .summary-label {
           color: var(--admin-gray-800);
         }
-        
+
         .summary-value {
           color: var(--admin-primary-color);
         }
@@ -2047,7 +2052,7 @@ textarea.form-control {
     display: flex;
     align-items: center;
     gap: 1rem;
-    
+
     .product-thumbnail {
       width: 50px;
       height: 50px;
@@ -2059,13 +2064,13 @@ textarea.form-control {
   .price-with-discount {
     display: flex;
     flex-direction: column;
-    
+
     .original-price {
       text-decoration: line-through;
       color: var(--admin-gray-600);
       font-size: 0.813rem;
     }
-    
+
     .current-price {
       font-weight: 500;
     }
@@ -2076,13 +2081,13 @@ textarea.form-control {
     border: 1px solid var(--admin-danger-color);
     border-radius: var(--admin-border-radius);
     background-color: rgba(231, 76, 60, 0.05);
-    
+
     h3 {
       color: var(--admin-danger-color);
       margin-top: 0;
       font-size: 1.125rem;
     }
-    
+
     p {
       color: var(--admin-gray-700);
       margin-bottom: 1.5rem;
@@ -2114,18 +2119,18 @@ textarea.form-control {
   border-radius: var(--admin-card-radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   padding: 2rem;
-  
+
   .login-header {
     text-align: center;
     margin-bottom: 2rem;
-    
+
     h1 {
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       color: var(--admin-primary-color);
     }
-    
+
     p {
       color: var(--admin-gray-600);
       margin: 0;
@@ -2156,12 +2161,12 @@ textarea.form-control {
     box-shadow: var(--admin-box-shadow);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
+
     &:hover {
       transform: translateY(-3px);
       box-shadow: var(--admin-hover-shadow);
     }
-    
+
     .stat-card-icon {
       display: flex;
       align-items: center;
@@ -2170,13 +2175,13 @@ textarea.form-control {
       padding: 1.5rem;
       color: var(--admin-primary-color);
     }
-    
+
     .stat-card-content {
       flex: 1;
       padding: 1.25rem 1.5rem;
       display: flex;
       flex-direction: column;
-      
+
       .stat-card-title {
         color: var(--admin-gray-600);
         font-size: 0.875rem;
@@ -2185,20 +2190,20 @@ textarea.form-control {
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
-      
+
       .stat-card-value {
         color: var(--admin-gray-800);
         font-size: 1.75rem;
         font-weight: 600;
         margin: 0 0 0.75rem;
       }
-      
+
       .stat-card-link {
         margin-top: auto;
         font-size: 0.875rem;
         font-weight: 500;
         color: var(--admin-primary-color);
-        
+
         &:hover {
           text-decoration: underline;
         }
@@ -2221,42 +2226,42 @@ textarea.form-control {
   box-shadow: var(--admin-box-shadow);
   overflow: hidden;
   transition: box-shadow 0.3s ease;
-  
+
   &:hover {
     box-shadow: var(--admin-hover-shadow);
   }
-  
+
   .card-header {
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--admin-gray-200);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
     h2 {
       margin: 0;
       font-size: 1.125rem;
       font-weight: 600;
       color: var(--admin-gray-800);
     }
-    
+
     .btn-outline {
       border: 1px solid var(--admin-gray-300);
       color: var(--admin-gray-600);
       background: transparent;
       font-size: 0.875rem;
-      
+
       &:hover {
         background-color: var(--admin-gray-100);
         color: var(--admin-gray-800);
       }
     }
   }
-  
+
   .card-content {
     padding: 1.25rem 1.5rem;
   }
-  
+
   table.table {
     margin-bottom: 0;
   }
@@ -2267,7 +2272,7 @@ textarea.form-control {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
-  
+
   .product-item {
     background-color: var(--admin-gray-100);
     border-radius: var(--admin-border-radius);
@@ -2275,48 +2280,48 @@ textarea.form-control {
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: var(--admin-box-shadow);
     }
-    
+
     .product-image {
       height: 120px;
       overflow: hidden;
-      
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
     }
-    
+
     .product-details {
       padding: 0.75rem;
       flex: 1;
-      
+
       h3 {
         font-size: 0.9rem;
         margin: 0 0 0.375rem;
         font-weight: 500;
-        
+
         a {
           color: var(--admin-gray-800);
-          
+
           &:hover {
             color: var(--admin-primary-color);
           }
         }
       }
-      
+
       .product-price {
         font-size: 0.875rem;
         color: var(--admin-gray-700);
         margin: 0;
       }
     }
-    
+
     .btn {
       margin: 0.5rem;
       border-radius: var(--admin-border-radius);
@@ -2328,7 +2333,7 @@ textarea.form-control {
       background-color: white;
       color: var(--admin-primary-color);
       border: 1px solid var(--admin-primary-color);
-      
+
       &:hover {
         background-color: var(--admin-primary-color);
         color: white;
@@ -2356,7 +2361,7 @@ textarea.form-control {
   align-items: center;
   justify-content: flex-end;
   gap: 0.5rem;
-  
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -2365,7 +2370,7 @@ textarea.form-control {
     height: 2rem; /* Fixed height for action buttons */
     padding: 0;
     border-radius: 0.5rem;
-    
+
     svg {
       width: 1rem;
       height: 1rem;
@@ -2392,7 +2397,7 @@ textarea.form-control {
           font-size: 0.875rem;
         }
       }
-      
+
       .logout-button {
         width: 40px;
         height: 40px;
@@ -2402,7 +2407,7 @@ textarea.form-control {
         padding: 0;
         border-radius: 50%;
         margin: 0.75rem auto 0;
-        
+
         svg {
           margin: 0;
         }
@@ -2418,24 +2423,24 @@ textarea.form-control {
     align-items: center;
     flex-wrap: wrap;
     gap: 0.75rem;
-    
+
     .filter-group {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       flex: 1;
       min-width: 200px;
-      
+
       &:last-child {
         flex-basis: auto;
         flex-grow: 0;
       }
-      
+
       .form-control {
         width: 100%;
         height: 38px;
       }
-      
+
       .btn {
         height: 38px;
         display: inline-flex;
@@ -2456,7 +2461,7 @@ textarea.form-control {
 
 .table {
   margin-bottom: 0;
-  
+
   th {
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -2466,40 +2471,40 @@ textarea.form-control {
     padding: 1rem 1.25rem;
     background-color: var(--admin-gray-50, #fafbfc);
     border-bottom: 1px solid var(--admin-gray-200);
-    
+
     &:first-child {
       padding-left: 1.5rem;
       border-top-left-radius: var(--admin-border-radius);
     }
-    
+
     &:last-child {
       padding-right: 1.5rem;
       border-top-right-radius: var(--admin-border-radius);
     }
   }
-  
+
   td {
     padding: 1rem 1.25rem;
     vertical-align: middle;
     border-bottom: 1px solid var(--admin-gray-200);
-    
+
     &:first-child {
       padding-left: 1.5rem;
     }
-    
+
     &:last-child {
       padding-right: 1.5rem;
     }
   }
-  
+
   tbody {
     tr {
       transition: background-color 0.15s ease;
-      
+
       &:hover {
         background-color: rgba(var(--admin-primary-color-rgb), 0.03);
       }
-      
+
       &:last-child td {
         border-bottom: none;
       }
@@ -2523,7 +2528,7 @@ textarea.form-control {
   color: var(--admin-gray-800);
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--admin-gray-200);
-  
+
   &:first-child {
     margin-top: 0;
   }
@@ -2541,16 +2546,16 @@ textarea.form-control {
 .card {
   border: none;
   overflow: hidden;
-  
+
   .card-header {
     background-color: white;
     padding: 1.25rem 1.5rem;
-    
+
     .card-title {
       font-weight: 600;
     }
   }
-  
+
   .card-body {
     padding: 1.5rem;
   }
@@ -2569,40 +2574,40 @@ textarea.form-control {
   transform: translateX(0);
   opacity: 1;
   transition: transform 0.3s ease, opacity 0.3s ease;
-  
+
   &.notification--success {
     border-left-color: var(--admin-success-color);
   }
-  
+
   &.notification--error {
     border-left-color: var(--admin-danger-color);
   }
-  
+
   &.notification--warning {
     border-left-color: var(--admin-warning-color);
   }
-  
+
   &.notification--info {
     border-left-color: var(--admin-info-color);
   }
-  
+
   .notification__icon {
     flex-shrink: 0;
     margin-right: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     svg {
       width: 20px;
       height: 20px;
     }
   }
-  
+
   .notification__content {
     flex: 1;
   }
-  
+
   .notification__close {
     flex-shrink: 0;
     background: transparent;
@@ -2615,12 +2620,12 @@ textarea.form-control {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     &:hover {
       background-color: var(--admin-gray-100);
       color: var(--admin-gray-700);
     }
-    
+
     svg {
       width: 16px;
       height: 16px;
@@ -2630,32 +2635,40 @@ textarea.form-control {
 
 /* Login page improvements */
 .login-page {
-  background: linear-gradient(135deg, var(--admin-secondary-color), var(--admin-primary-color));
+  background: linear-gradient(
+    135deg,
+    var(--admin-secondary-color),
+    var(--admin-primary-color)
+  );
 }
 
 .login-box {
   border-radius: var(--admin-card-radius);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  
+
   .login-header {
     text-align: center;
     margin-bottom: 2rem;
-    
+
     h1 {
       font-size: 2rem;
       font-weight: 700;
-      background: linear-gradient(45deg, var(--admin-primary-color), var(--admin-accent-color));
+      background: linear-gradient(
+        45deg,
+        var(--admin-primary-color),
+        var(--admin-accent-color)
+      );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
   }
-  
+
   .form-control {
     height: 46px;
     border-radius: 8px;
   }
-  
+
   .btn {
     height: 46px;
   }
@@ -2667,7 +2680,7 @@ textarea.form-control {
     background-color: var(--admin-gray-100);
     padding: 0 1rem;
     border-bottom: 1px solid var(--admin-gray-300);
-    
+
     .tab-btn {
       padding: 1rem;
       border: none;
@@ -2677,9 +2690,9 @@ textarea.form-control {
       cursor: pointer;
       position: relative;
       margin-bottom: -1px;
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: 0;
         left: 0;
@@ -2689,15 +2702,15 @@ textarea.form-control {
         transform: scaleX(0);
         transition: transform 0.2s ease;
       }
-      
+
       &:hover {
         color: var(--admin-primary-color);
       }
-      
+
       &.active {
         color: var(--admin-primary-color);
         font-weight: 600;
-        
+
         &::after {
           transform: scaleX(1);
         }
@@ -2710,12 +2723,12 @@ textarea.form-control {
 .product-card {
   display: flex;
   flex-direction: column;
-  
+
   .product-card-body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    
+
     .product-actions {
       display: flex;
       align-items: center;
@@ -2746,7 +2759,7 @@ textarea.form-control {
       border: 1px solid var(--admin-gray-300);
       border-radius: var(--admin-border-radius);
       overflow: hidden;
-      
+
       .status-btn {
         flex: 1;
         padding: 0.5rem 1rem;
@@ -2755,13 +2768,13 @@ textarea.form-control {
         font-size: 0.875rem;
         font-weight: 500;
         position: relative;
-        
+
         &:not(:last-child) {
           border-right: 1px solid var(--admin-gray-300);
         }
-        
+
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 0;
           left: 0;
@@ -2770,42 +2783,42 @@ textarea.form-control {
           transform: scaleX(0);
           transition: transform 0.2s ease;
         }
-        
+
         &.active {
           font-weight: 600;
-          
+
           &::after {
             transform: scaleX(1);
           }
         }
-        
+
         &.status-btn--initial {
           color: var(--admin-warning-color);
-          
+
           &::after {
             background-color: var(--admin-warning-color);
           }
         }
-        
+
         &.status-btn--working {
           color: var(--admin-primary-color);
-          
+
           &::after {
             background-color: var(--admin-primary-color);
           }
         }
-        
+
         &.status-btn--success {
           color: var(--admin-success-color);
-          
+
           &::after {
             background-color: var(--admin-success-color);
           }
         }
-        
+
         &.status-btn--canceled {
           color: var(--admin-danger-color);
-          
+
           &::after {
             background-color: var(--admin-danger-color);
           }
@@ -2821,26 +2834,26 @@ textarea.form-control {
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  
+
   .characteristic-name,
   .size-name {
     font-weight: 500;
     margin-right: 1rem;
     flex: 1;
   }
-  
+
   .characteristic-value {
     color: var(--admin-gray-700);
     margin-right: auto;
     flex: 2;
   }
-  
+
   .characteristic-actions,
   .size-controls {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -2849,7 +2862,7 @@ textarea.form-control {
       height: 2rem;
       padding: 0;
       border-radius: 0.5rem;
-      
+
       svg {
         width: 1rem;
         height: 1rem;
@@ -2865,18 +2878,18 @@ textarea.form-control {
   border-radius: var(--admin-border-radius);
   overflow: hidden;
   box-shadow: var(--admin-box-shadow);
-  
+
   &:hover .product-image-actions {
     opacity: 1;
   }
-  
+
   .product-image-actions {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
     opacity: 0;
     transition: opacity 0.2s ease;
-    
+
     .btn {
       width: 2rem;
       height: 2rem;
@@ -2887,7 +2900,7 @@ textarea.form-control {
       padding: 0;
       background-color: white;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      
+
       svg {
         width: 1rem;
         height: 1rem;
@@ -2900,7 +2913,7 @@ textarea.form-control {
 /* Make form switches more modern */
 .form-switch {
   padding-left: 3rem;
-  
+
   .form-check-input {
     width: 2.2rem;
     height: 1.2rem;
@@ -2908,16 +2921,17 @@ textarea.form-control {
     border-radius: 1.2rem;
     background-position: left center;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
-    
+
     &:checked {
       background-position: right center;
       background-color: var(--admin-success-color);
       border-color: var(--admin-success-color);
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='white'/%3e%3c/svg%3e");
     }
-    
+
     &:focus {
-      box-shadow: 0 0 0 3px rgba(var(--admin-success-color-rgb, 46, 204, 113), 0.15);
+      box-shadow: 0 0 0 3px
+        rgba(var(--admin-success-color-rgb, 46, 204, 113), 0.15);
     }
   }
 }
@@ -2926,20 +2940,20 @@ textarea.form-control {
 .empty-state {
   padding: 3rem 1.5rem;
   text-align: center;
-  
+
   svg {
     color: var(--admin-gray-400);
     margin-bottom: 1.25rem;
     width: 64px;
     height: 64px;
   }
-  
+
   p {
     color: var(--admin-gray-600);
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .btn {
     margin: 0 auto;
   }
@@ -2948,18 +2962,18 @@ textarea.form-control {
 /* Modern upload style */
 .custom-file-upload {
   border: 2px dashed var(--admin-gray-300);
-  
+
   &:hover {
     border-color: var(--admin-primary-color);
   }
-  
+
   .file-preview {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 150px;
     padding: 1rem;
-    
+
     .file-preview-placeholder {
       display: flex;
       flex-direction: column;
@@ -2967,13 +2981,454 @@ textarea.form-control {
       justify-content: center;
       color: var(--admin-gray-600);
       text-align: center;
-      
+
       svg {
         color: var(--admin-gray-500);
         margin-bottom: 0.75rem;
         width: 32px;
         height: 32px;
       }
+    }
+  }
+}
+
+/* News management styles */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: var(--admin-card-radius);
+  overflow: hidden;
+  box-shadow: var(--admin-box-shadow);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  height: 100%;
+
+  &:hover {
+    box-shadow: var(--admin-hover-shadow);
+    transform: translateY(-5px);
+  }
+
+  .news-card-image {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+
+    .news-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .news-status {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: var(--admin-border-radius);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+  }
+
+  .news-card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .news-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--admin-secondary-color);
+      line-height: 1.3;
+    }
+
+    .news-date {
+      color: var(--admin-gray-600);
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .news-description {
+      color: var(--admin-gray-700);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+  }
+
+  &:hover .news-card-image .news-image {
+    transform: scale(1.05);
+  }
+}
+
+/* News view styles */
+.news-view {
+  .news-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+    }
+
+    .news-image {
+      position: relative;
+      border-radius: var(--admin-card-radius);
+      overflow: hidden;
+      box-shadow: var(--admin-box-shadow);
+
+      .news-main-image {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .draft-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background-color: var(--admin-warning-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: var(--admin-border-radius);
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .news-info {
+      .news-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--admin-secondary-color);
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
+
+      .news-meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.75rem 1.5rem;
+        margin-bottom: 1.5rem;
+
+        .meta-item {
+          display: flex;
+          flex-direction: column;
+
+          .meta-label {
+            font-size: 0.75rem;
+            color: var(--admin-gray-600);
+            margin-bottom: 0.25rem;
+          }
+
+          .meta-value {
+            font-size: 0.875rem;
+            font-weight: 500;
+
+            &.status-published {
+              color: var(--admin-success-color);
+            }
+
+            &.status-draft {
+              color: var(--admin-warning-color);
+            }
+          }
+        }
+      }
+
+      .news-description {
+        background-color: var(--admin-gray-100);
+        padding: 1rem;
+        border-radius: var(--admin-border-radius);
+        margin-top: 1rem;
+
+        h2 {
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: var(--admin-secondary-color);
+        }
+
+        p {
+          font-size: 0.875rem;
+          line-height: 1.6;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .news-content {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--admin-gray-800);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--admin-secondary-color);
+      margin-top: 1.5em;
+      margin-bottom: 0.75em;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+    }
+    h3 {
+      font-size: 1.125rem;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    ul,
+    ol {
+      margin-bottom: 1em;
+      padding-left: 2em;
+
+      li {
+        margin-bottom: 0.5em;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 1em 0;
+      border-radius: var(--admin-border-radius);
+    }
+
+    blockquote {
+      border-left: 4px solid var(--admin-primary-color);
+      padding: 0.5em 1em;
+      background-color: var(--admin-gray-100);
+      margin: 1em 0;
+      font-style: italic;
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    code {
+      background-color: var(--admin-gray-200);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+
+    pre {
+      background-color: var(--admin-gray-800);
+      color: white;
+      padding: 1em;
+      border-radius: var(--admin-border-radius);
+      overflow-x: auto;
+      margin: 1em 0;
+
+      code {
+        background-color: transparent;
+        color: inherit;
+        padding: 0;
+      }
+    }
+
+    a {
+      color: var(--admin-primary-color);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--admin-gray-300);
+      margin: 2em 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+
+      th,
+      td {
+        border: 1px solid var(--admin-gray-300);
+        padding: 0.5em;
+      }
+
+      th {
+        background-color: var(--admin-gray-100);
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) {
+        background-color: var(--admin-gray-50);
+      }
+    }
+  }
+}
+
+/* Custom file upload styles for news */
+.custom-file-upload {
+  border: 2px dashed var(--admin-gray-300);
+  border-radius: var(--admin-border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  background-color: var(--admin-gray-100);
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+
+  &:hover,
+  &.dragover {
+    border-color: var(--admin-primary-color);
+    background-color: rgba(var(--admin-primary-color-rgb), 0.03);
+  }
+
+  .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-preview {
+    .file-preview-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+
+      svg {
+        color: var(--admin-gray-500);
+        width: 48px;
+        height: 48px;
+      }
+
+      span {
+        color: var(--admin-gray-600);
+        font-size: 0.9375rem;
+      }
+    }
+
+    .file-preview-image {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: var(--admin-border-radius);
+    }
+  }
+
+  &.has-file {
+    border-style: solid;
+  }
+}
+
+.current-thumb {
+  margin-bottom: 1rem;
+
+  .current-thumb-image {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: var(--admin-border-radius);
+    box-shadow: var(--admin-box-shadow);
+  }
+}
+
+/* EasyMDE overrides */
+.EasyMDEContainer {
+  .editor-toolbar {
+    border-color: var(--admin-gray-300);
+    border-top-left-radius: var(--admin-border-radius);
+    border-top-right-radius: var(--admin-border-radius);
+
+    button {
+      color: var(--admin-gray-700) !important;
+
+      &:hover,
+      &.active {
+        background-color: var(--admin-gray-200);
+        border-color: var(--admin-gray-300);
+      }
+
+      &.active {
+        background-color: var(--admin-gray-300);
+      }
+    }
+
+    &.fullscreen {
+      z-index: 9999999999; /* Above most other elements */
+    }
+
+    .table {
+      width: auto;
+    }
+  }
+
+  .CodeMirror {
+    border-color: var(--admin-gray-300);
+    border-bottom-left-radius: var(--admin-border-radius);
+    border-bottom-right-radius: var(--admin-border-radius);
+
+    &.CodeMirror-focused {
+      border-color: var(--admin-primary-color);
+    }
+
+    &.CodeMirror-fullscreen {
+      z-index: 9999999999999;
+    }
+  }
+
+  .editor-statusbar {
+    color: var(--admin-gray-600);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Add news to sidebar menu */
+.admin-sidebar .sidebar-nav .nav-list .nav-item {
+  &[href="/admin/news"],
+  &[href^="/admin/news/"] {
+    svg {
+      stroke: currentColor;
     }
   }
 }
