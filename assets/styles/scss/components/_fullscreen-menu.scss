@@ -57,8 +57,11 @@
       transition: transform var(--transition-main);
     }
 
-    &:hover svg {
-      transform: rotate(90deg);
+    &:hover,
+    &:focus-within {
+      svg {
+        transform: rotate(90deg);
+      }
     }
 
     @media screen and (width < 768px) {
