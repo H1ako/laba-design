@@ -10,7 +10,7 @@
     border-radius: 1.15em;
     color: var(--color-text);
 
-    @media screen and (width < 420px) {
+    @media screen and (width < 560px) {
       display: none;
     }
   }
@@ -28,7 +28,7 @@
     justify-content: center;
     translate: 0.3em;
 
-    @media screen and (width < 420px) {
+    @media screen and (width < 560px) {
       translate: 0;
     }
 
@@ -51,6 +51,10 @@
       stroke-width: 2px;
     }
   }
+
+  @media screen and (width < 560px) {
+    font-size: var(--font-size-3);
+  }
 }
 
 .fixed__menu-button {
@@ -72,7 +76,7 @@
       border-radius: 1.15em;
       color: var(--color-text);
 
-      @media screen and (width < 420px) {
+      @media screen and (width < 560px) {
         display: none;
       }
     }
@@ -90,7 +94,7 @@
       justify-content: center;
       translate: 0.3em;
 
-      @media screen and (width < 420px) {
+      @media screen and (width < 560px) {
         translate: 0;
       }
 

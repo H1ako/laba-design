@@ -67,6 +67,7 @@
       gap: 1em;
 
       .control__my-orders {
+
         .my-orders__link {
           @include cleanLink;
           color: var(--color-text);
@@ -97,6 +98,10 @@
             }
           }
         }
+
+        @media screen and (width < 768px) {
+          display: none;
+        }
       }
     }
   }
@@ -108,10 +113,19 @@
     translate: -50% -50%;
 
     .main-section__logo {
+      color: var(--color-text);
+
       .logo {
         width: 1em;
         font-size: 22rem;
         translate: 10%;
+
+        @media screen and (width < 768px) {
+          font-size: 15rem;
+        }
+        @media screen and (width < 330px) {
+          font-size: 12rem;
+        }
       }
     }
   }

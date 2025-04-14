@@ -27,9 +27,9 @@
     </div>
     
     <div class="main-header__main-section">
-        <div class="main-section__logo">
+        <a class="main-section__logo" href="<?= Router::getRoute('/') ?>">
             <?php include('components/logo.php'); ?>
-        </div>
+        </a>
     </div>
 
     <!-- Fixed header elements that appear on scroll -->
