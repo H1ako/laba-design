@@ -17,7 +17,7 @@ class NewsController extends Controller
         $page = max(1, intval(static::get_query_field('page') ?? 1));
         $per_page = 8; // Number of news per page
 
-        $total_news = News::where('is_published', '=', 1)->count();
+        $total_news = News::where('is_published', '=', 1)->get()->count();
         $total_pages = ceil($total_news / $per_page);
 
         $news = News::where('is_published', '=', 1)

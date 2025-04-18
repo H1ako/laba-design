@@ -40,7 +40,7 @@ class AdminUsersController extends Controller
 
         // Get order count for each user
         foreach ($users as $user) {
-            $user->orders_count = Order::where('customer_email', '=', $user->customer_email)->count();
+            $user->orders_count = Order::where('customer_email', '=', $user->customer_email)->get()->count();
             $user->total_spent = Order::where('customer_email', '=', $user->customer_email)
                 ->get()
                 ->reduce(function ($carry, $order) {
