@@ -8,7 +8,7 @@
     <div class="banner__content">
         <div class="content__scene scene_1">
             <img class="scene__image" src="<?= $SITE_URL ?>/assets/images/military.png" alt="Military">
-            <p class="scene__text">Подпиши контракт по нашему рефералу и получи промокод на скидку 50%</p>
+            <p class="scene__text">Для ветеранов действует скидка 20% на весь ассортимент!</p>
             <a target="_blank" href="https://mil.ru/" class="scene__button">подробнее</a>
         </div>
         <div class="content__scene scene_2">
@@ -16,7 +16,7 @@
             <a href="tel:79121234567" class="scene__phone">+7 (912) 123-45-67</a>
         </div>
         <div class="content__scene scene_3">
-            <p class="scene__text">Скидка на весь ассортимент 30%</p>
+            <p class="scene__text">На весь ассортимент действуют скидки до 99%!</p>
             <a target="_blank" href="<?= Router::getRoute('/catalog') ?>" class="scene__button">перейти в каталог</a>
         </div>
     </div>

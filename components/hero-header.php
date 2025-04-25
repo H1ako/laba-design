@@ -1,8 +1,14 @@
 <header class="hero-header">
     <div class="hero-header__bg">
-        <?php include('components/bg-part-1.php'); ?>
-        <?php include('components/bg-part-2.php'); ?>
-        <?php include('components/bg-part-3.php'); ?>
+        <div class="bg-part-wrapper">
+            <?php include('components/bg-part-1.php'); ?>
+        </div>
+        <div class="bg-part-wrapper">
+            <?php include('components/bg-part-2.php'); ?>
+        </div>
+        <div class="bg-part-wrapper">
+            <?php include('components/bg-part-3.php'); ?>
+        </div>
     </div>
     
     <div class="hero-header__top-section">

@@ -97,3 +97,36 @@ function initScrollBehavior() {
   // Initial check
   handleScroll();
 }
+
+// Add this to your main JavaScript file or create a new one
+document.addEventListener("DOMContentLoaded", () => {
+  const heroHeader = document.querySelector(".hero-header");
+
+  if (heroHeader) {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    if (!prefersReducedMotion.matches) {
+      let ticking = false;
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > 0) {
+              heroHeader.classList.add("scrolling");
+              heroHeader.style.setProperty("--scroll", scrollPosition);
+            } else {
+              heroHeader.classList.remove("scrolling");
+            }
+            ticking = false;
+          });
+
+          ticking = true;
+        }
+      });
+    }
+  }
+});
