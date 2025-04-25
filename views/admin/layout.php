@@ -1,3 +1,8 @@
+<?php
+
+global $session;
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -5,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Админ-панель' ?></title>
+    <?php $session->set_csrf_meta(); ?>
     <link rel="stylesheet" href="<?= $SITE_URL ?>/assets/styles/css/admin.css">
     <script defer src="<?= $SITE_URL ?>/assets/scripts/admin/main.js"></script>
     <?php if (isset($scripts) && is_array($scripts)): ?>

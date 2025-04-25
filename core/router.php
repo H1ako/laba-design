@@ -90,10 +90,7 @@ class Router
 
   protected static function route($route, $path_to_include)
   {
-    if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
-      $_POST = json_decode(file_get_contents('php://input'), true) ?: [];
-    }
-    
+    static::process_data();
     static::validate_csrf();
 
     global $DEV_URL_PART;
@@ -159,6 +156,20 @@ class Router
     }
     static::render($path_to_include);
     exit();
+  }
+
+  protected static function process_data()
+  {
+    $noPostSecureMethods = ['PUT', 'PATCH', 'DELETE'];
+    if (in_array($_SERVER['REQUEST_METHOD'], $noPostSecureMethods, true)) {
+      $_POST = file_get_contents('php://input');
+    }
+    if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
+      $json = file_get_contents('php://input');
+      $_POST = json_decode($json, true) ?: [];
+    } else {
+      $_POST = $_POST ?: [];
+    }
   }
 
   public static function render($path_to_include, $data = [])
